@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace BankingSystem
+namespace UserAut
 {
-    public class User
+    class User
     {
-        public string? Login { get; }
-        public string? Password { get; }
-        public string? ID { get; }
+        public string Login { get; }
+        public string Password { get; }
+        public string Id { get; }
 
-        public User(string login, string password, string num)
+        public User(string Login, string Password, string Id)
         {
-            Login = login;
-            Password = password;
-            ID = num;
+            this.Login = Login;
+            this.Password = Password;
+            this.Id = Id;
         }
     }
 }

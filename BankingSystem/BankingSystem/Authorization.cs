@@ -1,3 +1,5 @@
+using UserAut;
+
 namespace BankingSystem
 {
     public partial class Form1 : Form, IUser
@@ -48,9 +50,10 @@ namespace BankingSystem
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonAuthorization_Click(object sender, EventArgs e)
         {
-
+            UserPresenter presenter = new UserPresenter(this);
+            presenter.AddUser();
         }
     }
 }

@@ -114,6 +114,7 @@
             this.buttonAuthorization.TabIndex = 7;
             this.buttonAuthorization.Text = "Авторизация";
             this.buttonAuthorization.UseVisualStyleBackColor = true;
+            this.buttonAuthorization.Click += new System.EventHandler(this.buttonAuthorization_Click);
             // 
             // labelMessage
             // 
