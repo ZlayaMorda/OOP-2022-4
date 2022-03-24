@@ -1,59 +1,95 @@
-using UserAut;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using BankingSystem.AboutClient;
 
-namespace BankingSystem
+namespace BankingSystem.Authorization
 {
-    public partial class Form1 : Form, IUser
+    public partial class Authorization : Form, IClient
     {
-        string IUser.LoginText 
-        { 
-            get
-            {
-                return textBoxLogin.Text;
-            }
-            set
-            {
-                textBoxLogin.Text = value;
-            }
-        }
-        string IUser.PasswordText
-        {
-            get
-            {
-                return textBoxPassword.Text;
-            }
-            set
-            {
-                textBoxPassword.Text = value;
-            }
-        }
-        string IUser.Message
-        {
-            get
-            {
-                return labelMessage.Text;
-            }
-            set
-            {
-                labelMessage.Text = value;
-            }
-        }
-
-        public Form1()
+        public Authorization()
         {
             InitializeComponent();
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
+        string? IClient.Surname
         {
-            UserPresenter presenter = new UserPresenter(this);
-            presenter.FindUser();
-
+            get
+            {
+                return textBoxSurname.Text;
+            }
+            set
+            {
+                textBoxSurname.Text = value;
+            }
+        }
+        string? IClient.Name
+        {
+            get
+            {
+                return textBoxName.Text;
+            }
+            set
+            {
+                textBoxName.Text = value;
+            }
+        }
+        string? IClient.PName
+        {
+            get
+            {
+                return textBoxPName.Text;
+            }
+            set
+            {
+                textBoxPName.Text = value;
+            }
+        }
+        string? IClient.PhoneNumber
+        {
+            get
+            {
+                return textBoxPhone.Text;
+            }
+            set
+            {
+                textBoxPhone.Text = value;
+            }
+        }
+        string? IClient.Email
+        {
+            get
+            {
+                return textBoxEmail.Text;
+            }
+            set
+            {
+                textBoxEmail.Text = value;
+            }
         }
 
-        private void buttonAuthorization_Click(object sender, EventArgs e)
+        string? IClient.ClientBank
         {
-            UserPresenter presenter = new UserPresenter(this);
-            presenter.AddUser();
+            get
+            {
+                try
+                {
+                    return comboBoxBank.SelectedItem.ToString();
+                }
+                catch (NullReferenceException) { return null; }
+            }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
     }
 }

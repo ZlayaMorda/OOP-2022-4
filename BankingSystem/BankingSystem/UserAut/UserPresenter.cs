@@ -1,52 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BankingSystem.Loading;
 
 namespace UserAut
 {
     public class UserPresenter
     {
-        IUser? UserView;
+        readonly IUser? UserView;
+        readonly string CurrentPath = Directory.GetCurrentDirectory().ToString();
 
         public UserPresenter(IUser view)
         {
-            this.UserView = view;
+            if (view.Bank != null && !string.IsNullOrEmpty(view.LoginText) && !string.IsNullOrEmpty(view.PasswordText))
+            {
+                UserView = view;
+            }
+            else
+            {
+                UserView = null;
+            }
         }
 
         public void FindUser()
         {
-            LoadUser<User> Load = new LoadUser<User>("UsersData");
-            Load.LoadFromFile();
-            try
+            if (UserView != null)
             {
-                if (Load.Users.Count != 0)
+                try
                 {
-                    foreach (User user in Load.Users)
+                    Load<string, User> Load = new($"{CurrentPath}/{UserView.Bank}/{UserView.Bank}UsersData");
+                    Load.LoadFromFile();
+                    if (Load.Users.ContainsKey(UserView.LoginText))
                     {
-                        if (user.Login == UserView.LoginText && user.Password == UserView.PasswordText)
-                        {
-                            UserView.Message = $"Welcome {user.Login}";
-                            break;
-                        }
-                        UserView.Message = "there is no this user with the login or password";
+                        User temp;
+                        Load.Users.TryGetValue(UserView.LoginText, out temp);
+                        UserView.Message = $"Welcome {temp.Id}, your bank {UserView.Bank}";
+                    }
+                    else
+                    {
+                        UserView.Message = "There are no users with this login or password";
                     }
                 }
-                else
-                {
-                    UserView.Message = "there are no users";
-                }
+                catch (NullReferenceException) { UserView.Message = "Пожалуйста, заполните все поля"; }
             }
-            catch (NullReferenceException) { }
-
+            else
+            {
+                MessageBox.Show("Введите данные");
+            }
         }
 
         public void AddUser()
         {
-            LoadUser<User> Load = new LoadUser<User>("UsersData");
-            Load.LoadFromFile();
-            Load.Users.Add(new User(UserView.LoginText, UserView.PasswordText, "17467182"));
-            Load.LoadToFile();
+            if (UserView != null)
+            {
+                try
+                {
+                    Load<string, User> Load = new($"{CurrentPath}/{UserView.Bank}/{UserView.Bank}UsersData");
+                    Load.LoadFromFile();
+                    Load.Users.Add(UserView.LoginText, new User(UserView.LoginText, UserView.PasswordText, "17467182"));
+                    Load.LoadToFile();
+                }
+                catch (NullReferenceException) { UserView.Message = "Пожалуйста, заполните все поля"; }
+            }
+            else
+            {
+                MessageBox.Show("Введите данные");
+            }
         }
     }
 

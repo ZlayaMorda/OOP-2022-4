@@ -1,4 +1,4 @@
-namespace BankingSystem
+namespace BankingSystem.Login
 {
     internal static class Program
     {

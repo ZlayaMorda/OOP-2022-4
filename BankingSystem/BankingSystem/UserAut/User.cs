@@ -9,8 +9,8 @@ namespace UserAut
 {
     class User
     {
-        public string Login { get; }
-        public string Password { get; }
+        public string? Login { get; }
+        public string? Password { get; }
         public string Id { get; }
 
         public User(string Login, string Password, string Id)

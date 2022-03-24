@@ -1,21 +1,21 @@
 ﻿using System.Security.Cryptography;
 using System.Text.Json;
 
-namespace UserAut
+namespace BankingSystem.Loading
 {
-    public class LoadUser<T>
+    public class Load<K,T>
     {
-        public List<T> Users;
+        public Dictionary<K,T> Users;
         byte[] key =
             {
                 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
                 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
             };
         private string Path;
-        public LoadUser(string Path)
+        public Load(string Path)
         {
             this.Path = Path;
-            Users = new List<T>();
+            Users = new Dictionary<K,T>();
         }
 
         public void LoadToFile()
@@ -72,14 +72,9 @@ namespace UserAut
                                 string decryptedMessage = decryptReader.ReadToEnd();
                                 if (!string.IsNullOrEmpty(decryptedMessage))
                                 {
-                                    Users = JsonSerializer.Deserialize<List<T>>(decryptedMessage);
-                                    //List<T>? temp = JsonSerializer.Deserialize<List<T>>(decryptedMessage);
-                                    //MessageBox.Show(temp.ToString());
+                                    Users = JsonSerializer.Deserialize<Dictionary<K,T>>(decryptedMessage);
+
                                 }
-                                //else
-                                //{
-                                //    Users = new List<T>();
-                                //}
                             }
                         }
                     }
