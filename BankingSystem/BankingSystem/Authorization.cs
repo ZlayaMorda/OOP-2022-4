@@ -62,7 +62,18 @@ namespace BankingSystem.Authorization
                 textBoxPhone.Text = value;
             }
         }
-        string? IClient.Email
+        string? IClient.PasportNum
+        {
+            get
+            {
+                return textBoxPasport.Text;
+            }
+            set
+            {
+                textBoxPasport.Text = value;
+            }
+        }
+        public string? LoginText
         {
             get
             {
@@ -73,8 +84,18 @@ namespace BankingSystem.Authorization
                 textBoxEmail.Text = value;
             }
         }
-
-        string? IClient.ClientBank
+        public string? PasswordText
+        {
+            get
+            {
+                return textBoxParole.Text;
+            }
+            set
+            {
+                textBoxParole.Text = value;
+            }
+        }
+        public string? Bank
         {
             get
             {
@@ -86,10 +107,31 @@ namespace BankingSystem.Authorization
             }
         }
 
+        public string? Message
+        {
+            get
+            {
+                return labelMessage.Text;
+            }
+            set
+            {
+                labelMessage.Text = value;
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            Close();
+            ClientPresenter presenter = new(this);
+            if(presenter.SendToApprove())
+            {
+                textBoxParole.Clear();
+                textBoxEmail.Clear();
+                textBoxName.Clear();
+                textBoxParole.Clear();
+                textBoxPhone.Clear();
+                textBoxPName.Clear();
+                textBoxSurname.Clear();
+                textBoxPasport.Clear();
+            }
         }
-
     }
 }

@@ -5,7 +5,7 @@ namespace BankingSystem.Loading
 {
     public class Load<K,T>
     {
-        public Dictionary<K,T> Users;
+        public Dictionary<K,T> Information;
         byte[] key =
             {
                 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
@@ -15,7 +15,7 @@ namespace BankingSystem.Loading
         public Load(string Path)
         {
             this.Path = Path;
-            Users = new Dictionary<K,T>();
+            Information = new Dictionary<K,T>();
         }
 
         public void LoadToFile()
@@ -35,7 +35,7 @@ namespace BankingSystem.Loading
                         {
                             using (StreamWriter encryptWriter = new(cryptoStream))
                             {
-                                encryptWriter.WriteLine(JsonSerializer.Serialize(Users));
+                                encryptWriter.WriteLine(JsonSerializer.Serialize(Information));
                             }
                         }
                     }
@@ -72,7 +72,7 @@ namespace BankingSystem.Loading
                                 string decryptedMessage = decryptReader.ReadToEnd();
                                 if (!string.IsNullOrEmpty(decryptedMessage))
                                 {
-                                    Users = JsonSerializer.Deserialize<Dictionary<K,T>>(decryptedMessage);
+                                    Information = JsonSerializer.Deserialize<Dictionary<K,T>>(decryptedMessage);
 
                                 }
                             }

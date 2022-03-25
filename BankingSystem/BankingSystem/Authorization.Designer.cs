@@ -44,6 +44,9 @@
             this.buttonAuthorization = new System.Windows.Forms.Button();
             this.comboBoxBank = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.labelMessage = new System.Windows.Forms.Label();
+            this.textBoxPasport = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelSurname
@@ -142,7 +145,7 @@
             this.labelParole.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.labelParole.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelParole.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelParole.Location = new System.Drawing.Point(12, 219);
+            this.labelParole.Location = new System.Drawing.Point(12, 264);
             this.labelParole.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.labelParole.MinimumSize = new System.Drawing.Size(277, 0);
             this.labelParole.Name = "labelParole";
@@ -199,7 +202,7 @@
             // textBoxParole
             // 
             this.textBoxParole.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxParole.Location = new System.Drawing.Point(295, 219);
+            this.textBoxParole.Location = new System.Drawing.Point(295, 264);
             this.textBoxParole.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.textBoxParole.Name = "textBoxParole";
             this.textBoxParole.Size = new System.Drawing.Size(305, 34);
@@ -208,12 +211,12 @@
             // buttonAuthorization
             // 
             this.buttonAuthorization.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.buttonAuthorization.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAuthorization.Location = new System.Drawing.Point(136, 317);
+            this.buttonAuthorization.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAuthorization.Location = new System.Drawing.Point(127, 432);
             this.buttonAuthorization.Name = "buttonAuthorization";
             this.buttonAuthorization.Size = new System.Drawing.Size(372, 77);
             this.buttonAuthorization.TabIndex = 13;
-            this.buttonAuthorization.Text = "Отправить запрос на\r\nрегистрацию";
+            this.buttonAuthorization.Text = "Отправить форму";
             this.buttonAuthorization.UseVisualStyleBackColor = false;
             this.buttonAuthorization.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -225,7 +228,7 @@
             "Alpha Bank",
             "BSB Bank",
             "Belarus Bank"});
-            this.comboBoxBank.Location = new System.Drawing.Point(295, 261);
+            this.comboBoxBank.Location = new System.Drawing.Point(295, 307);
             this.comboBoxBank.Name = "comboBoxBank";
             this.comboBoxBank.Size = new System.Drawing.Size(305, 39);
             this.comboBoxBank.TabIndex = 14;
@@ -236,7 +239,7 @@
             this.label2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(12, 261);
+            this.label2.Location = new System.Drawing.Point(12, 307);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.label2.MinimumSize = new System.Drawing.Size(277, 0);
             this.label2.Name = "label2";
@@ -245,11 +248,47 @@
             this.label2.Text = "Выберите банк";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // labelMessage
+            // 
+            this.labelMessage.AutoSize = true;
+            this.labelMessage.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelMessage.Location = new System.Drawing.Point(127, 381);
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Size = new System.Drawing.Size(0, 35);
+            this.labelMessage.TabIndex = 16;
+            // 
+            // textBoxPasport
+            // 
+            this.textBoxPasport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxPasport.Location = new System.Drawing.Point(295, 220);
+            this.textBoxPasport.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.textBoxPasport.Name = "textBoxPasport";
+            this.textBoxPasport.Size = new System.Drawing.Size(305, 34);
+            this.textBoxPasport.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(12, 220);
+            this.label3.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.label3.MinimumSize = new System.Drawing.Size(277, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(277, 33);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Серия и номер паспорта";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // Authorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 406);
+            this.ClientSize = new System.Drawing.Size(625, 521);
+            this.Controls.Add(this.textBoxPasport);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxBank);
             this.Controls.Add(this.buttonAuthorization);
@@ -291,5 +330,8 @@
         private Button buttonAuthorization;
         private ComboBox comboBoxBank;
         private Label label2;
+        private Label labelMessage;
+        private TextBox textBoxPasport;
+        private Label label3;
     }
 }

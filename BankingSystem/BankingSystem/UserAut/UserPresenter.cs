@@ -1,11 +1,11 @@
 ﻿using BankingSystem.Loading;
 
-namespace UserAut
+namespace BankingSystem.UserAut
 {
     public class UserPresenter
     {
         readonly IUser? UserView;
-        readonly string CurrentPath = Directory.GetCurrentDirectory().ToString();
+        readonly string CurrentPath = Directory.GetCurrentDirectory().ToString() + @"\..\..\..";
 
         public UserPresenter(IUser view)
         {
@@ -27,10 +27,10 @@ namespace UserAut
                 {
                     Load<string, User> Load = new($"{CurrentPath}/{UserView.Bank}/{UserView.Bank}UsersData");
                     Load.LoadFromFile();
-                    if (Load.Users.ContainsKey(UserView.LoginText))
+                    if (Load.Information.ContainsKey(UserView.LoginText))
                     {
                         User temp;
-                        Load.Users.TryGetValue(UserView.LoginText, out temp);
+                        Load.Information.TryGetValue(UserView.LoginText, out temp);
                         UserView.Message = $"Welcome {temp.Id}, your bank {UserView.Bank}";
                     }
                     else
@@ -38,7 +38,7 @@ namespace UserAut
                         UserView.Message = "There are no users with this login or password";
                     }
                 }
-                catch (NullReferenceException) { UserView.Message = "Пожалуйста, заполните все поля"; }
+                catch { }
             }
             else
             {
@@ -54,10 +54,10 @@ namespace UserAut
                 {
                     Load<string, User> Load = new($"{CurrentPath}/{UserView.Bank}/{UserView.Bank}UsersData");
                     Load.LoadFromFile();
-                    Load.Users.Add(UserView.LoginText, new User(UserView.LoginText, UserView.PasswordText, "17467182"));
+                    Load.Information.Add(UserView.LoginText, new User(UserView.LoginText, UserView.PasswordText, "17467182"));
                     Load.LoadToFile();
                 }
-                catch (NullReferenceException) { UserView.Message = "Пожалуйста, заполните все поля"; }
+                catch { }
             }
             else
             {
