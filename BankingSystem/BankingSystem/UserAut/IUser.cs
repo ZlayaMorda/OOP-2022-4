@@ -8,6 +8,7 @@ namespace BankingSystem.UserAut
         string? PasswordText { get; set; }
         string? Message { get;  set; }
         string? Bank { get; }
+        string? Member { get; }
 
     }
 }

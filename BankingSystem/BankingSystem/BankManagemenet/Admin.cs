@@ -4,16 +4,21 @@ namespace BankingSystem.BankManagement
 {
     internal class Admin : User
     {
-        public string AdminBank;
-        public Admin(string Login, string Password, string Id, string AdminBank) : base(Login, Password, Id)
+        public Admin(string Login, string Password, string Id, string Bank) : base(Login, Password, Id, Bank)
         {
-            this.AdminBank = AdminBank;
         }
 
-        public void AddOperatore(Operator oper) 
-        { 
-                    
+        public void AddOperatore(string Login, string Password, string Bank) 
+        {
+            Operator oper = new(Login, Password, "", Bank);
+            oper.CreateId("op");
+            oper.Send("Management", oper.Login);
         }
-        public void AddManager() { }
+        public void AddManager(string Login, string Password, string Bank) 
+        {
+            Manager man = new(Login, Password, "", Bank);
+            man.CreateId("mn");
+            man.Send("Management", man.Login);
+        }
     }
 }

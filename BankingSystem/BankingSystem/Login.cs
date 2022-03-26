@@ -49,7 +49,17 @@ namespace BankingSystem.Login
                 catch (NullReferenceException) { return null; }
             }
         }
-
+        string IUser.Member
+        {
+            get
+            {
+                try
+                {
+                    return comboBoxUser.SelectedItem.ToString();
+                }
+                catch (NullReferenceException) { return null; }
+            }
+        }
         public Form1()
         {
             InitializeComponent();
@@ -58,14 +68,33 @@ namespace BankingSystem.Login
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             UserPresenter presenter = new (this);
-            presenter.FindUser();
+            string? id = presenter.FindUser();
+            MessageBox.Show(id);
+            if ( id != null)
+            {
+                if(id.Substring(0,4) == "0000")
+                {
+                    MessageBox.Show(id);
+                }
+                else if(id.Substring(0,4) == "1111")
+                {
 
+                }
+                else if( id.Substring(0,4) == "2222")
+                {
+
+                }
+                else if( id.Substring(0,4) == "3333")
+                {
+
+                }
+            }
         }
 
         private void buttonAuthorization_Click(object sender, EventArgs e)
         {
             //UserPresenter presenter = new(this);
-            //presenter.AddUser();
+            //presenter.AddAdmin();
             Authorization.Authorization f = new();
             f.ShowDialog();
         }

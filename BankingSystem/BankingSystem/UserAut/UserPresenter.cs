@@ -1,15 +1,15 @@
 ﻿using BankingSystem.Loading;
+using BankingSystem.BankManagement;
 
 namespace BankingSystem.UserAut
 {
     internal class UserPresenter
     {
         readonly IUser? UserView;
-        //readonly string CurrentPath = Directory.GetCurrentDirectory().ToString() + @"\..\..\..";
 
         public UserPresenter(IUser view)
         {
-            if (view.Bank != null && !string.IsNullOrEmpty(view.LoginText) && !string.IsNullOrEmpty(view.PasswordText))
+            if (view.Bank != null && !string.IsNullOrEmpty(view.LoginText) && !string.IsNullOrEmpty(view.PasswordText) && view.Member != null)
             {
                 UserView = view;
             }
@@ -19,50 +19,28 @@ namespace BankingSystem.UserAut
             }
         }
 
-        public void FindUser()
+        public string FindUser()
         {
             if (UserView != null)
             {
                 try
                 {
-                    Load<string, User> Load = new(UserView.Bank,$"{UserView.Bank}UsersData");
-                    Load.LoadFromFile();
-                    if (Load.Information.ContainsKey(UserView.LoginText))
-                    {
-                        User temp;
-                        Load.Information.TryGetValue(UserView.LoginText, out temp);
-                        UserView.Message = $"Welcome {temp.Id}, your bank {UserView.Bank}";
-                    }
-                    else
-                    {
-                        UserView.Message = "There are no users with this login or password";
-                    }
+                    User user = new(UserView.LoginText, UserView.PasswordText, "", UserView.Bank);
+                    return user.Find(UserView.Member);
                 }
-                catch { }
+                catch { return null; }
             }
             else
             {
                 MessageBox.Show("Введите данные");
+                return null;
             }
         }
-
-        public void AddUser()
+        public void AddAdmin()
         {
-            if (UserView != null)
-            {
-                try
-                {
-                    Load<string, User> Load = new(UserView.Bank, $"{UserView.Bank}UsersData");
-                    Load.LoadFromFile();
-                    Load.Information.Add(UserView.LoginText, new User(UserView.LoginText, UserView.PasswordText, "17467182"));
-                    Load.LoadToFile();
-                }
-                catch { }
-            }
-            else
-            {
-                MessageBox.Show("Введите данные");
-            }
+            Admin admin = new(UserView.LoginText, UserView.PasswordText, "", UserView.Bank);
+            admin.CreateId("adm");
+            admin.Send($"Management", admin.Login);
         }
     }
 

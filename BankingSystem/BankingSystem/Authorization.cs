@@ -118,6 +118,9 @@ namespace BankingSystem.Authorization
                 labelMessage.Text = value;
             }
         }
+
+        public string? Member => throw new NotImplementedException();
+
         private void button1_Click(object sender, EventArgs e)
         {
             ClientPresenter presenter = new(this);

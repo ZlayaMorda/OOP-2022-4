@@ -8,7 +8,6 @@ namespace BankingSystem.AboutClient
     internal class ClientPresenter
     {
         readonly IClient? ClientView;
-        //readonly string CurrentPath = Directory.GetCurrentDirectory().ToString() + @"\..\..\..";
 
         public ClientPresenter(IClient view)
         {
@@ -40,20 +39,15 @@ namespace BankingSystem.AboutClient
             {
                 try
                 {
-                    User UserToAdd = new(ClientView.LoginText, ClientView.PasswordText, "");
+                    User UserToAdd = new(ClientView.LoginText, ClientView.PasswordText, "", ClientView.Bank);
                     UserToAdd.CreateId("cl");
                     Client ClientToAdd = new(ClientView.Surname, ClientView.Name, ClientView.PName, ClientView.PhoneNumber,
                         ClientView.LoginText, ClientView.Bank, ClientView.PasportNum, UserToAdd.Id);
                     MessageBox.Show(ClientToAdd.Id);
 
-                    Load<string, Client> loadCl = new(ClientView.Bank, "UsersDataToRegistr");
-                    loadCl.AddToFile(ClientToAdd, ClientToAdd.Id);
-
-                    Load<string, User> loadUs = new(ClientView.Bank, "UsersDataToRegistr");
-                    loadUs.AddToFile(UserToAdd, UserToAdd.Login);
-                    //Send("UsersDataToRegistr", UserToAdd, UserToAdd.Login);
-                    //Send("ClientsDataToRegistr", ClientToAdd, ClientToAdd.Id);
-
+                    ClientToAdd.Send("ClientsDataToRegistr");
+                    UserToAdd.Send("UsersDataToRegistr", UserToAdd.Login);
+                    
                     ClientView.Message = "Ваша форма отправлена";
                     return true;
                 }
@@ -65,18 +59,5 @@ namespace BankingSystem.AboutClient
                 return false;
             }
         }
-        //private void Send<T>(string path, T temp, string key)
-        //{
-        //    Load<string, T> Load = new($"{ConfigurationManager.AppSettings.Get("DirectoryToProject")}/{ClientView.Bank}/{ClientView.Bank}{path}");
-        //    Load.LoadFromFile();
-        //    string ides = "";
-        //    foreach (var t in Load.Information)
-        //    {
-        //        ides += t.Key + "\n";
-        //    }
-        //    MessageBox.Show(ides);
-        //    Load.Information.Add(key, temp);
-        //    Load.LoadToFile();
-        //}
     }
 }

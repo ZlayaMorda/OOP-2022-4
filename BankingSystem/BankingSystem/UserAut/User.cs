@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using BankingSystem.Loading;
 
 namespace BankingSystem.UserAut
 {
@@ -12,29 +7,36 @@ namespace BankingSystem.UserAut
         public string? Login { get; }
         public string? Password { get; }
         public string Id { get; set; }
+        public string Bank { get; set; }
 
-        public User(string Login, string Password, string Id)
+        public User(string Login, string Password, string Id, string Bank)
         {
             this.Login = Login;
             this.Password = Password;
             this.Id = Id;
+            this.Bank = Bank;
         }
 
         public void CreateId(string user)
         {
             switch(user)
             {
-                case "cl":
+                case "adm":
                     {
-                        IdCase("1111");
+                        IdCase("0000");
                         break;
                     }
                 case "op":
                     {
+                        IdCase("1111");
+                        break;
+                    }
+                case "mn":
+                    {
                         IdCase("2222");
                         break;
                     }
-                case "man":
+                case "cl":
                     {
                         IdCase("3333");
                         break;
@@ -47,6 +49,45 @@ namespace BankingSystem.UserAut
             this.Id = userNum + Guid.NewGuid().ToString("N");
         }
 
+        public void Send(string fileName, string key)
+        {
+            Load<string, User> loadCl = new(this.Bank, fileName);
+            loadCl.AddToFile(this, key);
+        }
+        public string? Find(string member)
+        {
+            if (member == "Клиент")
+            {
+                return SearchAndReturnId("UsersData");
+            }
+            else
+            {
+                return SearchAndReturnId("Management");
+            }
+        }
+
+        public string? SearchAndReturnId(string fileName)
+        {
+            Load<string, User> loadCl = new(this.Bank, $"{fileName}");
+            loadCl.LoadFromFile();
+            if (loadCl.Information.ContainsKey(this.Login))
+            {
+                loadCl.Information.TryGetValue(this.Login, out User temp);
+                if (temp.Password == this.Password)
+                {
+                    this.Id = temp.Id;
+                    return temp.Id;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
 
     }
 }

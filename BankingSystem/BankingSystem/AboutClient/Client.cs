@@ -1,4 +1,4 @@
-﻿
+﻿using BankingSystem.Loading;
 
 namespace BankingSystem.AboutClient
 {
@@ -25,6 +25,16 @@ namespace BankingSystem.AboutClient
             this.ClientBank = ClientBank;
             this.Pasport = Pasport;
             this.Id = Id;
+        }
+
+        public void Send(string fileName)
+        {
+            Load<string, Client> loadCl = new(this.ClientBank, fileName);
+            loadCl.AddToFile(this, this.Id);
+            //foreach (var item in loadCl.Information)
+            //{
+            //    MessageBox.Show(item.Key + "//" + item.Value.Email);
+            //}
         }
     }
 }
