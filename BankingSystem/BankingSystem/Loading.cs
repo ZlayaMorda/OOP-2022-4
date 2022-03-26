@@ -1,9 +1,10 @@
 ﻿using System.Security.Cryptography;
 using System.Text.Json;
+using System.Configuration;
 
 namespace BankingSystem.Loading
 {
-    public class Load<K,T>
+    internal class Load<K,T>
     {
         public Dictionary<K,T> Information;
         byte[] key =
@@ -12,9 +13,9 @@ namespace BankingSystem.Loading
                 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
             };
         private string Path;
-        public Load(string Path)
+        public Load(string bank, string fileName)
         {
-            this.Path = Path;
+            this.Path = $"{ConfigurationManager.AppSettings.Get("DirectoryToProject")}/{bank}/{bank}{fileName}";
             Information = new Dictionary<K,T>();
         }
 
@@ -22,7 +23,7 @@ namespace BankingSystem.Loading
         {
             try
             {
-                using (FileStream fs = new FileStream(Path, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(Path, FileMode.Create))
                 {
                     using (Aes aes = Aes.Create())
                     {
@@ -82,5 +83,12 @@ namespace BankingSystem.Loading
             }
             catch (Exception) { }
         }
+        public void AddToFile(T temp, K key)
+        {
+            LoadFromFile();
+            Information.Add(key, temp);
+            LoadToFile();
+        }
     }
+
 }

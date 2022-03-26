@@ -2,7 +2,7 @@
 
 namespace BankingSystem.AboutClient
 {
-    public class Client
+    internal class Client
     {
         public string Surname { get; }
         public string Name { get; }
@@ -25,11 +25,6 @@ namespace BankingSystem.AboutClient
             this.ClientBank = ClientBank;
             this.Pasport = Pasport;
             this.Id = Id;
-        }
-
-        public void CreateId()
-        {
-            this.Id = "0000" + Guid.NewGuid().ToString("N");
         }
     }
 }

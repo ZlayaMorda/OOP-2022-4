@@ -1,13 +1,14 @@
 ﻿using System.Text.RegularExpressions;
 using BankingSystem.Loading;
 using BankingSystem.UserAut;
+using System.Configuration;
 
 namespace BankingSystem.AboutClient
 {
-    public class ClientPresenter
+    internal class ClientPresenter
     {
         readonly IClient? ClientView;
-        readonly string CurrentPath = Directory.GetCurrentDirectory().ToString() + @"\..\..\..";
+        //readonly string CurrentPath = Directory.GetCurrentDirectory().ToString() + @"\..\..\..";
 
         public ClientPresenter(IClient view)
         {
@@ -39,14 +40,20 @@ namespace BankingSystem.AboutClient
             {
                 try
                 {
-                    string str = "";
+                    User UserToAdd = new(ClientView.LoginText, ClientView.PasswordText, "");
+                    UserToAdd.CreateId("cl");
                     Client ClientToAdd = new(ClientView.Surname, ClientView.Name, ClientView.PName, ClientView.PhoneNumber,
-                        ClientView.LoginText, ClientView.Bank, ClientView.PasportNum, str);
-                    ClientToAdd.CreateId();
-                    Send("ClientsDataToRegistr", ClientToAdd, ClientToAdd.Id);
+                        ClientView.LoginText, ClientView.Bank, ClientView.PasportNum, UserToAdd.Id);
                     MessageBox.Show(ClientToAdd.Id);
-                    User UserToAdd = new(ClientView.LoginText, ClientView.PasswordText, ClientToAdd.Id);
-                    Send("UsersDataToRegistr", UserToAdd, UserToAdd.Login);
+
+                    Load<string, Client> loadCl = new(ClientView.Bank, "UsersDataToRegistr");
+                    loadCl.AddToFile(ClientToAdd, ClientToAdd.Id);
+
+                    Load<string, User> loadUs = new(ClientView.Bank, "UsersDataToRegistr");
+                    loadUs.AddToFile(UserToAdd, UserToAdd.Login);
+                    //Send("UsersDataToRegistr", UserToAdd, UserToAdd.Login);
+                    //Send("ClientsDataToRegistr", ClientToAdd, ClientToAdd.Id);
+
                     ClientView.Message = "Ваша форма отправлена";
                     return true;
                 }
@@ -58,18 +65,18 @@ namespace BankingSystem.AboutClient
                 return false;
             }
         }
-        private void Send<T>(string path, T temp, string key)
-        {
-            Load<string, T> Load = new($"{CurrentPath}/{ClientView.Bank}/{ClientView.Bank}{path}");
-            Load.LoadFromFile();
-            string ides = "";
-            foreach (var t in Load.Information)
-            {
-                ides += t.Key + "\n";
-            }
-            MessageBox.Show(ides);
-            Load.Information.Add(key, temp);
-            Load.LoadToFile();
-        }
+        //private void Send<T>(string path, T temp, string key)
+        //{
+        //    Load<string, T> Load = new($"{ConfigurationManager.AppSettings.Get("DirectoryToProject")}/{ClientView.Bank}/{ClientView.Bank}{path}");
+        //    Load.LoadFromFile();
+        //    string ides = "";
+        //    foreach (var t in Load.Information)
+        //    {
+        //        ides += t.Key + "\n";
+        //    }
+        //    MessageBox.Show(ides);
+        //    Load.Information.Add(key, temp);
+        //    Load.LoadToFile();
+        //}
     }
 }

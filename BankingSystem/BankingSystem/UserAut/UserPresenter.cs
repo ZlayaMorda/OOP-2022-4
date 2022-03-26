@@ -2,10 +2,10 @@
 
 namespace BankingSystem.UserAut
 {
-    public class UserPresenter
+    internal class UserPresenter
     {
         readonly IUser? UserView;
-        readonly string CurrentPath = Directory.GetCurrentDirectory().ToString() + @"\..\..\..";
+        //readonly string CurrentPath = Directory.GetCurrentDirectory().ToString() + @"\..\..\..";
 
         public UserPresenter(IUser view)
         {
@@ -25,7 +25,7 @@ namespace BankingSystem.UserAut
             {
                 try
                 {
-                    Load<string, User> Load = new($"{CurrentPath}/{UserView.Bank}/{UserView.Bank}UsersData");
+                    Load<string, User> Load = new(UserView.Bank,$"{UserView.Bank}UsersData");
                     Load.LoadFromFile();
                     if (Load.Information.ContainsKey(UserView.LoginText))
                     {
@@ -52,7 +52,7 @@ namespace BankingSystem.UserAut
             {
                 try
                 {
-                    Load<string, User> Load = new($"{CurrentPath}/{UserView.Bank}/{UserView.Bank}UsersData");
+                    Load<string, User> Load = new(UserView.Bank, $"{UserView.Bank}UsersData");
                     Load.LoadFromFile();
                     Load.Information.Add(UserView.LoginText, new User(UserView.LoginText, UserView.PasswordText, "17467182"));
                     Load.LoadToFile();

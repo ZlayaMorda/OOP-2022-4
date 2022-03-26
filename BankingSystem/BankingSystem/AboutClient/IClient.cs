@@ -2,7 +2,7 @@
 
 namespace BankingSystem.AboutClient
 {
-    public interface IClient : IUser
+    internal interface IClient : IUser
     {
         public string? Surname { get; set; }
         public string? Name { get; set; }

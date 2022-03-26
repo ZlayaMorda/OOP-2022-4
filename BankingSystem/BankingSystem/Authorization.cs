@@ -11,7 +11,7 @@ using BankingSystem.AboutClient;
 
 namespace BankingSystem.Authorization
 {
-    public partial class Authorization : Form, IClient
+    internal partial class Authorization : Form, IClient
     {
         public Authorization()
         {

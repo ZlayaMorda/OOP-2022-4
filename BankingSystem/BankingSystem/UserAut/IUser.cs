@@ -2,7 +2,7 @@
 
 namespace BankingSystem.UserAut
 {
-    public interface IUser
+    internal interface IUser
     {
         string? LoginText { get; set; }
         string? PasswordText { get; set; }

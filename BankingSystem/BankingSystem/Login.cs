@@ -2,7 +2,7 @@ using BankingSystem.UserAut;
 
 namespace BankingSystem.Login
 {
-    public partial class Form1 : Form, IUser
+    internal partial class Form1 : Form, IUser
     {
         string IUser.LoginText 
         { 
