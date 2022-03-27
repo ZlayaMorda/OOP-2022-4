@@ -31,10 +31,6 @@ namespace BankingSystem.AboutClient
         {
             Load<string, Client> loadCl = new(this.ClientBank, fileName);
             loadCl.AddToFile(this, this.Id);
-            //foreach (var item in loadCl.Information)
-            //{
-            //    MessageBox.Show(item.Key + "//" + item.Value.Email);
-            //}
         }
     }
 }

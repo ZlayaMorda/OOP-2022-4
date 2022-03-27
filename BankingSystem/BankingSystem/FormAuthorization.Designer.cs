@@ -206,7 +206,7 @@
             this.textBoxParole.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.textBoxParole.Name = "textBoxParole";
             this.textBoxParole.Size = new System.Drawing.Size(305, 34);
-            this.textBoxParole.TabIndex = 12;
+            this.textBoxParole.TabIndex = 13;
             // 
             // buttonAuthorization
             // 
@@ -215,7 +215,7 @@
             this.buttonAuthorization.Location = new System.Drawing.Point(127, 432);
             this.buttonAuthorization.Name = "buttonAuthorization";
             this.buttonAuthorization.Size = new System.Drawing.Size(372, 77);
-            this.buttonAuthorization.TabIndex = 13;
+            this.buttonAuthorization.TabIndex = 14;
             this.buttonAuthorization.Text = "Отправить форму";
             this.buttonAuthorization.UseVisualStyleBackColor = false;
             this.buttonAuthorization.Click += new System.EventHandler(this.button1_Click);
@@ -231,7 +231,7 @@
             this.comboBoxBank.Location = new System.Drawing.Point(295, 307);
             this.comboBoxBank.Name = "comboBoxBank";
             this.comboBoxBank.Size = new System.Drawing.Size(305, 39);
-            this.comboBoxBank.TabIndex = 14;
+            this.comboBoxBank.TabIndex = 0;
             // 
             // label2
             // 
@@ -264,7 +264,7 @@
             this.textBoxPasport.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
             this.textBoxPasport.Name = "textBoxPasport";
             this.textBoxPasport.Size = new System.Drawing.Size(305, 34);
-            this.textBoxPasport.TabIndex = 18;
+            this.textBoxPasport.TabIndex = 12;
             // 
             // label3
             // 
@@ -281,7 +281,7 @@
             this.label3.Text = "Серия и номер паспорта";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // Authorization
+            // FormAuthorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -305,7 +305,7 @@
             this.Controls.Add(this.labelPName);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelSurname);
-            this.Name = "Authorization";
+            this.Name = "FormAuthorization";
             this.Text = "Authorization";
             this.ResumeLayout(false);
             this.PerformLayout();

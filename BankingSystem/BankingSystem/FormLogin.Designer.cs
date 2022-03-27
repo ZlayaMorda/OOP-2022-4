@@ -147,9 +147,7 @@
             this.comboBoxUser.FormattingEnabled = true;
             this.comboBoxUser.Items.AddRange(new object[] {
             "Клиент",
-            "Админ",
-            "Оператор",
-            "Менеджер"});
+            "Администрация"});
             this.comboBoxUser.Location = new System.Drawing.Point(172, 175);
             this.comboBoxUser.Name = "comboBoxUser";
             this.comboBoxUser.Size = new System.Drawing.Size(261, 36);

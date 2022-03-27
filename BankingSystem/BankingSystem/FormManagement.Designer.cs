@@ -35,10 +35,12 @@
             this.labelLogin = new System.Windows.Forms.Label();
             this.comboBoxUser = new System.Windows.Forms.ComboBox();
             this.labelUser = new System.Windows.Forms.Label();
-            this.listViewInfo = new System.Windows.Forms.ListView();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.comboBoxNature = new System.Windows.Forms.ComboBox();
             this.labelMessage = new System.Windows.Forms.Label();
+            this.buttonApprove = new System.Windows.Forms.Button();
+            this.buttonRejection = new System.Windows.Forms.Button();
+            this.listBoxInfo = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // labelBank
@@ -109,14 +111,6 @@
             this.labelUser.TabIndex = 11;
             this.labelUser.Text = "Пользователь";
             // 
-            // listViewInfo
-            // 
-            this.listViewInfo.Location = new System.Drawing.Point(404, 4);
-            this.listViewInfo.Name = "listViewInfo";
-            this.listViewInfo.Size = new System.Drawing.Size(432, 360);
-            this.listViewInfo.TabIndex = 13;
-            this.listViewInfo.UseCompatibleStateImageBehavior = false;
-            // 
             // buttonAdd
             // 
             this.buttonAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -131,10 +125,13 @@
             // comboBoxNature
             // 
             this.comboBoxNature.FormattingEnabled = true;
-            this.comboBoxNature.Location = new System.Drawing.Point(404, 379);
+            this.comboBoxNature.Items.AddRange(new object[] {
+            "Заявки на авторизацию"});
+            this.comboBoxNature.Location = new System.Drawing.Point(404, 12);
             this.comboBoxNature.Name = "comboBoxNature";
             this.comboBoxNature.Size = new System.Drawing.Size(432, 28);
             this.comboBoxNature.TabIndex = 15;
+            this.comboBoxNature.SelectedIndexChanged += new System.EventHandler(this.comboBoxNature_SelectedIndexChanged);
             // 
             // labelMessage
             // 
@@ -145,15 +142,50 @@
             this.labelMessage.Size = new System.Drawing.Size(0, 31);
             this.labelMessage.TabIndex = 16;
             // 
+            // buttonApprove
+            // 
+            this.buttonApprove.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonApprove.Location = new System.Drawing.Point(642, 421);
+            this.buttonApprove.Name = "buttonApprove";
+            this.buttonApprove.Size = new System.Drawing.Size(194, 70);
+            this.buttonApprove.TabIndex = 17;
+            this.buttonApprove.Text = "Принять";
+            this.buttonApprove.UseVisualStyleBackColor = true;
+            this.buttonApprove.Click += new System.EventHandler(this.buttonApprove_Click);
+            // 
+            // buttonRejection
+            // 
+            this.buttonRejection.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRejection.Location = new System.Drawing.Point(404, 421);
+            this.buttonRejection.Name = "buttonRejection";
+            this.buttonRejection.Size = new System.Drawing.Size(194, 70);
+            this.buttonRejection.TabIndex = 18;
+            this.buttonRejection.Text = "Отказать";
+            this.buttonRejection.UseVisualStyleBackColor = true;
+            this.buttonRejection.Click += new System.EventHandler(this.buttonRejection_Click);
+            // 
+            // listBoxInfo
+            // 
+            this.listBoxInfo.FormattingEnabled = true;
+            this.listBoxInfo.HorizontalScrollbar = true;
+            this.listBoxInfo.ItemHeight = 20;
+            this.listBoxInfo.Location = new System.Drawing.Point(404, 57);
+            this.listBoxInfo.Name = "listBoxInfo";
+            this.listBoxInfo.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxInfo.Size = new System.Drawing.Size(432, 344);
+            this.listBoxInfo.TabIndex = 19;
+            // 
             // FormManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 503);
+            this.Controls.Add(this.listBoxInfo);
+            this.Controls.Add(this.buttonRejection);
+            this.Controls.Add(this.buttonApprove);
             this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.comboBoxNature);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.listViewInfo);
             this.Controls.Add(this.comboBoxUser);
             this.Controls.Add(this.labelUser);
             this.Controls.Add(this.textBoxPassword);
@@ -177,9 +209,11 @@
         private Label labelLogin;
         private ComboBox comboBoxUser;
         private Label labelUser;
-        private ListView listViewInfo;
         private Button buttonAdd;
         private ComboBox comboBoxNature;
         private Label labelMessage;
+        private Button buttonApprove;
+        private Button buttonRejection;
+        private ListBox listBoxInfo;
     }
 }

@@ -9,14 +9,12 @@ namespace BankingSystem
     internal class Account
     {
         public string Id { get; set; }
-        public string Name { get; set; }
         public string Sum { get; set; }
         public bool State { get; set; }
 
-        public Account(string Id, string Name, string Sum, bool State)
+        public Account(string Id, string Sum, bool State)
         {
             this.Id = Id;
-            this.Name = Name;
             this.Sum = Sum;
             this.State = State;
         }
@@ -33,30 +31,43 @@ namespace BankingSystem
             catch { MessageBox.Show("Неверный ввод"); }
         }
 
-        public void CreateId(string Id, int num)
+        public void CreateId(string Id, int num, string Bank)
         {
+            if(Bank == "Alpha Bank")
+            {
+                Bank = "0";
+            }
+            else if(Bank == "BSB Bank")
+            {
+                Bank = "1";
+            }
+            else if(Bank == "Belarus Bank")
+            {
+                Bank = "2";
+            }
+
             if(num < 10)
             {
-                IdCase(Id, "000", num);
+                IdCase(Id, "000", num, Bank);
             }
             else if(num < 100)
             {
-                IdCase(Id, "00", num);
+                IdCase(Id, "00", num, Bank);
             }
             else if(num < 1000)
             {
-                IdCase(Id, "0", num);
+                IdCase(Id, "0", num, Bank);
             }
             else if(num < 10000)
             {
-                IdCase(Id, "", num);
+                IdCase(Id, "", num, Bank);
             }
             else { MessageBox.Show("Слишком много счетов"); }
         }
 
-        private void IdCase(string Id, string zero, int num)
+        private void IdCase(string Id, string zero, int num, string Bank)
         {
-            this.Id = Id + zero + Convert.ToString(num);
+            this.Id = Id + zero + Convert.ToString(num) + Bank;
         }
     }
 }

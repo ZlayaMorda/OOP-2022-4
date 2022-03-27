@@ -19,7 +19,7 @@ namespace BankingSystem.UserAut
             }
         }
 
-        public string FindUser()
+        public string? FindUser()
         {
             if (UserView != null)
             {
@@ -53,24 +53,16 @@ namespace BankingSystem.UserAut
         {
             if (id != null)
             {
-                if (id.Substring(0, 4) == "0000")
+                string substr = id.Substring(0, 4);
+                if (substr != "3333")
                 {
-                    FormManagement.FormManagement f = new(UserView.Bank, true);
+                    FormManagement.FormManagement f = new(UserView.Bank, substr);
                     f.ShowDialog();
                 }
-                else if (id.Substring(0, 4) == "1111")
+                else
                 {
-                    FormManagement.FormManagement f = new(UserView.Bank, false);
+                    FormClient.FormClient f = new(UserView.Bank, UserView.LoginText);
                     f.ShowDialog();
-                }
-                else if (id.Substring(0, 4) == "2222")
-                {
-                    FormManagement.FormManagement f = new(UserView.Bank, false);
-                    f.ShowDialog();
-                }
-                else if (id.Substring(0, 4) == "3333")
-                {
-
                 }
             }
         }
