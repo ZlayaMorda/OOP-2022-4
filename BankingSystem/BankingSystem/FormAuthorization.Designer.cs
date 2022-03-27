@@ -1,6 +1,6 @@
 ﻿namespace BankingSystem.Authorization
 {
-    partial class Authorization
+    partial class FormAuthorization
     {
         /// <summary>
         /// Required designer variable.

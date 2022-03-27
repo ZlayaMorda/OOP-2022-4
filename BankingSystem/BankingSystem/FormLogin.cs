@@ -68,34 +68,14 @@ namespace BankingSystem.Login
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             UserPresenter presenter = new (this);
-            string? id = presenter.FindUser();
-            MessageBox.Show(id);
-            if ( id != null)
-            {
-                if(id.Substring(0,4) == "0000")
-                {
-                    MessageBox.Show(id);
-                }
-                else if(id.Substring(0,4) == "1111")
-                {
-
-                }
-                else if( id.Substring(0,4) == "2222")
-                {
-
-                }
-                else if( id.Substring(0,4) == "3333")
-                {
-
-                }
-            }
+            presenter.OpenForm(presenter.FindUser());            
         }
 
         private void buttonAuthorization_Click(object sender, EventArgs e)
         {
             //UserPresenter presenter = new(this);
             //presenter.AddAdmin();
-            Authorization.Authorization f = new();
+            Authorization.FormAuthorization f = new();
             f.ShowDialog();
         }
 

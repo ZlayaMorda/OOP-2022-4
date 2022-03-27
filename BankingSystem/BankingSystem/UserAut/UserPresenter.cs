@@ -26,7 +26,9 @@ namespace BankingSystem.UserAut
                 try
                 {
                     User user = new(UserView.LoginText, UserView.PasswordText, "", UserView.Bank);
-                    return user.Find(UserView.Member);
+                    string tempId = user.Find(UserView.Member);
+                    if(tempId == null) { UserView.Message = "Такого пользователя не существует"; }
+                    return tempId;
                 }
                 catch { return null; }
             }
@@ -36,11 +38,41 @@ namespace BankingSystem.UserAut
                 return null;
             }
         }
-        public void AddAdmin()
+        public void AddManager(string WhichOne)
         {
-            Admin admin = new(UserView.LoginText, UserView.PasswordText, "", UserView.Bank);
-            admin.CreateId("adm");
-            admin.Send($"Management", admin.Login);
+            try
+            {
+                User admin = new(UserView.LoginText, UserView.PasswordText, "", UserView.Bank);
+                admin.CreateId(WhichOne);
+                admin.Send($"Management", admin.Login);
+                UserView.Message = $"{WhichOne} добавлен";
+            }
+            catch { }
+        }
+        public void OpenForm(string? id)
+        {
+            if (id != null)
+            {
+                if (id.Substring(0, 4) == "0000")
+                {
+                    FormManagement.FormManagement f = new(UserView.Bank, true);
+                    f.ShowDialog();
+                }
+                else if (id.Substring(0, 4) == "1111")
+                {
+                    FormManagement.FormManagement f = new(UserView.Bank, false);
+                    f.ShowDialog();
+                }
+                else if (id.Substring(0, 4) == "2222")
+                {
+                    FormManagement.FormManagement f = new(UserView.Bank, false);
+                    f.ShowDialog();
+                }
+                else if (id.Substring(0, 4) == "3333")
+                {
+
+                }
+            }
         }
     }
 

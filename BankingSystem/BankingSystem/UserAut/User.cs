@@ -21,22 +21,22 @@ namespace BankingSystem.UserAut
         {
             switch(user)
             {
-                case "adm":
+                case "Админ":
                     {
                         IdCase("0000");
                         break;
                     }
-                case "op":
+                case "Оператор":
                     {
                         IdCase("1111");
                         break;
                     }
-                case "mn":
+                case "Менеджер":
                     {
                         IdCase("2222");
                         break;
                     }
-                case "cl":
+                case "Клиент":
                     {
                         IdCase("3333");
                         break;
