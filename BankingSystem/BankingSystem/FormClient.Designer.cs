@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.labelBank = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxInfo = new System.Windows.Forms.ListBox();
             this.labelClient = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxNature = new System.Windows.Forms.ComboBox();
             this.buttonRequestAcc = new System.Windows.Forms.Button();
             this.textBoxSum = new System.Windows.Forms.TextBox();
             this.labelSum = new System.Windows.Forms.Label();
@@ -54,15 +54,17 @@
             this.labelBank.TabIndex = 0;
             this.labelBank.Text = "Bank";
             // 
-            // listBox1
+            // listBoxInfo
             // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(10, 56);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(319, 384);
-            this.listBox1.TabIndex = 1;
+            this.listBoxInfo.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.listBoxInfo.FormattingEnabled = true;
+            this.listBoxInfo.HorizontalScrollbar = true;
+            this.listBoxInfo.ItemHeight = 20;
+            this.listBoxInfo.Location = new System.Drawing.Point(10, 56);
+            this.listBoxInfo.Name = "listBoxInfo";
+            this.listBoxInfo.Size = new System.Drawing.Size(319, 384);
+            this.listBoxInfo.TabIndex = 1;
+            this.listBoxInfo.SelectedIndexChanged += new System.EventHandler(this.listBoxInfo_SelectedIndexChanged);
             // 
             // labelClient
             // 
@@ -74,29 +76,32 @@
             this.labelClient.TabIndex = 2;
             this.labelClient.Text = "Client";
             // 
-            // comboBox1
+            // comboBoxNature
             // 
-            this.comboBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboBoxNature.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.comboBoxNature.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxNature.FormattingEnabled = true;
+            this.comboBoxNature.Items.AddRange(new object[] {
             "Счета",
             "Кредиты"});
-            this.comboBox1.Location = new System.Drawing.Point(336, 54);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(187, 36);
-            this.comboBox1.TabIndex = 3;
+            this.comboBoxNature.Location = new System.Drawing.Point(336, 54);
+            this.comboBoxNature.Name = "comboBoxNature";
+            this.comboBoxNature.Size = new System.Drawing.Size(187, 36);
+            this.comboBoxNature.TabIndex = 3;
+            this.comboBoxNature.SelectedIndexChanged += new System.EventHandler(this.comboBoxNature_SelectedIndexChanged);
             // 
             // buttonRequestAcc
             // 
-            this.buttonRequestAcc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.buttonRequestAcc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonRequestAcc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRequestAcc.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.buttonRequestAcc.Location = new System.Drawing.Point(335, 100);
             this.buttonRequestAcc.Name = "buttonRequestAcc";
             this.buttonRequestAcc.Size = new System.Drawing.Size(187, 68);
             this.buttonRequestAcc.TabIndex = 4;
             this.buttonRequestAcc.Text = "Отправить запрос\r\nна открыти счета";
             this.buttonRequestAcc.UseVisualStyleBackColor = false;
+            this.buttonRequestAcc.Click += new System.EventHandler(this.buttonRequestAcc_Click);
             // 
             // textBoxSum
             // 
@@ -121,14 +126,16 @@
             // 
             // buttonTakeCash
             // 
-            this.buttonTakeCash.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonTakeCash.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonTakeCash.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonTakeCash.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.buttonTakeCash.Location = new System.Drawing.Point(548, 100);
             this.buttonTakeCash.Name = "buttonTakeCash";
             this.buttonTakeCash.Size = new System.Drawing.Size(179, 68);
             this.buttonTakeCash.TabIndex = 10;
             this.buttonTakeCash.Text = "Снять наличные";
             this.buttonTakeCash.UseVisualStyleBackColor = false;
+            this.buttonTakeCash.Click += new System.EventHandler(this.buttonTakeCash_Click);
             // 
             // textBoxAccount
             // 
@@ -152,19 +159,22 @@
             // 
             // buttonAddSum
             // 
-            this.buttonAddSum.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonAddSum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonAddSum.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddSum.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.buttonAddSum.Location = new System.Drawing.Point(548, 174);
             this.buttonAddSum.Name = "buttonAddSum";
             this.buttonAddSum.Size = new System.Drawing.Size(179, 68);
             this.buttonAddSum.TabIndex = 13;
             this.buttonAddSum.Text = "Добавить сумму";
             this.buttonAddSum.UseVisualStyleBackColor = false;
+            this.buttonAddSum.Click += new System.EventHandler(this.buttonAddSum_Click);
             // 
             // buttonFreeze
             // 
-            this.buttonFreeze.BackColor = System.Drawing.Color.IndianRed;
+            this.buttonFreeze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonFreeze.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonFreeze.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.buttonFreeze.Location = new System.Drawing.Point(335, 174);
             this.buttonFreeze.Name = "buttonFreeze";
             this.buttonFreeze.Size = new System.Drawing.Size(187, 68);
@@ -210,9 +220,9 @@
             this.Controls.Add(this.labelSum);
             this.Controls.Add(this.textBoxSum);
             this.Controls.Add(this.buttonRequestAcc);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxNature);
             this.Controls.Add(this.labelClient);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listBoxInfo);
             this.Controls.Add(this.labelBank);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "FormClient";
@@ -225,9 +235,9 @@
         #endregion
 
         private Label labelBank;
-        private ListBox listBox1;
+        private ListBox listBoxInfo;
         private Label labelClient;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxNature;
         private Button buttonRequestAcc;
         private TextBox textBoxSum;
         private Label labelSum;

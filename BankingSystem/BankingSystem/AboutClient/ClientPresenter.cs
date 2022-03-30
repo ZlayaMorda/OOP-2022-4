@@ -41,8 +41,8 @@ namespace BankingSystem.AboutClient
                 {
                     User UserToAdd = new(ClientView.LoginText, ClientView.PasswordText, "", ClientView.Bank);
                     UserToAdd.CreateId("Клиент");
-                    Client ClientToAdd = new(ClientView.Surname, ClientView.Name, ClientView.PName, ClientView.PhoneNumber,
-                        ClientView.LoginText, ClientView.Bank, ClientView.PasportNum, UserToAdd.Id);
+                    Client ClientToAdd = new(ClientView.Bank, UserToAdd.Id, ClientView.Surname, ClientView.Name, ClientView.PName, ClientView.PhoneNumber,
+                        ClientView.LoginText, ClientView.PasportNum);
                     MessageBox.Show(ClientToAdd.Id);
 
                     ClientToAdd.Send("ClientsDataToRegistr");

@@ -9,7 +9,5 @@ namespace BankingSystem.AboutClient
         public string? PName { get; set; }
         public string? PhoneNumber { get; set; }
         public string? PasportNum { get; set; }
-        //public string? Email { get; set; }
-        //public string? ClientBank { get; }
     }
 }

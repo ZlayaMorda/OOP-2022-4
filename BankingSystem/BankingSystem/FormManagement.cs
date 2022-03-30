@@ -1,5 +1,6 @@
 ﻿using BankingSystem.UserAut;
 using BankingSystem.BankManagement;
+using BankingSystem.AllAccount;
 
 namespace BankingSystem.FormManagement
 {
@@ -7,6 +8,8 @@ namespace BankingSystem.FormManagement
     {
         Operator oper;
         Manager manager;
+        Bank Bank;
+        AccountPresenter acc;
         string id;
         public FormManagement()
         {
@@ -27,6 +30,7 @@ namespace BankingSystem.FormManagement
                 this.labelUser.Visible = false;
                 this.comboBoxUser.Visible = false;
                 id = manag;
+                Bank = new Bank(bank);
                 if (manag == "1111")
                 {
                     oper = new Operator("", "", manag, bank);
@@ -113,11 +117,20 @@ namespace BankingSystem.FormManagement
                     listBoxInfo.Items.Add(manager.GetClient(key));
                 }
             }
+            else if(id == "2222" || id == "1111" && comboBoxNature.SelectedItem.ToString() == "Заявки на открытие счета")
+            {
+                acc = new();
+                acc.GetFromFile(Bank.Name);
+                foreach (var key in acc.accounts.Keys)
+                {
+                    listBoxInfo.Items.Add(acc.GetAccount(key));
+                }
+            }
         }
 
         private void buttonApprove_Click(object sender, EventArgs e)
         {
-            if (id == "2222" && listBoxInfo.SelectedIndices != null)
+            if (id == "2222" && listBoxInfo.SelectedIndices != null && comboBoxNature.SelectedItem.ToString() == "Заявки на авторизацию")
             {
                 foreach (int num in listBoxInfo.SelectedIndices)
                 {
@@ -126,17 +139,33 @@ namespace BankingSystem.FormManagement
                 manager.SendBack();
                 comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
             }
+            else if (id == "2222" || id == "1111" && comboBoxNature.SelectedItem.ToString() == "Заявки на открытие счета" && listBoxInfo.SelectedIndices != null)
+            {
+                foreach (int num in listBoxInfo.SelectedIndices)
+                {
+                    acc.Add(Bank.Name, listBoxInfo.Items[num].ToString().Substring(0, 41));
+                }
+                comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+            }
         }
 
         private void buttonRejection_Click(object sender, EventArgs e)
         {
-            if (id == "2222" && listBoxInfo.SelectedIndices != null)
+            if (id == "2222" && listBoxInfo.SelectedIndices != null && comboBoxNature.SelectedItem.ToString() == "Заявки на авторизацию")
             {
                 foreach (int num in listBoxInfo.SelectedIndices)
                 {
                     manager.RemoveClient(listBoxInfo.Items[num].ToString().Substring(0, 36));
                 }
                 manager.SendBack();
+                comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+            }
+            else if (id == "2222" || id == "1111" && comboBoxNature.SelectedItem.ToString() == "Заявки на открытие счета" && listBoxInfo.SelectedIndices != null)
+            {
+                foreach (int num in listBoxInfo.SelectedIndices)
+                {
+                    acc.RemoveAccount(Bank.Name, listBoxInfo.Items[num].ToString().Substring(0, 41));
+                }
                 comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
             }
         }

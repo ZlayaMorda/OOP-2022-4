@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankingSystem
+namespace BankingSystem.AllAccount
 {
     internal class Account
     {
@@ -21,31 +21,23 @@ namespace BankingSystem
 
         public void AddMoney(string Num)
         {
-            try
+            if (this.State)
             {
-                float sum = Convert.ToSingle(this.Sum);
-                float num = Convert.ToSingle(Num);
-                sum += num;
-                this.Sum = Convert.ToString(sum);
+                try
+                {
+                    float sum = Convert.ToSingle(this.Sum);
+                    float num = Convert.ToSingle(Num);
+                    if(num < 0) { num *= -1; }
+                    sum += num;
+                    this.Sum = Convert.ToString(sum);
+                }
+                catch { MessageBox.Show("Неверный ввод"); }
             }
-            catch { MessageBox.Show("Неверный ввод"); }
+            else { MessageBox.Show("Счет заморожен"); }
         }
 
         public void CreateId(string Id, int num, string Bank)
         {
-            if(Bank == "Alpha Bank")
-            {
-                Bank = "0";
-            }
-            else if(Bank == "BSB Bank")
-            {
-                Bank = "1";
-            }
-            else if(Bank == "Belarus Bank")
-            {
-                Bank = "2";
-            }
-
             if(num < 10)
             {
                 IdCase(Id, "000", num, Bank);
@@ -62,7 +54,6 @@ namespace BankingSystem
             {
                 IdCase(Id, "", num, Bank);
             }
-            else { MessageBox.Show("Слишком много счетов"); }
         }
 
         private void IdCase(string Id, string zero, int num, string Bank)

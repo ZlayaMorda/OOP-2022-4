@@ -61,7 +61,7 @@ namespace BankingSystem.UserAut
                 }
                 else
                 {
-                    FormClient.FormClient f = new(UserView.Bank, UserView.LoginText);
+                    FormClient.FormClient f = new(UserView.Bank, id);
                     f.ShowDialog();
                 }
             }
