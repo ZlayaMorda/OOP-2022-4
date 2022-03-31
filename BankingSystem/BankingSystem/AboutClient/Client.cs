@@ -44,12 +44,12 @@ namespace BankingSystem.AboutClient
             Load<string, Client> loadCl = new(this.ClientBank, fileName);
             loadCl.AddToFile(this, this.Id);
         }
-        public void LoadToFile(string id)
+        public void LoadToFile(string idAcc)
         {
             Load<string, Client> loadCl = new(this.ClientBank, "ClientsData");
             loadCl.LoadFromFile();
-            loadCl.Information[this.Id].AccountsDict[id].State = AccountsDict[id].State;
-            loadCl.Information[this.Id].AccountsDict[id].Sum = AccountsDict[id].Sum;
+            loadCl.Information[this.Id].AccountsDict[idAcc].State = AccountsDict[idAcc].State;
+            loadCl.Information[this.Id].AccountsDict[idAcc].Sum = AccountsDict[idAcc].Sum;
             loadCl.LoadToFile();
         }
         public void LoadClient()

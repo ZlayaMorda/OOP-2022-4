@@ -19,7 +19,7 @@ namespace BankingSystem.AllAccount
             this.State = State;
         }
 
-        public void AddMoney(string Num)
+        public void AddMoney(string Num, bool sign)
         {
             if (this.State)
             {
@@ -28,7 +28,16 @@ namespace BankingSystem.AllAccount
                     float sum = Convert.ToSingle(this.Sum);
                     float num = Convert.ToSingle(Num);
                     if(num < 0) { num *= -1; }
-                    sum += num;
+                    if(sign == true)
+                    {
+                        sum += num;
+                    }
+                    else if(sign == false && sum >= num) 
+                    {
+                        sum -= num;
+                    }
+                    else { MessageBox.Show("Слишком большая сумма"); }
+
                     this.Sum = Convert.ToString(sum);
                 }
                 catch { MessageBox.Show("Неверный ввод"); }

@@ -48,11 +48,11 @@ namespace BankingSystem.FormClient
         {
             get
             {
-                if (comboBoxNature.SelectedItem.ToString() != null)
+                try
                 {
                     return comboBoxNature.SelectedItem.ToString();
                 }
-                else { return ""; }
+                catch (NullReferenceException) { return ""; }
             }
         }
 
@@ -70,10 +70,15 @@ namespace BankingSystem.FormClient
 
         private void buttonRequestAcc_Click(object sender, EventArgs e)
         {
-            AccountPresenter accPres = new();
             try
             {
-                accPres.Send(dataClientPresenter.GetAcc(), dataClientPresenter.Bank.Name);
+                AccountPresenter accPres = new();
+                if (comboBoxRequest.SelectedItem == "Открыть счет")
+                {
+                
+                        accPres.Send(dataClientPresenter.GetAcc(), dataClientPresenter.Bank.Name);
+                
+                }
             }
             catch (NullReferenceException) { }
         }
@@ -85,18 +90,38 @@ namespace BankingSystem.FormClient
 
         private void buttonAddSum_Click(object sender, EventArgs e)
         {
-                dataClientPresenter.AddSumToTheAcc(this);
+                dataClientPresenter.ChangeAccSum(this, true);
                 comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
         }
 
         private void buttonTakeCash_Click(object sender, EventArgs e)
         {
-
+            dataClientPresenter.ChangeAccSum(this, false);
         }
 
         private void listBoxInfo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                Clipboard.SetText(listBoxInfo.SelectedItem.ToString().Substring(13, 41));
+            }
+            catch (NullReferenceException){ MessageBox.Show("Выберите счет"); }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataClientPresenter.Transfer(this);
+            comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+        }
+
+        private void buttonFreeze_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dataClientPresenter.Freeze(this);
+                comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+            }
+            catch (NullReferenceException) { }
         }
     }
 }

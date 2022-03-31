@@ -34,5 +34,24 @@ namespace BankingSystem
                 return "";
             }
         }
+        public string GetName(string num)
+        {
+            if(num == "0")
+            {
+                return "Alpha Bank";
+            }
+            else if(num == "1")
+            {
+                return "BSB Bank";
+            }
+            else if(num == "2")
+            {
+                return "Belarus Bank";
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }
