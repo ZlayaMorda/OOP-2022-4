@@ -127,7 +127,8 @@
             this.comboBoxNature.FormattingEnabled = true;
             this.comboBoxNature.Items.AddRange(new object[] {
             "Заявки на авторизацию",
-            "Заявки на открытие счета"});
+            "Заявки на открытие счета",
+            "Логи движений по счетам"});
             this.comboBoxNature.Location = new System.Drawing.Point(404, 12);
             this.comboBoxNature.Name = "comboBoxNature";
             this.comboBoxNature.Size = new System.Drawing.Size(432, 28);

@@ -48,8 +48,15 @@ namespace BankingSystem.AboutClient
         {
             Load<string, Client> loadCl = new(this.ClientBank, "ClientsData");
             loadCl.LoadFromFile();
-            loadCl.Information[this.Id].AccountsDict[idAcc].State = AccountsDict[idAcc].State;
-            loadCl.Information[this.Id].AccountsDict[idAcc].Sum = AccountsDict[idAcc].Sum;
+            if (AccountsDict.ContainsKey(idAcc))
+            {
+                loadCl.Information[this.Id].AccountsDict[idAcc].State = AccountsDict[idAcc].State;
+                loadCl.Information[this.Id].AccountsDict[idAcc].Sum = AccountsDict[idAcc].Sum;
+            }
+            else
+            {
+                loadCl.Information[this.Id].AccountsDict.Remove(idAcc);
+            }
             loadCl.LoadToFile();
         }
         public void LoadClient()
@@ -74,9 +81,9 @@ namespace BankingSystem.AboutClient
             }
             catch (ArgumentException) { }
         }
-        public Account? CreateAccount(string Bank)
+        public Account? CreateAccount(string Bank, string Currency)
         {
-            Account temp = new("", "0", true);
+            Account temp = new("", "0", true, Currency);
             int num = -1;
             for(int i = 0; i < 10000; i++)
             {
@@ -119,11 +126,11 @@ namespace BankingSystem.AboutClient
         {
             if (AccountsDict[key].State)
             {
-                return "Номер счета: " + this.AccountsDict[key].Id + "  Сумма: " + this.AccountsDict[key].Sum + "   Заморожен: " + "нет";
+                return "Валюта" + this.AccountsDict[key].Currency + "  Сумма: " + this.AccountsDict[key].Sum + "   Заморожен: " + "нет" + "   Номер счета: " + this.AccountsDict[key].Id;
             }
             else
             {
-                return "Номер счета: " + this.AccountsDict[key].Id + "  Сумма: " + this.AccountsDict[key].Sum + "   Заморожен: " + "да";
+                return "Валюта" + this.AccountsDict[key].Currency + "  Сумма: " + this.AccountsDict[key].Sum + "   Заморожен: " + "да" + "   Номер счета: " + this.AccountsDict[key].Id;
             }
         }
     }

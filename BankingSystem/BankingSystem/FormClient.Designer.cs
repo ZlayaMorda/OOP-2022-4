@@ -41,7 +41,7 @@
             this.buttonAddSum = new System.Windows.Forms.Button();
             this.buttonFreeze = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
             this.comboBoxRequest = new System.Windows.Forms.ComboBox();
             this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -199,16 +199,17 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // buttonRemove
             // 
-            this.button2.BackColor = System.Drawing.Color.IndianRed;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(337, 446);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(186, 54);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Удалить счет";
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonRemove.BackColor = System.Drawing.Color.RosyBrown;
+            this.buttonRemove.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRemove.Location = new System.Drawing.Point(337, 446);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(186, 54);
+            this.buttonRemove.TabIndex = 16;
+            this.buttonRemove.Text = "Удалить счет";
+            this.buttonRemove.UseVisualStyleBackColor = false;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
             // comboBoxRequest
             // 
@@ -268,7 +269,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxCurrency);
             this.Controls.Add(this.comboBoxRequest);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonFreeze);
             this.Controls.Add(this.buttonAddSum);
@@ -305,7 +306,7 @@
         private Button buttonAddSum;
         private Button buttonFreeze;
         private Button button1;
-        private Button button2;
+        private Button buttonRemove;
         private ComboBox comboBoxRequest;
         private ComboBox comboBoxCurrency;
         private Label label1;

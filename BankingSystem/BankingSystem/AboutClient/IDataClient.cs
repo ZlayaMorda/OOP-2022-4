@@ -10,7 +10,8 @@ namespace BankingSystem.AboutClient
     {
         public string HomeId { get;}
         public string AlienId { get; set; } 
-        public string Sum { get; set; }
+        public string Sum { get; }
         public string Nature { get; }
+        public string? Currency { get; }
     }
 }

@@ -7,10 +7,11 @@ namespace BankingSystem.FormManagement
     public partial class FormManagement : Form, IUser
     {
         Operator oper;
-        Manager manager;
-        Bank Bank;
+        private readonly Manager manager;
+        private readonly Bank Bank;
         AccountPresenter acc;
-        string id;
+        private readonly string id;
+        private readonly Logs logs;
         public FormManagement()
         {
             InitializeComponent();
@@ -19,6 +20,8 @@ namespace BankingSystem.FormManagement
         {
             InitializeComponent();
             this.labelBank.Text = bank;
+            Bank = new Bank(bank);
+            logs = new(bank);
             if (manag == "1111" || manag == "2222")
             {
                 this.labelLogin.Visible = false;
@@ -30,7 +33,6 @@ namespace BankingSystem.FormManagement
                 this.labelUser.Visible = false;
                 this.comboBoxUser.Visible = false;
                 id = manag;
-                Bank = new Bank(bank);
                 if (manag == "1111")
                 {
                     oper = new Operator("", "", manag, bank);
@@ -117,7 +119,7 @@ namespace BankingSystem.FormManagement
                     listBoxInfo.Items.Add(manager.GetClient(key));
                 }
             }
-            else if(id == "2222" || id == "1111" && comboBoxNature.SelectedItem.ToString() == "Заявки на открытие счета")
+            else if(comboBoxNature.SelectedItem.ToString() == "Заявки на открытие счета" && (id == "2222" || id == "1111"))
             {
                 acc = new();
                 acc.GetFromFile(Bank.Name);
@@ -125,6 +127,10 @@ namespace BankingSystem.FormManagement
                 {
                     listBoxInfo.Items.Add(acc.GetAccount(key));
                 }
+            }
+            else if(id != "3333" && comboBoxNature.SelectedItem.ToString() == "Логи движений по счетам")
+            {
+                logs.FillLog(listBoxInfo);
             }
         }
 
@@ -165,6 +171,8 @@ namespace BankingSystem.FormManagement
                 foreach (int num in listBoxInfo.SelectedIndices)
                 {
                     acc.RemoveAccount(Bank.Name, listBoxInfo.Items[num].ToString().Substring(0, 41));
+                    Logs logs = new(Bank.Name);
+                    logs.AddLogModif(listBoxInfo.Items[num].ToString().Substring(0, 41), "не одобрен");
                 }
                 comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
             }

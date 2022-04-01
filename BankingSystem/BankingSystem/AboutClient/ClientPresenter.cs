@@ -33,25 +33,50 @@ namespace BankingSystem.AboutClient
             }
             else { return false; }
         }
+        public bool IsExist()
+        {
+            Load<string, User> loadUs = new(ClientView.Bank, "UsersData");
+            loadUs.LoadFromFile();
+            Load<string, Client> loadCl = new(ClientView.Bank, "ClientsData");
+            loadCl.LoadFromFile();
+            bool pasportExist = false;
+            foreach(var key in loadCl.Information.Keys)
+            {
+                if(loadCl.Information[key].Pasport == ClientView.PasportNum)
+                {
+                    pasportExist = true;
+                    break;
+                }
+            }
+            if (loadUs.Information.ContainsKey(ClientView.LoginText) || pasportExist)
+            {
+                return false;
+            }
+            else { return true; }
+        }
         public bool SendToApprove()
         {
             if (ClientView != null)
             {
-                try
+                if (IsExist())
                 {
-                    User UserToAdd = new(ClientView.LoginText, ClientView.PasswordText, "", ClientView.Bank);
-                    UserToAdd.CreateId("Клиент");
-                    Client ClientToAdd = new(ClientView.Bank, UserToAdd.Id, ClientView.Surname, ClientView.Name, ClientView.PName, ClientView.PhoneNumber,
-                        ClientView.LoginText, ClientView.PasportNum);
-                    MessageBox.Show(ClientToAdd.Id);
+                    try
+                    {
+                        User UserToAdd = new(ClientView.LoginText, ClientView.PasswordText, "", ClientView.Bank);
+                        UserToAdd.CreateId("Клиент");
+                        Client ClientToAdd = new(ClientView.Bank, UserToAdd.Id, ClientView.Surname, ClientView.Name, ClientView.PName, ClientView.PhoneNumber,
+                            ClientView.LoginText, ClientView.PasportNum);
+                        MessageBox.Show(ClientToAdd.Id);
 
-                    ClientToAdd.Send("ClientsDataToRegistr");
-                    UserToAdd.Send("UsersDataToRegistr", UserToAdd.Login);
-                    
-                    ClientView.Message = "Ваша форма отправлена";
-                    return true;
+                        ClientToAdd.Send("ClientsDataToRegistr");
+                        UserToAdd.Send("UsersDataToRegistr", UserToAdd.Login);
+
+                        ClientView.Message = "Ваша форма отправлена";
+                        return true;
+                    }
+                    catch { return false; }
                 }
-                catch { return false; }
+                else { MessageBox.Show("Такой пользователь уже существует"); return false; }
             }
             else
             {

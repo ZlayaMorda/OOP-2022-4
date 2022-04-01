@@ -7,7 +7,7 @@ namespace BankingSystem.AllAccount
     {
         readonly public Dictionary<string, Account> accounts = new();
 
-        public void Send(Account acc, string Bank)
+        public static void Send(Account acc, string Bank)
         {
             Load<string, Account> load = new(Bank, "AccountsToRegistr");
             load.LoadFromFile();
@@ -41,19 +41,21 @@ namespace BankingSystem.AllAccount
         }
         public void Add(string Bank, string id)
         {
+            Logs logs = new(Bank);
             Load<string, Client> load = new(Bank, "ClientsData");
             load.LoadFromFile();
             if(load.Information.ContainsKey(id.Substring(0,36)))
             {
                 load.Information[id.Substring(0, 36)].AddAccount(accounts[id]);
                 load.LoadToFile();
+                logs.AddLogModif(id, "создан");
             }
             RemoveAccount(Bank, id);
         }
 
         public string GetAccount(string id)
         {
-            return accounts[id].Id;
+            return accounts[id].Id + "Валюта: " + accounts[id].Currency;
         }
     }
 }

@@ -11,15 +11,17 @@ namespace BankingSystem.AllAccount
         public string Id { get; set; }
         public string Sum { get; set; }
         public bool State { get; set; }
+        public string Currency { get; }
 
-        public Account(string Id, string Sum, bool State)
+        public Account(string Id, string Sum, bool State, string Currency)
         {
             this.Id = Id;
             this.Sum = Sum;
             this.State = State;
+            this.Currency = Currency;
         }
 
-        public void AddMoney(string Num, bool sign)
+        public void AddMoney(Logs logs, string Num, bool sign, float revert = 1)
         {
             if (this.State)
             {
@@ -27,18 +29,23 @@ namespace BankingSystem.AllAccount
                 {
                     float sum = Convert.ToSingle(this.Sum);
                     float num = Convert.ToSingle(Num);
-                    if(num < 0) { num *= -1; }
-                    if(sign == true)
+                    if (num != 0)
                     {
-                        sum += num;
+                        num = (float)Math.Round(num /= revert, 2);
+                        if (num < 0) { num *= -1; }
+                        if (sign == true)
+                        {
+                            sum = (float)Math.Round(sum += num, 2);
+                        }
+                        else if (sign == false && sum >= num)
+                        {
+                            sum = (float)Math.Round(sum -= num, 2);
+                        }
+                        else { MessageBox.Show("Слишком большая сумма"); }
+                        logs.AddLogChanges(this.Id, Num, sign, this.Currency);
+                        this.Sum = Convert.ToString(sum);
                     }
-                    else if(sign == false && sum >= num) 
-                    {
-                        sum -= num;
-                    }
-                    else { MessageBox.Show("Слишком большая сумма"); }
-
-                    this.Sum = Convert.ToString(sum);
+                    else { MessageBox.Show("Введите корректную сумму"); }
                 }
                 catch { MessageBox.Show("Неверный ввод"); }
             }

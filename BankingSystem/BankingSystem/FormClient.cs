@@ -6,7 +6,7 @@ namespace BankingSystem.FormClient
     
     public partial class FormClient : Form, IDataClient
     {
-        DataClientPresenter dataClientPresenter;
+        private readonly DataClientPresenter dataClientPresenter;
         string IDataClient.HomeId 
         { 
             get
@@ -15,7 +15,8 @@ namespace BankingSystem.FormClient
                 {
                     if (comboBoxNature.SelectedItem.ToString() == "Счета")
                     {
-                        return listBoxInfo.SelectedItem.ToString().Substring(13, 41);
+                        string select = listBoxInfo.SelectedItem.ToString();
+                        return select.Substring(select.Length - 41, 41);
                     }
                     else { return ""; }
                 }
@@ -39,10 +40,6 @@ namespace BankingSystem.FormClient
             {
                 return textBoxSum.Text;
             }
-            set
-            {
-                textBoxSum.Text = value;
-            }
         }
         string IDataClient.Nature
         {
@@ -53,6 +50,17 @@ namespace BankingSystem.FormClient
                     return comboBoxNature.SelectedItem.ToString();
                 }
                 catch (NullReferenceException) { return ""; }
+            }
+        }
+        string? IDataClient.Currency
+        {
+            get
+            {
+                try
+                {
+                    return comboBoxCurrency.SelectedItem.ToString();
+                }
+                catch (NullReferenceException) { return null; }
             }
         }
 
@@ -73,10 +81,10 @@ namespace BankingSystem.FormClient
             try
             {
                 AccountPresenter accPres = new();
-                if (comboBoxRequest.SelectedItem == "Открыть счет")
+                if (comboBoxRequest.SelectedItem.ToString() == "Открыть счет")
                 {
-                
-                        accPres.Send(dataClientPresenter.GetAcc(), dataClientPresenter.Bank.Name);
+
+                    AccountPresenter.Send(dataClientPresenter.GetAcc(this), dataClientPresenter.Bank.Name);
                 
                 }
             }
@@ -97,13 +105,15 @@ namespace BankingSystem.FormClient
         private void buttonTakeCash_Click(object sender, EventArgs e)
         {
             dataClientPresenter.ChangeAccSum(this, false);
+            comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
         }
 
         private void listBoxInfo_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                Clipboard.SetText(listBoxInfo.SelectedItem.ToString().Substring(13, 41));
+                string select = listBoxInfo.SelectedItem.ToString();
+                Clipboard.SetText(select.Substring(select.Length - 41, 41));
             }
             catch (NullReferenceException){ MessageBox.Show("Выберите счет"); }
         }
@@ -122,6 +132,12 @@ namespace BankingSystem.FormClient
                 comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
             }
             catch (NullReferenceException) { }
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            dataClientPresenter.RemoveAcc(this);
+            comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
         }
     }
 }
