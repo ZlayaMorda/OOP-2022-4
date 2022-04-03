@@ -104,11 +104,11 @@ namespace BankingSystem
         }
     }
 
-    internal class AccLogModif
+    internal class AccLogModif : Registration
     {
         private string HomeId { get; set; }
         private DateTime? Date { get; set; }
-        private string State {get; set;}
+        private string State { get; set; }
 
         public AccLogModif(string HomeId, string State, DateTime? Date = null)
         {

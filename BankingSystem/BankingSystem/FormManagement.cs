@@ -1,17 +1,11 @@
 ﻿using BankingSystem.UserAut;
 using BankingSystem.BankManagement;
-using BankingSystem.AllAccount;
 
 namespace BankingSystem.FormManagement
 {
     public partial class FormManagement : Form, IUser
     {
-        Operator oper;
-        private readonly Manager manager;
-        private readonly Bank Bank;
-        AccountPresenter acc;
-        private readonly string id;
-        private readonly Logs logs;
+        private readonly IAdmin? Administration;
         public FormManagement()
         {
             InitializeComponent();
@@ -20,8 +14,10 @@ namespace BankingSystem.FormManagement
         {
             InitializeComponent();
             this.labelBank.Text = bank;
-            Bank = new Bank(bank);
-            logs = new(bank);
+            if (manag == "0000")
+            {
+                Administration = new Admin(manag, new Bank(bank));
+            }
             if (manag == "1111" || manag == "2222")
             {
                 this.labelLogin.Visible = false;
@@ -32,19 +28,19 @@ namespace BankingSystem.FormManagement
                 this.buttonAdd.Visible = false;
                 this.labelUser.Visible = false;
                 this.comboBoxUser.Visible = false;
-                id = manag;
+                
                 if (manag == "1111")
                 {
-                    oper = new Operator("", "", manag, bank);
-                }    
-                else
+                    Administration = new Operator(manag, new Bank(bank));
+                }
+                else if (manag == "2222")
                 {
-                    manager = new Manager("", "", manag, bank);
+                    Administration = new Manager(manag, new Bank(bank));
                 }
             }
         }
         
-        string IUser.LoginText
+        string? IUser.LoginText
         {
             get
             {
@@ -55,7 +51,7 @@ namespace BankingSystem.FormManagement
                 textBoxLogin.Text = value;
             }
         }
-        string IUser.PasswordText
+        string? IUser.PasswordText
         {
             get
             {
@@ -66,7 +62,7 @@ namespace BankingSystem.FormManagement
                 textBoxPassword.Text = value;
             }
         }
-        string IUser.Message
+        string? IUser.Message
         {
             get
             {
@@ -78,18 +74,18 @@ namespace BankingSystem.FormManagement
             }
         }
 
-        string IUser.Bank
+        string? IUser.Bank
         {
             get
             {
                 try
                 {
-                    return labelBank.Text;
+                    return labelBank.Text.ToString();
                 }
                 catch (NullReferenceException) { return null; }
             }
         }
-        string IUser.Member
+        string? IUser.Member
         {
             get
             {
@@ -101,81 +97,34 @@ namespace BankingSystem.FormManagement
             }
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            UserPresenter presenter = new(this);
-            presenter.AddManager(comboBoxUser.SelectedItem.ToString());
-
+            //try
+            //{
+            //    UserPresenter presenter = new(this);
+            //    presenter.AddManager(comboBoxUser.SelectedItem.ToString());
+            //}
+            //catch (NullReferenceException) { MessageBox.Show("Выберите кого добавить"); }
+            Administration.Add(this);
         }
 
-        private void comboBoxNature_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxNature_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBoxInfo.Items.Clear();
-            if(id == "2222" && comboBoxNature.SelectedItem.ToString() == "Заявки на авторизацию")
-            {
-                manager.GetClientsData();
-                foreach(var key in manager.ClientsDict.Keys)
-                {
-                    listBoxInfo.Items.Add(manager.GetClient(key));
-                }
-            }
-            else if(comboBoxNature.SelectedItem.ToString() == "Заявки на открытие счета" && (id == "2222" || id == "1111"))
-            {
-                acc = new();
-                acc.GetFromFile(Bank.Name);
-                foreach (var key in acc.accounts.Keys)
-                {
-                    listBoxInfo.Items.Add(acc.GetAccount(key));
-                }
-            }
-            else if(id != "3333" && comboBoxNature.SelectedItem.ToString() == "Логи движений по счетам")
-            {
-                logs.FillLog(listBoxInfo);
-            }
+            Administration.Show(listBoxInfo, comboBoxNature.SelectedItem.ToString());
         }
 
-        private void buttonApprove_Click(object sender, EventArgs e)
+        private void ButtonApprove_Click(object sender, EventArgs e)
         {
-            if (id == "2222" && listBoxInfo.SelectedIndices != null && comboBoxNature.SelectedItem.ToString() == "Заявки на авторизацию")
-            {
-                foreach (int num in listBoxInfo.SelectedIndices)
-                {
-                    manager.AddClient(listBoxInfo.Items[num].ToString().Substring(0,36));
-                }
-                manager.SendBack();
-                comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
-            }
-            else if (id == "2222" || id == "1111" && comboBoxNature.SelectedItem.ToString() == "Заявки на открытие счета" && listBoxInfo.SelectedIndices != null)
-            {
-                foreach (int num in listBoxInfo.SelectedIndices)
-                {
-                    acc.Add(Bank.Name, listBoxInfo.Items[num].ToString().Substring(0, 41));
-                }
-                comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
-            }
+            Administration.Approve(listBoxInfo, comboBoxNature.SelectedItem.ToString());
+            ComboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
         }
 
-        private void buttonRejection_Click(object sender, EventArgs e)
+        private void ButtonRejection_Click(object sender, EventArgs e)
         {
-            if (id == "2222" && listBoxInfo.SelectedIndices != null && comboBoxNature.SelectedItem.ToString() == "Заявки на авторизацию")
-            {
-                foreach (int num in listBoxInfo.SelectedIndices)
-                {
-                    manager.RemoveClient(listBoxInfo.Items[num].ToString().Substring(0, 36));
-                }
-                manager.SendBack();
-                comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
-            }
-            else if (id == "2222" || id == "1111" && comboBoxNature.SelectedItem.ToString() == "Заявки на открытие счета" && listBoxInfo.SelectedIndices != null)
-            {
-                foreach (int num in listBoxInfo.SelectedIndices)
-                {
-                    acc.RemoveAccount(Bank.Name, listBoxInfo.Items[num].ToString().Substring(0, 41));
-                    Logs logs = new(Bank.Name);
-                    logs.AddLogModif(listBoxInfo.Items[num].ToString().Substring(0, 41), "не одобрен");
-                }
-                comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
-            }
+
+            Administration.Deny(listBoxInfo, comboBoxNature.SelectedItem.ToString());
+            ComboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
         }
     }
 }

@@ -2,23 +2,19 @@
 
 namespace BankingSystem.BankManagement
 {
-    internal class Admin : User
+    internal class Admin : Manager
     {
-        public Admin(string Login, string Password, string Id, string Bank) : base(Login, Password, Id, Bank)
+        public Admin(string Id, Bank Bank) : base(Id, Bank)
         {
         }
-
-        //public void AddOperatore(string Login, string Password, string Bank) 
-        //{
-        //    Operator oper = new(Login, Password, "", Bank);
-        //    oper.CreateId("op");
-        //    oper.Send("Management", oper.Login);
-        //}
-        //public void AddManager(string Login, string Password, string Bank) 
-        //{
-        //    Manager man = new(Login, Password, "", Bank);
-        //    man.CreateId("mn");
-        //    man.Send("Management", man.Login);
-        //}
+        public override void Add(IUser user)
+        {
+            try
+            {
+                UserPresenter presenter = new(user);
+                presenter.AddManager(user.Member);
+            }
+            catch (NullReferenceException) { MessageBox.Show("Заполните все поля"); }
+        }
     }
 }

@@ -47,7 +47,8 @@ namespace BankingSystem.UserAut
                 admin.Send($"Management", admin.Login);
                 UserView.Message = $"{WhichOne} добавлен";
             }
-            catch { }
+            catch (NullReferenceException){ MessageBox.Show("Введите данные"); }
+            catch (System.ArgumentException) { UserView.Message = $"{WhichOne} существует"; }
         }
         public void OpenForm(string? id)
         {

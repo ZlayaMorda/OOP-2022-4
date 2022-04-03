@@ -8,8 +8,72 @@ namespace BankingSystem.BankManagement
     {
         public readonly Dictionary<string, Client> ClientsDict = new();
         private readonly Dictionary<string, User> Users = new();
-        public Manager(string Login, string Password, string Id, string Bank) : base(Login, Password, Id, Bank)
+        public Manager(string Id, Bank Bank) : base(Id, Bank)
         {
+        }
+
+        public override void Show(ListBox listBoxInfo, string choose)
+        {
+            try
+            {
+                if (choose == "Заявки на авторизацию")
+                {
+                    GetClientsData();
+                    foreach (var key in ClientsDict.Keys)
+                    {
+                        listBoxInfo.Items.Add(GetClient(key));
+                    }
+                }
+                else if (choose == "Заявки на открытие счета")
+                {
+                    ShowAcc(listBoxInfo);
+                }
+                else if (choose == "Логи движений по счетам")
+                {
+                    logs.FillLog(listBoxInfo);
+                }
+            }
+            catch (NullReferenceException) { }
+        }
+
+        public override void Approve(ListBox listBoxInfo, string choose)
+        {
+            try
+            {
+                if (choose == "Заявки на авторизацию")
+                {
+                    foreach (int num in listBoxInfo.SelectedIndices)
+                    {
+                        AddClient(listBoxInfo.Items[num].ToString().Substring(0, 36));
+                    }
+                    SendBack();
+                }
+                else if (choose == "Заявки на открытие счета")
+                {
+                    ApproveAcc(listBoxInfo);
+                }
+            }
+            catch (NullReferenceException) { }
+        }
+
+        public override void Deny(ListBox listBoxInfo, string choose)
+        {
+            try
+            {
+                if (choose == "Заявки на авторизацию")
+                {
+                    foreach (int num in listBoxInfo.SelectedIndices)
+                    {
+                        RemoveClient(listBoxInfo.Items[num].ToString().Substring(0, 36));
+                    }
+                    SendBack();
+                }
+                else if (choose == "Заявки на открытие счета")
+                {
+                    DenyAcc(listBoxInfo);
+                }
+            }
+            catch (NullReferenceException) { }
         }
         public void GetClientsData()
         {
@@ -19,7 +83,7 @@ namespace BankingSystem.BankManagement
 
         public void CopyAll<K, T>(Dictionary<K, T> dictOut, string fileName)
         {
-            Load<K, T> load = new(this.Bank, fileName);
+            Load<K, T> load = new(this.Bank.Name, fileName);
             load.LoadFromFile();
             try
             {
@@ -56,7 +120,7 @@ namespace BankingSystem.BankManagement
         }
         public void CopyAllBack<K, T>(Dictionary<K, T> dictOut, string fileName)
         {
-            Load<K, T> load = new(this.Bank, fileName);
+            Load<K, T> load = new(this.Bank.Name, fileName);
             try
             {
                 foreach (var k in dictOut.Keys)

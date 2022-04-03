@@ -120,7 +120,7 @@
             this.buttonAdd.TabIndex = 14;
             this.buttonAdd.Text = "Добавить\r\nв систему";
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // comboBoxNature
             // 
@@ -133,7 +133,7 @@
             this.comboBoxNature.Name = "comboBoxNature";
             this.comboBoxNature.Size = new System.Drawing.Size(432, 28);
             this.comboBoxNature.TabIndex = 15;
-            this.comboBoxNature.SelectedIndexChanged += new System.EventHandler(this.comboBoxNature_SelectedIndexChanged);
+            this.comboBoxNature.SelectedIndexChanged += new System.EventHandler(this.ComboBoxNature_SelectedIndexChanged);
             // 
             // labelMessage
             // 
@@ -153,7 +153,7 @@
             this.buttonApprove.TabIndex = 17;
             this.buttonApprove.Text = "Принять";
             this.buttonApprove.UseVisualStyleBackColor = true;
-            this.buttonApprove.Click += new System.EventHandler(this.buttonApprove_Click);
+            this.buttonApprove.Click += new System.EventHandler(this.ButtonApprove_Click);
             // 
             // buttonRejection
             // 
@@ -164,7 +164,7 @@
             this.buttonRejection.TabIndex = 18;
             this.buttonRejection.Text = "Отказать";
             this.buttonRejection.UseVisualStyleBackColor = true;
-            this.buttonRejection.Click += new System.EventHandler(this.buttonRejection_Click);
+            this.buttonRejection.Click += new System.EventHandler(this.ButtonRejection_Click);
             // 
             // listBoxInfo
             // 
