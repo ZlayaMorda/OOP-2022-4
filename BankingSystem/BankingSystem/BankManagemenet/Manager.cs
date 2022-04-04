@@ -30,7 +30,7 @@ namespace BankingSystem.BankManagement
                 }
                 else if (choose == "Логи движений по счетам")
                 {
-                    logs.FillLog(listBoxInfo);
+                    logs.FillLog(listBoxInfo, choose);
                 }
             }
             catch (NullReferenceException) { }
@@ -64,7 +64,7 @@ namespace BankingSystem.BankManagement
                 {
                     foreach (int num in listBoxInfo.SelectedIndices)
                     {
-                        RemoveClient(listBoxInfo.Items[num].ToString().Substring(0, 36));
+                        RemoveCl(listBoxInfo.Items[num].ToString().Substring(0, 36));
                     }
                     SendBack();
                 }
@@ -104,7 +104,7 @@ namespace BankingSystem.BankManagement
             ClientsDict[id].Send("ClientsData");
             string login = ClientsDict[id].Email;
             Users[login].Send("UsersData", login);
-
+            logs.AddUserReg(id, "Клиент", true);
             Users.Remove(login);
             ClientsDict.Remove(id);
         }
@@ -112,6 +112,11 @@ namespace BankingSystem.BankManagement
         {
             Users.Remove(ClientsDict[id].Email);
             ClientsDict.Remove(id);
+        }
+        public void RemoveCl(string id)
+        {
+            RemoveClient(id);
+            logs.AddUserReg(id, "Клиент", false);
         }
         public void SendBack()
         {

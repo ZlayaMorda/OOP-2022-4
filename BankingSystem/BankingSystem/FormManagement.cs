@@ -99,12 +99,6 @@ namespace BankingSystem.FormManagement
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    UserPresenter presenter = new(this);
-            //    presenter.AddManager(comboBoxUser.SelectedItem.ToString());
-            //}
-            //catch (NullReferenceException) { MessageBox.Show("Выберите кого добавить"); }
             Administration.Add(this);
         }
 
@@ -116,15 +110,22 @@ namespace BankingSystem.FormManagement
 
         private void ButtonApprove_Click(object sender, EventArgs e)
         {
-            Administration.Approve(listBoxInfo, comboBoxNature.SelectedItem.ToString());
-            ComboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+            try
+            {
+                Administration.Approve(listBoxInfo, comboBoxNature.SelectedItem.ToString());
+                ComboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+            }
+            catch (NullReferenceException) { MessageBox.Show("Ничего не выбрано"); }
         }
 
         private void ButtonRejection_Click(object sender, EventArgs e)
         {
-
-            Administration.Deny(listBoxInfo, comboBoxNature.SelectedItem.ToString());
-            ComboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+            try
+            {
+                Administration.Deny(listBoxInfo, comboBoxNature.SelectedItem.ToString());
+                ComboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+            }
+            catch (NullReferenceException) { MessageBox.Show("Ничего не выбрано"); }
         }
     }
 }

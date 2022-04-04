@@ -14,26 +14,37 @@ namespace BankingSystem
         public void AddLogTrans(IDataClient data, string currency)
         {
             AccLogTrans log = new(data.HomeId, data.AlienId, data.Sum, currency);
-            load.AddToFile(log.GetTransString(), CreateKey(load, "Trans0"));
+            load.AddToFile(log.GetTransString(), CreateKey(load, "Acc0"));
         }
 
         public void AddLogChanges(string HomeId, string Sum, bool changes, string Currency)
         {
             AccLogTrans log = new(HomeId, changes, Sum, Currency);
-            load.AddToFile(log.GetTransString(), CreateKey(load, "Trans0"));
+            load.AddToFile(log.GetTransString(), CreateKey(load, "Acc0"));
         }
 
         public void AddLogModif(string HomeId, string State)
         {
             AccLogModif log = new(HomeId, State);
-            load.AddToFile(log.GetModifSettings(), CreateKey(load, "Modif0"));
+            load.AddToFile(log.GetModifString(), CreateKey(load, "Acc0"));
         }
 
-        public void FillLog(ListBox listBox)
+        public void AddUserReg(string Id, string UserType, bool state)
         {
+            Registration log = new(Id, UserType, state);
+            load.AddToFile(log.GetRegString(), CreateKey(load, "Reg0"));
+        }
+
+        public void FillLog(ListBox listBox, string choose)
+        {
+            load.LoadFromFile();
             foreach(var key in load.Information.Keys)
             {
-                if(key.IndexOf("Trans") != -1 || key.IndexOf("Modif") != -1)
+                if(key.IndexOf("Acc") != -1 && choose == "Логи движений по счетам")
+                {
+                    listBox.Items.Add(load.Information[key]);
+                }
+                if (key.IndexOf("Reg") != -1 && choose == "Логи регистрации")
                 {
                     listBox.Items.Add(load.Information[key]);
                 }
@@ -41,12 +52,13 @@ namespace BankingSystem
         }
 
         private static string CreateKey(Load<string, string> load, string key)
-        { 
+        {
+            load.LoadFromFile();
             int i = 0;
             while (load.Information.ContainsKey(key))
             {
                 i++;
-                key = key.Substring(0, 5) + i.ToString();
+                key = key.Substring(0, 3) + i.ToString();
             }
             return key;
         }
@@ -104,7 +116,7 @@ namespace BankingSystem
         }
     }
 
-    internal class AccLogModif : Registration
+    internal class AccLogModif
     {
         private string HomeId { get; set; }
         private DateTime? Date { get; set; }
@@ -124,11 +136,41 @@ namespace BankingSystem
             this.State = State;
         }
 
-        public string GetModifSettings()
+        public string GetModifString()
         {
             return Date.ToString() + "  счет " + HomeId + "  " + State;
         }
     }
     internal class Registration
-    { }
+    {
+        private string Id { get; set; }
+        private DateTime? Date { get; set; }
+        private string UserType { get; set; }
+        private string state { get; set; }
+        internal Registration(string Id, string UserType, bool reg, DateTime? Date = null)
+        {
+            if (Date == null)
+            {
+                this.Date = DateTime.Now;
+            }
+            else
+            {
+                this.Date = Date;
+            }
+            this.Id = Id;
+            this.UserType = UserType;
+            if(reg)
+            {
+                state = " Зарегестрирован в банке, ID";
+            }
+            else
+            {
+                state = " Отказано в регистрации в банке, ID";
+            }
+        }
+        internal string GetRegString()
+        {
+            return Date.ToString() + "Пользователь " + this.UserType + this.state + this.Id;
+        }
+    }
 }

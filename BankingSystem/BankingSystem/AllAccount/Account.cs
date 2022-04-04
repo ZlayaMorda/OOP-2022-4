@@ -42,7 +42,7 @@ namespace BankingSystem.AllAccount
                             sum = (float)Math.Round(sum -= num, 2);
                         }
                         else { MessageBox.Show("Слишком большая сумма"); }
-                        logs.AddLogChanges(this.Id, Num, sign, this.Currency);
+                        //logs.AddLogChanges(this.Id, Num, sign, this.Currency);
                         this.Sum = Convert.ToString(sum);
                     }
                     else { MessageBox.Show("Введите корректную сумму"); }

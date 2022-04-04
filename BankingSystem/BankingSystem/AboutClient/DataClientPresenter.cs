@@ -73,7 +73,7 @@ namespace BankingSystem.AboutClient
             }
         }
 
-        public void ChangeAccSum(IDataClient data, bool sign)
+        public bool ChangeAccSum(IDataClient data, bool sign)
         {
             GetView(data);
             try
@@ -85,19 +85,37 @@ namespace BankingSystem.AboutClient
                         client.AccountsDict[clientView.HomeId].AddMoney(logs, clientView.Sum, sign);
                         client.LoadToFile(clientView.HomeId);
                         //logs.AddLogChanges(clientView, sign, Bank.Name, client.AccountsDict[data.HomeId].Currency);
+                        return true;
                     }
                     else
                     {
                         MessageBox.Show("Введите сумму и выберите счет");
+                        return false;
                     }
                 }
                 else
                 {
                     MessageBox.Show("Счет заморожен");
+                    return false;
                 }
             }
-            catch (KeyNotFoundException) { MessageBox.Show("Выберите счет"); }
+            catch (KeyNotFoundException) { MessageBox.Show("Выберите счет"); return false; }
             
+        }
+        public void PlusSum(IDataClient data)
+        {
+            if(ChangeAccSum(data, true))
+            {
+                logs.AddLogChanges(data.HomeId, data.Sum, true, client.AccountsDict[clientView.HomeId].Currency);
+            }
+        }
+
+        public void MinusSum(IDataClient data)
+        {
+            if (ChangeAccSum(data, false))
+            {
+                logs.AddLogChanges(data.HomeId, data.Sum, false, client.AccountsDict[clientView.HomeId].Currency);
+            }
         }
 
         public void Transfer(IDataClient data)
@@ -136,7 +154,7 @@ namespace BankingSystem.AboutClient
                 alienClient.AccountsDict[AlienAccId].AddMoney(logs, clientView.Sum, true, Currency(alienClient, AlienAccId, out string currency));
                 alienClient.LoadToFile(AlienAccId);
                 ChangeAccSum(clientView, false);
-                //logs.AddLogTrans(clientView, currency, Bank.Name);
+                logs.AddLogTrans(clientView, currency);
             }
             else { MessageBox.Show("Счет заморожен"); }
         }

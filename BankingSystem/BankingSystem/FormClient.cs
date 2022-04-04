@@ -98,13 +98,13 @@ namespace BankingSystem.FormClient
 
         private void buttonAddSum_Click(object sender, EventArgs e)
         {
-                dataClientPresenter.ChangeAccSum(this, true);
+                dataClientPresenter.PlusSum(this);
                 comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
         }
 
         private void buttonTakeCash_Click(object sender, EventArgs e)
         {
-            dataClientPresenter.ChangeAccSum(this, false);
+            dataClientPresenter.MinusSum(this);
             comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
         }
 

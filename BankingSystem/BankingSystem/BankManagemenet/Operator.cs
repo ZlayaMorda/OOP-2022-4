@@ -31,7 +31,7 @@ namespace BankingSystem.BankManagement
                 }
                 else if (choose == "Логи движений по счетам")
                 {
-                    logs.FillLog(listBoxInfo);
+                    logs.FillLog(listBoxInfo, choose);
                 }
             }
             catch (NullReferenceException) { }

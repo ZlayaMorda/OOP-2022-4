@@ -55,7 +55,15 @@ namespace BankingSystem.Login
             {
                 try
                 {
-                    return comboBoxUser.SelectedItem.ToString();
+                    if(textBoxLogin.Text.Contains("@"))
+                    {
+                        return "Клиент";
+                    }
+                    else
+                    {
+                        return "Администрация";
+                    }
+                    
                 }
                 catch (NullReferenceException) { return null; }
             }
@@ -73,15 +81,8 @@ namespace BankingSystem.Login
 
         private void buttonAuthorization_Click(object sender, EventArgs e)
         {
-            //UserPresenter presenter = new(this);
-            //presenter.AddAdmin();
             Authorization.FormAuthorization f = new();
             f.ShowDialog();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

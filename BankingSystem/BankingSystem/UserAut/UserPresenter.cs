@@ -38,7 +38,7 @@ namespace BankingSystem.UserAut
                 return null;
             }
         }
-        public void AddManager(string WhichOne)
+        public void AddManager(string WhichOne, Logs logs)
         {
             try
             {
@@ -46,6 +46,7 @@ namespace BankingSystem.UserAut
                 admin.CreateId(WhichOne);
                 admin.Send($"Management", admin.Login);
                 UserView.Message = $"{WhichOne} добавлен";
+                logs.AddUserReg(admin.Id, WhichOne, true);
             }
             catch (NullReferenceException){ MessageBox.Show("Введите данные"); }
             catch (System.ArgumentException) { UserView.Message = $"{WhichOne} существует"; }
