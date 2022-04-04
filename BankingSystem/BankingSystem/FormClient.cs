@@ -64,6 +64,14 @@ namespace BankingSystem.FormClient
             }
         }
 
+        internal AccountPresenter AccountPresenter
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public FormClient()
         {
             InitializeComponent();
@@ -72,8 +80,7 @@ namespace BankingSystem.FormClient
         {
             InitializeComponent();
             this.labelBank.Text = Bank;
-            Bank bank = new(Bank);
-            dataClientPresenter = new(bank, id);
+            dataClientPresenter = new(new Bank(Bank), id);
         }
 
         private void buttonRequestAcc_Click(object sender, EventArgs e)

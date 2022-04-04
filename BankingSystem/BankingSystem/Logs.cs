@@ -11,6 +11,39 @@ namespace BankingSystem
             load = new(BankName, "Logs");
             load.LoadFromFile();
         }
+
+        internal AccLogTrans AccLogTrans
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal AccLogModif AccLogModif
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Load<object, object> Load
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Registration Registration
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public void AddLogTrans(IDataClient data, string currency)
         {
             AccLogTrans log = new(data.HomeId, data.AlienId, data.Sum, currency);

@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BankingSystem.Bank" Collapsed="true">
+    <Position X="1.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQIAAAACAAAAAAAAAAEBCA=</HashCode>
+      <FileName>Bank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.Logs" Collapsed="true">
+    <Position X="1.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAiAAAAqAAABAAAABAAAAAABEAAAAAAAAABAAEAAA=</HashCode>
+      <FileName>Logs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AccLogTrans" />
+      <Property Name="AccLogModif" />
+      <Property Name="Load" />
+      <Property Name="Registration" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankingSystem.AccLogTrans" Collapsed="true">
+    <Position X="0.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAIAAAAAAAQAACAAAAAABAAAAAAAAAAQ=</HashCode>
+      <FileName>Logs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.AccLogModif" Collapsed="true">
+    <Position X="2.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAIAAAAAAAAAAAAAAAAABAAAABAAAAAA=</HashCode>
+      <FileName>Logs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.Registration" Collapsed="true">
+    <Position X="1.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAgAAAAAAAAAAAAAAAAACAAFAAAAAAAAAAA=</HashCode>
+      <FileName>Logs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.AboutClient.Client" Collapsed="true">
+    <Position X="9.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACQAQAACAAEQAAAEAARAQEBAAAAAAAAgACAAABAAA=</HashCode>
+      <FileName>AboutClient\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.AboutClient.ClientPresenter" Collapsed="true">
+    <Position X="10.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgAgAAAAAAAAIAAAACAAAQAAAAAAAAAAAAAABAAQ=</HashCode>
+      <FileName>AboutClient\ClientPresenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FormAuthorization" />
+      <Property Name="Client" />
+      <Property Name="User" />
+      <Property Name="Load" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankingSystem.AboutClient.DataClientPresenter" Collapsed="true">
+    <Position X="5.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAgAAgAAAEUQAAEAAAAQAACABQEABAAIQhBAAAAAI=</HashCode>
+      <FileName>AboutClient\DataClientPresenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Bank1" />
+      <Property Name="CopyOfClient" />
+      <Property Name="FormClient" />
+      <Property Name="FormClient1" />
+      <Property Name="Load" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankingSystem.AllAccount.Account" Collapsed="true">
+    <Position X="1.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAAAAAAAAAAAAAAAAACACAAAAAAAAABAAAAgQ=</HashCode>
+      <FileName>AllAccount\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.AllAccount.AccountPresenter" Collapsed="true">
+    <Position X="3.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAAAAAAAAEAAAAAAAIAAAAAEAAAAAEAAAEA=</HashCode>
+      <FileName>AllAccount\AccountPresenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Account" />
+      <Property Name="Load" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankingSystem.BankManagement.Admin" Collapsed="true">
+    <Position X="9.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BankManagemenet\Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.BankManagement.Manager" Collapsed="true">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAACAAAAAAAAAEAAQAAAAAAABEAAAADAECAARAAAQ=</HashCode>
+      <FileName>BankManagemenet\Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.BankManagement.Operator" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQoCwAQAAAAAEAAAAAAAAAAAAAAEAAAAAAEAAAACAAA=</HashCode>
+      <FileName>BankManagemenet\Operator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Load" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BankingSystem.UserAut.User" Collapsed="true">
+    <Position X="11.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAAAAAAAAAAEAAAAAAAACIAAACAAAQgAAAAgA=</HashCode>
+      <FileName>UserAut\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.UserAut.UserPresenter" Collapsed="true">
+    <Position X="6.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABgEAAAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>UserAut\UserPresenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Form1" />
+      <Property Name="User" />
+      <Property Name="Load" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankingSystem.Authorization.FormAuthorization" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EQAEAAQAgCAQEBAEAA6AAAAGhggIAAFAGkAAIAAAgDA=</HashCode>
+      <FileName>FormAuthorization.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ClientPresenter" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BankingSystem.FormClient.FormClient" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AChAIAAAEiBAQJADQACQCQACECIICAAAoEgAQIAAAAI=</HashCode>
+      <FileName>FormClient.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AccountPresenter" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BankingSystem.Login.Form1" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgIAABBACAAEAAAAAKAAAQSgQAAAAEAIQABAACAAAA=</HashCode>
+      <FileName>FormLogin.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UserPresenter" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.245" />
+  </Class>
+  <Class Name="BankingSystem.Login.Program" Collapsed="true">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.FormManagement.FormManagement" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgAAAEBASAAEBAAAACAAgQKoQAACAEJIQABQACAAAA=</HashCode>
+      <FileName>FormManagement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IAdmin" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BankingSystem.Loading.Load&lt;K, T&gt;" Collapsed="true">
+    <Position X="6.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAIAAAAEAAAAAAAAAAAACgAAAAAAEAA=</HashCode>
+      <FileName>Loading.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.AboutClient.CopyOfClient" Collapsed="true">
+    <Position X="1.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACQAQAACAAEQAAAEAARAQEBAAAAAAAAgACAAABAEA=</HashCode>
+      <FileName>AboutClient\Client.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Account" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="BankingSystem.AboutClient.IClient" Collapsed="true">
+    <Position X="10.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAQAQABAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>AboutClient\IClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BankingSystem.AboutClient.IDataClient" Collapsed="true">
+    <Position X="5.75" Y="6.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAQAQCAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>AboutClient\IDataClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BankingSystem.BankManagement.IAdmin" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQoCAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>BankManagemenet\IAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BankingSystem.UserAut.IUser" Collapsed="true">
+    <Position X="10.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAgAIAAAAEAAAIAAAAAA=</HashCode>
+      <FileName>UserAut\IUser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

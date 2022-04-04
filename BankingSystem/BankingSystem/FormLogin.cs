@@ -4,8 +4,8 @@ namespace BankingSystem.Login
 {
     internal partial class Form1 : Form, IUser
     {
-        string IUser.LoginText 
-        { 
+        string IUser.LoginText
+        {
             get
             {
                 return textBoxLogin.Text;
@@ -55,7 +55,7 @@ namespace BankingSystem.Login
             {
                 try
                 {
-                    if(textBoxLogin.Text.Contains("@"))
+                    if (textBoxLogin.Text.Contains("@"))
                     {
                         return "Клиент";
                     }
@@ -63,11 +63,20 @@ namespace BankingSystem.Login
                     {
                         return "Администрация";
                     }
-                    
+
                 }
                 catch (NullReferenceException) { return null; }
             }
         }
+
+        internal UserPresenter UserPresenter
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -75,8 +84,8 @@ namespace BankingSystem.Login
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            UserPresenter presenter = new (this);
-            presenter.OpenForm(presenter.FindUser());            
+            UserPresenter presenter = new(this);
+            presenter.OpenForm(presenter.FindUser());
         }
 
         private void buttonAuthorization_Click(object sender, EventArgs e)

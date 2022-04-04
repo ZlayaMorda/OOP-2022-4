@@ -8,6 +8,14 @@ namespace BankingSystem.BankManagement
         public string Id { get; set; }
         public Bank Bank { get; set; }
 
+        internal Loading.Load<object, object> Load
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         AccountPresenter? acc;
         protected Logs logs;
 

@@ -84,7 +84,6 @@ namespace BankingSystem.AboutClient
                     {
                         client.AccountsDict[clientView.HomeId].AddMoney(logs, clientView.Sum, sign);
                         client.LoadToFile(clientView.HomeId);
-                        //logs.AddLogChanges(clientView, sign, Bank.Name, client.AccountsDict[data.HomeId].Currency);
                         return true;
                     }
                     else
@@ -169,6 +168,46 @@ namespace BankingSystem.AboutClient
             {
                 currency = client.AccountsDict[clientView.HomeId].Currency + "-" + client.AccountsDict[clientView.HomeId].Currency;
                 return 1; 
+            }
+        }
+
+        internal Bank Bank1
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal CopyOfClient CopyOfClient
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public FormClient.FormClient FormClient
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public FormClient.FormClient FormClient1
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Loading.Load<object, object> Load
+        {
+            get => default;
+            set
+            {
             }
         }
     }
