@@ -99,7 +99,6 @@ namespace BankingSystem.AboutClient
                         UserToAdd.CreateId("Клиент");
                         Client ClientToAdd = new(ClientView.Bank, UserToAdd.Id, ClientView.Surname, ClientView.Name, ClientView.PName, ClientView.PhoneNumber,
                             ClientView.LoginText, ClientView.PasportNum);
-                        MessageBox.Show(ClientToAdd.Id);
 
                         ClientToAdd.Send("ClientsDataToRegistr");
                         UserToAdd.Send("UsersDataToRegistr", UserToAdd.Login);

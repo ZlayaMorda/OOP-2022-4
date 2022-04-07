@@ -32,6 +32,39 @@ namespace BankingSystem.AboutClient
                 return null;
             }
         }
+        public Credit? GetCredit(IDataClient data, bool MinusOrPlus)
+        {
+            GetView(data);
+            if (clientView.HomeId != "" && clientView.Month != null && clientView.ToReg != null && clientView.Sum != "")
+            {
+                return client.CreateCredit(data, Bank, MinusOrPlus);
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля");
+                return null;
+            }
+        }
+
+        public void SendToApprove(IDataClient data)
+        {
+            try
+            {
+                if (data.ToReg == "Открыть счет")
+                {
+                    AccountPresenter.Send(GetAcc(data), Bank.Name);
+                }
+                else if(data.ToReg == "Получить кредит")
+                {
+                    CreditPresenter.SendToApprove(GetCredit(data, false), Bank.Name);
+                }
+                else if(data.ToReg == "Сделать вклад")
+                {
+                    CreditPresenter.SendToApprove(GetCredit(data, true), Bank.Name);
+                }
+            }
+            catch (NullReferenceException) { }
+        }
         public void FillTheBox(ListBox listBoxInfo, IDataClient data)
         {
             GetView(data);
@@ -40,6 +73,27 @@ namespace BankingSystem.AboutClient
                 foreach (var key in client.AccountsDict.Keys)
                 {
                     listBoxInfo.Items.Add(client.GetAccString(key));
+              
+                }
+            }
+            else if(clientView.Nature == "Кредиты")
+            {
+                foreach (var key in client.CreditsDict.Keys)
+                {
+                    if(!client.CreditsDict[key].MinusOrPlus)
+                    {
+                        listBoxInfo.Items.Add(client.GetCreditString(key));
+                    }
+                }
+            }
+            else if(clientView.Nature == "Вклады")
+            {
+                foreach (var key in client.CreditsDict.Keys)
+                {
+                    if (client.CreditsDict[key].MinusOrPlus)
+                    {
+                        listBoxInfo.Items.Add(client.GetCreditString(key));
+                    }
                 }
             }
         }
@@ -82,7 +136,7 @@ namespace BankingSystem.AboutClient
                 {
                     if (clientView.Nature == "Счета" && clientView.HomeId != "" && clientView.Sum != "")
                     {
-                        client.AccountsDict[clientView.HomeId].AddMoney(logs, clientView.Sum, sign);
+                        client.AccountsDict[clientView.HomeId].AddMoney(clientView.Sum, sign);
                         client.LoadToFile(clientView.HomeId);
                         return true;
                     }
@@ -150,7 +204,7 @@ namespace BankingSystem.AboutClient
         {
             if (alienClient.AccountsDict[AlienAccId].State == true)
             {
-                alienClient.AccountsDict[AlienAccId].AddMoney(logs, clientView.Sum, true, Currency(alienClient, AlienAccId, out string currency));
+                alienClient.AccountsDict[AlienAccId].AddMoney(clientView.Sum, true, Currency(alienClient, AlienAccId, out string currency));
                 alienClient.LoadToFile(AlienAccId);
                 ChangeAccSum(clientView, false);
                 logs.AddLogTrans(clientView, currency);

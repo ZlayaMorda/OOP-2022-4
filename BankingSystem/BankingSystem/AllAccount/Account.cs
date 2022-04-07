@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BankingSystem.AllAccount
 {
     internal class Account
@@ -20,8 +15,7 @@ namespace BankingSystem.AllAccount
             this.State = State;
             this.Currency = Currency;
         }
-
-        public void AddMoney(Logs logs, string Num, bool sign, float revert = 1)
+        public void AddMoney(string Num, bool sign, float revert = 1)
         {
             if (this.State)
             {

@@ -128,6 +128,7 @@
             this.comboBoxNature.Items.AddRange(new object[] {
             "Заявки на авторизацию",
             "Заявки на открытие счета",
+            "Заявки на выдачу кредитов",
             "Логи движений по счетам",
             "Логи регистрации"});
             this.comboBoxNature.Location = new System.Drawing.Point(404, 12);

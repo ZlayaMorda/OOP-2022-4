@@ -13,5 +13,7 @@ namespace BankingSystem.AboutClient
         public string Sum { get; }
         public string Nature { get; }
         public string? Currency { get; }
+        public string? ToReg { get; }
+        public string? Month { get; }
     }
 }

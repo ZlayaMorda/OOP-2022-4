@@ -1,6 +1,7 @@
 ﻿using BankingSystem.UserAut;
 using BankingSystem.Loading;
 using BankingSystem.AboutClient;
+using BankingSystem.AllAccount;
 
 namespace BankingSystem.BankManagement
 {
@@ -8,6 +9,7 @@ namespace BankingSystem.BankManagement
     {
         public readonly Dictionary<string, Client> ClientsDict = new();
         private readonly Dictionary<string, User> Users = new();
+        private CreditPresenter? creditPresenter;
         public Manager(string Id, Bank Bank) : base(Id, Bank)
         {
         }
@@ -32,6 +34,10 @@ namespace BankingSystem.BankManagement
                 {
                     logs.FillLog(listBoxInfo, choose);
                 }
+                else if (choose == "Заявки на выдачу кредитов")
+                {
+                    ShowCredits(listBoxInfo);
+                }
             }
             catch (NullReferenceException) { }
         }
@@ -51,6 +57,10 @@ namespace BankingSystem.BankManagement
                 else if (choose == "Заявки на открытие счета")
                 {
                     ApproveAcc(listBoxInfo);
+                }
+                else if (choose == "Заявки на выдачу кредитов")
+                {
+                    ApproveCredit(listBoxInfo);
                 }
             }
             catch (NullReferenceException) { }
@@ -72,6 +82,11 @@ namespace BankingSystem.BankManagement
                 {
                     DenyAcc(listBoxInfo);
                 }
+                else if (choose == "Заявки на выдачу кредитов")
+                {
+                    DenyCredit(listBoxInfo);
+                }
+
             }
             catch (NullReferenceException) { }
         }
@@ -135,6 +150,53 @@ namespace BankingSystem.BankManagement
                 load.LoadToFile();
             }
             catch (ArgumentException) { }
+        }
+
+        protected void ShowCredits(ListBox listBox)
+        {
+            creditPresenter = new();
+            creditPresenter.GetFromFile(Bank.Name);
+            foreach (var key in creditPresenter.CreditsDict.Keys)
+            {
+                listBox.Items.Add(creditPresenter.GetCreditString(key));
+            }
+        }
+        protected void ApproveCredit(ListBox listBoxInfo)
+        {
+            if (listBoxInfo.SelectedIndices.Count != 0)
+            {
+                foreach (int num in listBoxInfo.SelectedIndices)
+                {
+                    string id = listBoxInfo.Items[num].ToString().Substring(9, 41);
+                    if (!creditPresenter.CreditsDict[id].MinusOrPlus)
+                    {
+                        Load<string, Client> cl = new(Bank.Name, "ClientsData");
+                        cl.LoadFromFile();
+                        cl.Information[id.Substring(0, 36)].AccountsDict[id].AddMoney(creditPresenter.CreditsDict[id].CreditSum, true);
+                        cl.LoadToFile();
+                    }
+                    creditPresenter.Add(Bank.Name, id);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент");
+            }
+        }
+        protected void DenyCredit(ListBox listBoxInfo)
+        {
+            if (listBoxInfo.SelectedIndices.Count != 0)
+            {
+                foreach (int num in listBoxInfo.SelectedIndices)
+                {
+                    creditPresenter.RemoveCredit(Bank.Name, listBoxInfo.Items[num].ToString().Substring(9, 41));
+                    //logs.AddLogModif(listBoxInfo.Items[num].ToString().Substring(9, 41), "не одобрен");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент");
+            }
         }
     }
 }

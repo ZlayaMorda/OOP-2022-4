@@ -7,6 +7,7 @@ namespace BankingSystem.AboutClient
     internal class Client
     {
         public Dictionary<string, Account> AccountsDict { get; }
+        public Dictionary<string, Credit> CreditsDict { get; }
         public string Surname { get; set; }
         public string Name { get; set; }
         public string PName { get; set; }
@@ -17,7 +18,8 @@ namespace BankingSystem.AboutClient
         public string Pasport { get; set; }
 
         public Client(string ClientBank, string Id, string Surname = "", string Name = "", string PName = "", 
-            string PhoneNumber = "", string Email = "", string Pasport = "", Dictionary<string, Account> ?AccountsDict = null)
+            string PhoneNumber = "", string Email = "", string Pasport = "", Dictionary<string, Account> ?AccountsDict = null,
+            Dictionary<string, Credit> ?CreditsDict = null)
         {
 
             this.Surname = Surname;
@@ -36,6 +38,15 @@ namespace BankingSystem.AboutClient
             else
             {
                 this.AccountsDict = new();
+            }
+            if(CreditsDict != null)
+            {
+                this.CreditsDict = new();
+                CopyCredits(CreditsDict);
+            }
+            else
+            {
+                this.CreditsDict = new();
             }
         }
 
@@ -70,6 +81,12 @@ namespace BankingSystem.AboutClient
                 {
                     CopyAccounts(temp.AccountsDict);
                 }
+
+                if(temp.CreditsDict.Count != 0)
+                {
+                    CopyCredits(temp.CreditsDict);
+                }
+                
                 this.Surname = temp.Surname;
                 this.Name = temp.Name;
                 this.PName = temp.PName;
@@ -133,8 +150,54 @@ namespace BankingSystem.AboutClient
                 return "Валюта" + this.AccountsDict[key].Currency + "  Сумма: " + this.AccountsDict[key].Sum + "   Заморожен: " + "да" + "   Номер счета: " + this.AccountsDict[key].Id;
             }
         }
-    }
+        public void CopyCredits(Dictionary<string, Credit> temp)
+        {
+            foreach (var key in temp.Keys)
+            {
+                this.CreditsDict.Add(key, temp[key]);
+            }
+        }
+        public void AddCredit(Credit cr)
+        {
+            cr.CreateSum();
+            this.CreditsDict.Add(cr.IdAcc, cr);
+        }
+        public Credit? CreateCredit(IDataClient data, Bank Bank, bool MinusOrPlus)
+        {
+            if(!CreditsDict.ContainsKey(data.HomeId))
+            {
+                try
+                {
+                    Credit temp = new(MinusOrPlus, Bank.BankCredits[data.Month], data.Month, data.Sum, data.HomeId);
+                    return temp;
+                }
+                catch { return null; }
+            }
+            else
+            {
+                MessageBox.Show("Выберите другой счет");
+                return null;
+            }
 
+        }
+        public string GetCreditString(string key)
+        {
+            return "Сумма в месяц: " + CreditsDict[key].CreditSum + "   Осталось месяцев: " + CreditsDict[key].Data + "   Номер счета: " + key;
+        }
+
+        public void CheckCredits()
+        {
+            foreach (var key in this.CreditsDict.Keys)
+            {
+                CreditsDict[key].ChangeSum(AccountsDict);
+                if(CreditsDict[key].Data == "0")
+                {
+                    CreditsDict.Remove(CreditsDict[key].IdAcc);
+                }
+            }
+        }
+    }
+    
     internal class CopyOfClient
     {
         public Dictionary<string, Account> AccountsDict { get; }

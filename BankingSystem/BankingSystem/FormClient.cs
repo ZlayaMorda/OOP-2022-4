@@ -52,6 +52,17 @@ namespace BankingSystem.FormClient
                 catch (NullReferenceException) { return ""; }
             }
         }
+        string? IDataClient.ToReg
+        {
+            get
+            {
+                try
+                {
+                    return comboBoxRequest.SelectedItem.ToString();
+                }
+                catch (NullReferenceException) { return null; }
+            }
+        }
         string? IDataClient.Currency
         {
             get
@@ -63,7 +74,17 @@ namespace BankingSystem.FormClient
                 catch (NullReferenceException) { return null; }
             }
         }
-
+        string? IDataClient.Month
+        {
+            get
+            {
+                try
+                {
+                    return comboBoxMonth.SelectedItem.ToString();
+                }
+                catch (NullReferenceException) { return null; }
+            }
+        }
         internal AccountPresenter AccountPresenter
         {
             get => default;
@@ -85,17 +106,7 @@ namespace BankingSystem.FormClient
 
         private void buttonRequestAcc_Click(object sender, EventArgs e)
         {
-            try
-            {
-                AccountPresenter accPres = new();
-                if (comboBoxRequest.SelectedItem.ToString() == "Открыть счет")
-                {
-
-                    AccountPresenter.Send(dataClientPresenter.GetAcc(this), dataClientPresenter.Bank.Name);
-                
-                }
-            }
-            catch (NullReferenceException) { }
+            dataClientPresenter.SendToApprove(this);
         }
         private void comboBoxNature_SelectedIndexChanged(object sender, EventArgs e)
         {

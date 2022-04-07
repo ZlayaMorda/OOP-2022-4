@@ -73,5 +73,7 @@ namespace BankingSystem.AllAccount
         {
             return accounts[id].Id + "Валюта: " + accounts[id].Currency;
         }
+
+
     }
 }
