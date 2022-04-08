@@ -48,6 +48,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
+            this.buttonRegComp = new System.Windows.Forms.Button();
+            this.buttonCompany = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelBank
@@ -68,7 +70,7 @@
             this.listBoxInfo.ItemHeight = 20;
             this.listBoxInfo.Location = new System.Drawing.Point(10, 56);
             this.listBoxInfo.Name = "listBoxInfo";
-            this.listBoxInfo.Size = new System.Drawing.Size(319, 484);
+            this.listBoxInfo.Size = new System.Drawing.Size(319, 524);
             this.listBoxInfo.TabIndex = 1;
             this.listBoxInfo.SelectedIndexChanged += new System.EventHandler(this.listBoxInfo_SelectedIndexChanged);
             // 
@@ -208,7 +210,7 @@
             this.buttonRemove.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonRemove.Location = new System.Drawing.Point(335, 487);
             this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(186, 54);
+            this.buttonRemove.Size = new System.Drawing.Size(186, 45);
             this.buttonRemove.TabIndex = 16;
             this.buttonRemove.Text = "Удалить счет";
             this.buttonRemove.UseVisualStyleBackColor = false;
@@ -287,12 +289,39 @@
             this.comboBoxMonth.Size = new System.Drawing.Size(182, 36);
             this.comboBoxMonth.TabIndex = 23;
             // 
+            // buttonRegComp
+            // 
+            this.buttonRegComp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonRegComp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRegComp.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonRegComp.Location = new System.Drawing.Point(334, 538);
+            this.buttonRegComp.Name = "buttonRegComp";
+            this.buttonRegComp.Size = new System.Drawing.Size(387, 45);
+            this.buttonRegComp.TabIndex = 24;
+            this.buttonRegComp.Text = "Регистрация предприятия";
+            this.buttonRegComp.UseVisualStyleBackColor = false;
+            this.buttonRegComp.Click += new System.EventHandler(this.buttonRegComp_Click);
+            // 
+            // buttonCompany
+            // 
+            this.buttonCompany.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonCompany.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonCompany.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonCompany.Location = new System.Drawing.Point(542, 487);
+            this.buttonCompany.Name = "buttonCompany";
+            this.buttonCompany.Size = new System.Drawing.Size(179, 45);
+            this.buttonCompany.TabIndex = 25;
+            this.buttonCompany.Text = "Предприятия";
+            this.buttonCompany.UseVisualStyleBackColor = false;
+            // 
             // FormClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(733, 553);
+            this.ClientSize = new System.Drawing.Size(733, 591);
+            this.Controls.Add(this.buttonCompany);
+            this.Controls.Add(this.buttonRegComp);
             this.Controls.Add(this.comboBoxMonth);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -343,5 +372,7 @@
         private Label label2;
         private Label label3;
         private ComboBox comboBoxMonth;
+        private Button buttonRegComp;
+        private Button buttonCompany;
     }
 }

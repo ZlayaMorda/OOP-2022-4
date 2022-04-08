@@ -8,6 +8,7 @@ namespace BankingSystem.AboutClient
     {
         public Dictionary<string, Account> AccountsDict { get; }
         public Dictionary<string, Credit> CreditsDict { get; }
+        public Dictionary<string, Company> CompanyDict { get; }
         public string Surname { get; set; }
         public string Name { get; set; }
         public string PName { get; set; }
@@ -19,7 +20,7 @@ namespace BankingSystem.AboutClient
 
         public Client(string ClientBank, string Id, string Surname = "", string Name = "", string PName = "", 
             string PhoneNumber = "", string Email = "", string Pasport = "", Dictionary<string, Account> ?AccountsDict = null,
-            Dictionary<string, Credit> ?CreditsDict = null)
+            Dictionary<string, Credit> ?CreditsDict = null, Dictionary<string, Company> ?CompanyDict = null)
         {
 
             this.Surname = Surname;
@@ -47,6 +48,15 @@ namespace BankingSystem.AboutClient
             else
             {
                 this.CreditsDict = new();
+            }
+            if(CompanyDict == null)
+            {
+                this.CompanyDict = new();
+            }
+            else
+            {
+                this.CompanyDict = new();
+                CopyCompanies(CompanyDict);
             }
         }
 
@@ -85,6 +95,10 @@ namespace BankingSystem.AboutClient
                 if(temp.CreditsDict.Count != 0)
                 {
                     CopyCredits(temp.CreditsDict);
+                }
+                if(temp.CompanyDict.Count != 0)
+                {
+                    CopyCompanies(temp.CompanyDict);
                 }
                 
                 this.Surname = temp.Surname;
@@ -194,6 +208,13 @@ namespace BankingSystem.AboutClient
                 {
                     CreditsDict.Remove(CreditsDict[key].IdAcc);
                 }
+            }
+        }
+        public void CopyCompanies(Dictionary<string, Company> temp)
+        {
+            foreach (var key in temp.Keys)
+            {
+                this.CompanyDict.Add(key, temp[key]);
             }
         }
     }

@@ -157,5 +157,11 @@ namespace BankingSystem.FormClient
             dataClientPresenter.RemoveAcc(this);
             comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
         }
+
+        private void buttonRegComp_Click(object sender, EventArgs e)
+        {
+            FormCompanyReg form = new(dataClientPresenter.client, dataClientPresenter.Bank);
+            form.ShowDialog();
+        }
     }
 }

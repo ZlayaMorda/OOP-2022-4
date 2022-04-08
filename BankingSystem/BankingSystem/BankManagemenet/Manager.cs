@@ -10,6 +10,7 @@ namespace BankingSystem.BankManagement
         public readonly Dictionary<string, Client> ClientsDict = new();
         private readonly Dictionary<string, User> Users = new();
         private CreditPresenter? creditPresenter;
+        private CompanyPresenter? companyPresenter;
         public Manager(string Id, Bank Bank) : base(Id, Bank)
         {
         }
@@ -38,6 +39,10 @@ namespace BankingSystem.BankManagement
                 {
                     ShowCredits(listBoxInfo);
                 }
+                else if (choose == "Заявки на регистрацию предприятия")
+                {
+                    ShowComp(listBoxInfo);
+                }
             }
             catch (NullReferenceException) { }
         }
@@ -62,6 +67,10 @@ namespace BankingSystem.BankManagement
                 {
                     ApproveCredit(listBoxInfo);
                 }
+                else if(choose == "Заявки на регистрацию предприятия")
+                {
+
+                }
             }
             catch (NullReferenceException) { }
         }
@@ -85,6 +94,10 @@ namespace BankingSystem.BankManagement
                 else if (choose == "Заявки на выдачу кредитов")
                 {
                     DenyCredit(listBoxInfo);
+                }
+                else if (choose == "Заявки на регистрацию предприятия")
+                {
+
                 }
 
             }
@@ -196,6 +209,16 @@ namespace BankingSystem.BankManagement
             else
             {
                 MessageBox.Show("Выберите элемент");
+            }
+        }
+
+        public void ShowComp(ListBox listBox)
+        {
+            companyPresenter = new(Bank);
+            companyPresenter.GetFromFile();
+            foreach (var key in companyPresenter.CompanyDict.Keys)
+            {
+                listBox.Items.Add(companyPresenter.GetCompanyString(companyPresenter.CompanyDict[key]));
             }
         }
     }

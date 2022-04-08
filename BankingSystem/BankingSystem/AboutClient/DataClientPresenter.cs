@@ -4,7 +4,7 @@ namespace BankingSystem.AboutClient
     internal class DataClientPresenter
     {
         private IDataClient clientView;
-        private readonly Client client;
+        public readonly Client client;
         public Bank Bank { get; }
         private readonly Logs logs;
         public DataClientPresenter(Bank Bank, string id)
