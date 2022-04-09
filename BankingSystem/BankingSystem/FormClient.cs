@@ -160,8 +160,14 @@ namespace BankingSystem.FormClient
 
         private void buttonRegComp_Click(object sender, EventArgs e)
         {
-            FormCompanyReg form = new(dataClientPresenter.client, dataClientPresenter.Bank);
-            form.ShowDialog();
+            FormCompanyReg formReg = new(dataClientPresenter.client, dataClientPresenter.Bank);
+            formReg.ShowDialog();
+        }
+
+        private void buttonCompany_Click(object sender, EventArgs e)
+        {
+            FormCompany formComp = new(dataClientPresenter.client);
+            formComp.ShowDialog();
         }
     }
 }

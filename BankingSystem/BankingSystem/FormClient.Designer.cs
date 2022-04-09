@@ -313,6 +313,7 @@
             this.buttonCompany.TabIndex = 25;
             this.buttonCompany.Text = "Предприятия";
             this.buttonCompany.UseVisualStyleBackColor = false;
+            this.buttonCompany.Click += new System.EventHandler(this.buttonCompany_Click);
             // 
             // FormClient
             // 

@@ -1,5 +1,6 @@
 ﻿using BankingSystem.AllAccount;
 using BankingSystem.UserAut;
+using BankingSystem.AboutClient;
 
 namespace BankingSystem.BankManagement
 {
@@ -8,6 +9,7 @@ namespace BankingSystem.BankManagement
         public string Id { get; set; }
         public Bank Bank { get; set; }
 
+        protected CompanyPresenter? companyPresenter;
         internal Loading.Load<object, object> Load
         {
             get => default;
@@ -41,6 +43,10 @@ namespace BankingSystem.BankManagement
                 {
                     logs.FillLog(listBoxInfo, choose);
                 }
+                else if (choose == "Заявки на зарплатный проект")
+                {
+                    ShowComp(listBoxInfo, "PayProjectRegistr");
+                }
             }
             catch (NullReferenceException) { }
         }
@@ -57,6 +63,11 @@ namespace BankingSystem.BankManagement
                 {
                     ApproveAcc(listBoxInfo);
                 }
+                else if (choose == "Заявки на зарплатный проект")
+                {
+                    ApprovePayProject(listBoxInfo);
+                }
+
             }
             catch (NullReferenceException) { }
         }
@@ -72,6 +83,10 @@ namespace BankingSystem.BankManagement
                 else if (choose == "Заявки на открытие счета")
                 {
                     DenyAcc(listBoxInfo);
+                }
+                else if (choose == "Заявки на зарплатный проект")
+                {
+                    DenyCompany(listBoxInfo, "PayProjectRegistr");
                 }
             }
             catch (NullReferenceException) { }
@@ -115,5 +130,44 @@ namespace BankingSystem.BankManagement
             }
         }
         public virtual void Add(IUser user) { MessageBox.Show("Доступ ограничен"); }
+
+        protected void ShowComp(ListBox listBox, string file)
+        {
+            companyPresenter = new(Bank);
+            companyPresenter.GetFromFile(file);
+            foreach (var key in companyPresenter.CompanyDict.Keys)
+            {
+                listBox.Items.Add(companyPresenter.GetCompanyString(companyPresenter.CompanyDict[key]));
+            }
+        }
+        protected void ApprovePayProject(ListBox listBox)
+        {
+            if (listBox.SelectedIndices.Count != 0)
+            {
+                foreach (int num in listBox.SelectedIndices)
+                {
+                    companyPresenter.AddPayProject(listBox.Items[num].ToString().Substring(0, 40));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент");
+            }
+        }
+        protected void DenyCompany(ListBox listBoxInfo, string file)
+        {
+            if (listBoxInfo.SelectedIndices.Count != 0)
+            {
+                foreach (int num in listBoxInfo.SelectedIndices)
+                {
+                    companyPresenter.RemoveCompany(listBoxInfo.Items[num].ToString().Substring(0, 40), file);
+                    //logs.AddLogModif(listBoxInfo.Items[num].ToString().Substring(9, 41), "не одобрен");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент");
+            }
+        }
     }
 }

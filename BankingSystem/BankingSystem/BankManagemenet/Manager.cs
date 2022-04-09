@@ -10,7 +10,6 @@ namespace BankingSystem.BankManagement
         public readonly Dictionary<string, Client> ClientsDict = new();
         private readonly Dictionary<string, User> Users = new();
         private CreditPresenter? creditPresenter;
-        private CompanyPresenter? companyPresenter;
         public Manager(string Id, Bank Bank) : base(Id, Bank)
         {
         }
@@ -41,7 +40,11 @@ namespace BankingSystem.BankManagement
                 }
                 else if (choose == "Заявки на регистрацию предприятия")
                 {
-                    ShowComp(listBoxInfo);
+                    ShowComp(listBoxInfo, "CompanyToRegistr");
+                }
+                else if (choose == "Заявки на зарплатный проект")
+                {
+                    ShowComp(listBoxInfo, "PayProjectRegistr");
                 }
             }
             catch (NullReferenceException) { }
@@ -69,7 +72,11 @@ namespace BankingSystem.BankManagement
                 }
                 else if(choose == "Заявки на регистрацию предприятия")
                 {
-
+                    ApproveComp(listBoxInfo);
+                }
+                else if (choose == "Заявки на зарплатный проект")
+                {
+                    ApprovePayProject(listBoxInfo);
                 }
             }
             catch (NullReferenceException) { }
@@ -97,7 +104,11 @@ namespace BankingSystem.BankManagement
                 }
                 else if (choose == "Заявки на регистрацию предприятия")
                 {
-
+                    DenyCompany(listBoxInfo, "CompanyToRegistr");
+                }
+                else if (choose == "Заявки на зарплатный проект")
+                {
+                    DenyCompany(listBoxInfo, "PayProjectRegistr");
                 }
 
             }
@@ -211,14 +222,18 @@ namespace BankingSystem.BankManagement
                 MessageBox.Show("Выберите элемент");
             }
         }
-
-        public void ShowComp(ListBox listBox)
+        protected void ApproveComp(ListBox listBox)
         {
-            companyPresenter = new(Bank);
-            companyPresenter.GetFromFile();
-            foreach (var key in companyPresenter.CompanyDict.Keys)
+            if (listBox.SelectedIndices.Count != 0)
             {
-                listBox.Items.Add(companyPresenter.GetCompanyString(companyPresenter.CompanyDict[key]));
+                foreach (int num in listBox.SelectedIndices)
+                {
+                    companyPresenter.AddCompany(listBox.Items[num].ToString().Substring(0, 40));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите элемент");
             }
         }
     }

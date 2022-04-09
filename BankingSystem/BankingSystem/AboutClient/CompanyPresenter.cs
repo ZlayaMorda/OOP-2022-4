@@ -48,9 +48,9 @@ namespace BankingSystem.AboutClient
             comp.CompanyType = "";
         }
 
-        public void GetFromFile()
+        public void GetFromFile(string file)
         {
-            Load<string, Company> load = new(Bank.Name, "CompanyToRegistr");
+            Load<string, Company> load = new(Bank.Name, file);
             load.LoadFromFile();
             foreach(var key in load.Information.Keys)
             {
@@ -58,10 +58,91 @@ namespace BankingSystem.AboutClient
             }
         }
 
+        public void RemoveCompany(string id, string file)
+        {
+            CompanyDict.Remove(id);
+            Load<string, Company> load = new(Bank.Name, file);
+            load.LoadFromFile();
+            load.Information.Remove(id);
+            load.LoadToFile();
+        }
+        public void AddCompany(string id)
+        {
+            //Logs logs = new(Bank);
+            Load<string, Client> load = new(Bank.Name, "ClientsData");
+            load.LoadFromFile();
+            if (load.Information.ContainsKey(id.Substring(0, 36)))
+            {
+                load.Information[id.Substring(0, 36)].CompanyDict.Add(id,this.CompanyDict[id]);
+                load.LoadToFile();
+                //logs.AddLogModif(id, "создан");
+            }
+            RemoveCompany(id, "CompanyToRegistr");
+        }
+
         public string GetCompanyString(Company comp)
         {
             return comp.Id + "  Тип: " + comp.CompanyType + "  Юридическое название: " + comp.LegalName + "  УНП: " + comp.PayersNumber +
                 "  БИК: " + comp.BankIdCode + "  Юридический адрес: " + comp.JurAdress;
+        }
+        public void SendPayProject(ISalary CompanyViewer)
+        {
+            try
+            {
+                string id = "";
+                foreach(var temp in cl.CompanyDict)
+                {
+                    if(temp.Value.LegalName == CompanyViewer.Company)
+                    {
+                        id = temp.Value.Id;
+                        break;
+                    }
+                }
+                if(!cl.CompanyDict[id].IsPayable)
+                {
+                    Load<string, Company> load = new(Bank.Name, "PayProjectRegistr");
+                    load.LoadFromFile();
+                    load.Information.Add(id, cl.CompanyDict[id]);
+                    load.LoadToFile();
+                }
+                else
+                {
+                    MessageBox.Show("Зарплатный проект уже подтвержден");
+                }
+                
+            }
+            catch{ MessageBox.Show("Выберите предприятие"); }
+        }
+        public void AddPayProject(string id)
+        {
+            Load<string, Client> load = new(Bank.Name, "ClientsData");
+            load.LoadFromFile();
+            load.Information[id.Substring(0, 36)].CompanyDict[id].IsPayable = true;
+            load.LoadToFile();
+
+            RemoveCompany(id, "PayProjectRegistr");
+        }
+
+        public void AddSalary(ISalary data)
+        {
+            Load<string, Client> load = new(Bank.Name, "ClientsData");
+            load.LoadFromFile();
+            string id = data.AccId;
+            Credit cr;
+            if (!load.Information[id.Substring(0, 36)].CreditsDict.ContainsKey(id))
+            {
+                try
+                {
+                    cr = new(true, 0, data.Mounth, data.Sum, id);
+                    load.Information[id.Substring(0, 36)].CreditsDict.Add(id, cr);
+                    load.LoadToFile();
+                }
+                catch { }
+            }
+            else
+            {
+                MessageBox.Show("Выберите другой счет");
+            }
         }
 
     }
