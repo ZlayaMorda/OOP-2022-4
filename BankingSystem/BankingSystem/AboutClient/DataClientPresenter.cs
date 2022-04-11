@@ -32,7 +32,7 @@ namespace BankingSystem.AboutClient
                 return null;
             }
         }
-        public Credit? GetCredit(IDataClient data, bool MinusOrPlus)
+        public Credit? GetCredit(IDataClient data, bool MinusOrPlus, float Bank)
         {
             GetView(data);
             if (clientView.HomeId != "" && clientView.Month != null && clientView.ToReg != null && clientView.Sum != "")
@@ -56,11 +56,15 @@ namespace BankingSystem.AboutClient
                 }
                 else if(data.ToReg == "Получить кредит")
                 {
-                    CreditPresenter.SendToApprove(GetCredit(data, false), Bank.Name);
+                    CreditPresenter.SendToApprove(GetCredit(data, false, Bank.BankCredits[data.Month]), Bank.Name);
                 }
                 else if(data.ToReg == "Сделать вклад")
                 {
-                    CreditPresenter.SendToApprove(GetCredit(data, true), Bank.Name);
+                    CreditPresenter.SendToApprove(GetCredit(data, true, Bank.BankCredits[data.Month]), Bank.Name);
+                }
+                else if(data.ToReg == "Получить рассрочку")
+                {
+                    CreditPresenter.SendToApprove(GetCredit(data, false, 0), Bank.Name);
                 }
             }
             catch (NullReferenceException) { }
@@ -80,7 +84,7 @@ namespace BankingSystem.AboutClient
             {
                 foreach (var key in client.CreditsDict.Keys)
                 {
-                    if(!client.CreditsDict[key].MinusOrPlus)
+                    if (!client.CreditsDict[key].MinusOrPlus && client.CreditsDict[key].Percent != 0)
                     {
                         listBoxInfo.Items.Add(client.GetCreditString(key));
                     }
@@ -90,7 +94,27 @@ namespace BankingSystem.AboutClient
             {
                 foreach (var key in client.CreditsDict.Keys)
                 {
-                    if (client.CreditsDict[key].MinusOrPlus)
+                    if (client.CreditsDict[key].MinusOrPlus && client.CreditsDict[key].Percent != 0)
+                    {
+                        listBoxInfo.Items.Add(client.GetCreditString(key));
+                    }
+                }
+            }
+            else if (clientView.Nature == "Рассрочки")
+            {
+                foreach (var key in client.CreditsDict.Keys)
+                {
+                    if (!client.CreditsDict[key].MinusOrPlus && client.CreditsDict[key].Percent == 0)
+                    {
+                        listBoxInfo.Items.Add(client.GetCreditString(key));
+                    }
+                }
+            }
+            else if (clientView.Nature == "Зарплаты")
+            {
+                foreach (var key in client.CreditsDict.Keys)
+                {
+                    if (client.CreditsDict[key].MinusOrPlus && client.CreditsDict[key].Percent == 0)
                     {
                         listBoxInfo.Items.Add(client.GetCreditString(key));
                     }
@@ -155,49 +179,75 @@ namespace BankingSystem.AboutClient
             catch (KeyNotFoundException) { MessageBox.Show("Выберите счет"); return false; }
             
         }
+        public bool CheckDeposit(Client cl, string id)
+        {
+            foreach (var temp in cl.CreditsDict.Values)
+            {
+                if(temp.IdAcc == id && temp.MinusOrPlus == true && temp.Percent != 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         public void PlusSum(IDataClient data)
         {
-            if(ChangeAccSum(data, true))
+            if (CheckDeposit(client, data.HomeId))
             {
-                logs.AddLogChanges(data.HomeId, data.Sum, true, client.AccountsDict[clientView.HomeId].Currency);
+                if (ChangeAccSum(data, true))
+                {
+                    logs.AddLogChanges(data.HomeId, data.Sum, true, client.AccountsDict[clientView.HomeId].Currency);
+                }
             }
+            else { MessageBox.Show("Невозможно изменить сумму вклада"); }
         }
 
         public void MinusSum(IDataClient data)
         {
-            if (ChangeAccSum(data, false))
+            if (CheckDeposit(client, data.HomeId))
             {
-                logs.AddLogChanges(data.HomeId, data.Sum, false, client.AccountsDict[clientView.HomeId].Currency);
+                if (ChangeAccSum(data, false))
+                {
+                    logs.AddLogChanges(data.HomeId, data.Sum, false, client.AccountsDict[clientView.HomeId].Currency);
+                }
             }
+            else { MessageBox.Show("Невозможно изменить сумму вклада"); }
         }
 
         public void Transfer(IDataClient data)
         {
             GetView(data);
-            try
+            if (CheckDeposit(client, data.HomeId))
             {
-                if (client.AccountsDict[clientView.HomeId].State == true)
+                try
                 {
-                    string AlienAccId = clientView.AlienId;
-                    if (AlienAccId.Length == 41 && clientView.Nature == "Счета" && clientView.HomeId != "" && clientView.Sum != "")
+                    if (client.AccountsDict[clientView.HomeId].State == true)
                     {
-                        if (AlienAccId.Substring(0, 36) != client.Id)
+                        string AlienAccId = clientView.AlienId;
+                        if (AlienAccId.Length == 41 && clientView.Nature == "Счета" && clientView.HomeId != "" && clientView.Sum != "")
                         {
-                            Client alienClient = new(Bank.GetName(AlienAccId[40].ToString()), AlienAccId.Substring(0, 36));
-                            alienClient.LoadClient();
-
-                            TransferSum(alienClient, AlienAccId);
+                            if (AlienAccId.Substring(0, 36) != client.Id)
+                            {
+                                Client alienClient = new(Bank.GetName(AlienAccId[40].ToString()), AlienAccId.Substring(0, 36));
+                                alienClient.LoadClient();
+                                if (CheckDeposit(alienClient, data.AlienId))
+                                {
+                                    TransferSum(alienClient, AlienAccId);
+                                }
+                                else { MessageBox.Show("Невозможно изменить сумму вклада"); }
+                            }
+                            else
+                            {
+                                TransferSum(client, AlienAccId);
+                            }
                         }
-                        else
-                        {
-                            TransferSum(client, AlienAccId);
-                        }
+                        else { MessageBox.Show("Введите сумму и выберите счет"); }
                     }
-                    else { MessageBox.Show("Введите сумму и выберите счет"); }
+                    else { MessageBox.Show("Счет заморожен"); }
                 }
-                else { MessageBox.Show("Счет заморожен"); }
+                catch { }
             }
-            catch { }
+            else { MessageBox.Show("Невозможно изменить сумму вклада"); }
         }
 
         public void TransferSum(Client alienClient, string AlienAccId)

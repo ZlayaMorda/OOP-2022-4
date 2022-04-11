@@ -8,6 +8,23 @@ namespace BankingSystem.AboutClient
         Client? cl { get; set; }
         Bank Bank { get; set; }
         public Dictionary<string, Company> CompanyDict { get; set; }
+
+        internal Company Company
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Load<object, object> Load
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public CompanyPresenter(Bank Bank, Client? cl = null)
         {
             if(cl != null)
@@ -113,11 +130,11 @@ namespace BankingSystem.AboutClient
             }
             catch{ MessageBox.Show("Выберите предприятие"); }
         }
-        public void AddPayProject(string id)
+        public void AddOrRemovePayProject(string id, bool state)
         {
             Load<string, Client> load = new(Bank.Name, "ClientsData");
             load.LoadFromFile();
-            load.Information[id.Substring(0, 36)].CompanyDict[id].IsPayable = true;
+            load.Information[id.Substring(0, 36)].CompanyDict[id].IsPayable = state;
             load.LoadToFile();
 
             RemoveCompany(id, "PayProjectRegistr");
@@ -125,24 +142,32 @@ namespace BankingSystem.AboutClient
 
         public void AddSalary(ISalary data)
         {
-            Load<string, Client> load = new(Bank.Name, "ClientsData");
-            load.LoadFromFile();
-            string id = data.AccId;
-            Credit cr;
-            if (!load.Information[id.Substring(0, 36)].CreditsDict.ContainsKey(id))
+            try
             {
-                try
+                Load<string, Client> load = new(Bank.Name, "ClientsData");
+                load.LoadFromFile();
+                string id = data.AccId;
+                Credit cr;
+                if (!load.Information[id.Substring(0, 36)].CreditsDict.ContainsKey(id))
                 {
-                    cr = new(true, 0, data.Mounth, data.Sum, id);
-                    load.Information[id.Substring(0, 36)].CreditsDict.Add(id, cr);
-                    load.LoadToFile();
+                    if (load.Information[id.Substring(0, 36)].CompanyDict[id].IsPayable)
+                    {
+                        try
+                        {
+                            cr = new(true, 0, data.Mounth, data.Sum, id);
+                            load.Information[id.Substring(0, 36)].CreditsDict.Add(id, cr);
+                            load.LoadToFile();
+                        }
+                        catch { }
+                    }
+                    else { MessageBox.Show("Подайте заявку на зарплатный проект"); }
                 }
-                catch { }
+                else
+                {
+                    MessageBox.Show("Выберите другой счет");
+                }
             }
-            else
-            {
-                MessageBox.Show("Выберите другой счет");
-            }
+            catch { MessageBox.Show("Заполните все поля"); }
         }
 
     }

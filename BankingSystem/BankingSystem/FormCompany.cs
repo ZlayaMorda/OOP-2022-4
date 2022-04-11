@@ -62,6 +62,14 @@ namespace BankingSystem
             }
         }
 
+        internal AllAccount.CreditPresenter CreditPresenter
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private void buttonApprove_Click(object sender, EventArgs e)
         {
             companyPresenter.SendPayProject(this);

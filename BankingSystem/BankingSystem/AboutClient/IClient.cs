@@ -11,7 +11,7 @@ namespace BankingSystem.AboutClient
         public string? PasportNum { get; set; }
     }
 
-    internal interface Copy1OfIClient : Copy1OfIUser
+    internal interface Copy1OfIClient
     {
         public string? Surname { get; set; }
         public string? Name { get; set; }

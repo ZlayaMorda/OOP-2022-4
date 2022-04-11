@@ -7,6 +7,22 @@ namespace BankingSystem.AllAccount
     {
         public readonly Dictionary<string, Credit> CreditsDict = new();
 
+        internal Credit Credit
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Load<object, object> Load
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public static void SendToApprove(Credit cr, string Bank)
         {
             Load<string, Credit> load = new(Bank, "CreditsToRegistr");
@@ -18,13 +34,21 @@ namespace BankingSystem.AllAccount
 
         public string GetCreditString(string id)
         {
-            if(!CreditsDict[id].MinusOrPlus)
+            if(!CreditsDict[id].MinusOrPlus && CreditsDict[id].Percent != 0)
             {
-                return "Кредит:  " + CreditsDict[id].IdAcc + "    Месяцев: " + CreditsDict[id].Data + "   Сумма: " + CreditsDict[id].CreditSum;
+                return "Кредит:    " + CreditsDict[id].IdAcc + "    Месяцев: " + CreditsDict[id].Data + "   Сумма: " + CreditsDict[id].CreditSum;
+            }
+            else if(CreditsDict[id].MinusOrPlus && CreditsDict[id].Percent != 0)
+            {
+                return "Вклад:     " + CreditsDict[id].IdAcc + "    Месяцев: " + CreditsDict[id].Data + "   Сумма: " + CreditsDict[id].CreditSum;
+            }
+            else if(!CreditsDict[id].MinusOrPlus && CreditsDict[id].Percent == 0)
+            {
+                return "Рассрочка: " + CreditsDict[id].IdAcc + "    Месяцев: " + CreditsDict[id].Data + "   Сумма: " + CreditsDict[id].CreditSum;
             }
             else
             {
-                return "Вклад:   " + CreditsDict[id].IdAcc + "    Месяцев: " + CreditsDict[id].Data + "   Сумма: " + CreditsDict[id].CreditSum;
+                return "";
             }
         }
         

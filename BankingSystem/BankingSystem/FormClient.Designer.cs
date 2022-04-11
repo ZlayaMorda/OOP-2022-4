@@ -92,7 +92,9 @@
             this.comboBoxNature.Items.AddRange(new object[] {
             "Счета",
             "Кредиты",
-            "Вклады"});
+            "Вклады",
+            "Рассрочки",
+            "Зарплаты"});
             this.comboBoxNature.Location = new System.Drawing.Point(336, 54);
             this.comboBoxNature.Name = "comboBoxNature";
             this.comboBoxNature.Size = new System.Drawing.Size(187, 36);
@@ -224,7 +226,8 @@
             this.comboBoxRequest.Items.AddRange(new object[] {
             "Открыть счет",
             "Сделать вклад",
-            "Получить кредит"});
+            "Получить кредит",
+            "Получить рассрочку"});
             this.comboBoxRequest.Location = new System.Drawing.Point(335, 125);
             this.comboBoxRequest.Name = "comboBoxRequest";
             this.comboBoxRequest.Size = new System.Drawing.Size(187, 36);

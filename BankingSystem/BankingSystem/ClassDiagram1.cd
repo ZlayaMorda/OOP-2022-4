@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BankingSystem.Bank" Collapsed="true">
-    <Position X="1.75" Y="8" Width="1.5" />
+    <Position X="19.25" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQIAAAACAAAAAAAAAAEBCA=</HashCode>
+      <HashCode>EAAIAAAAAAAAAAAAAAAAAAQIAAAACAAAAAAAAAAEBCA=</HashCode>
       <FileName>Bank.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.Logs" Collapsed="true">
-    <Position X="1.25" Y="10.5" Width="1.5" />
+    <Position X="18.75" Y="12.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAiAAAAqAAABAAAABAAAAAABEAAAAAAAAABAAEAAA=</HashCode>
+      <HashCode>AAECiAAAAqAAABAACABAAAAAABEAAAAACAAABAAEAAA=</HashCode>
       <FileName>Logs.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -18,38 +18,39 @@
       <Property Name="AccLogModif" />
       <Property Name="Load" />
       <Property Name="Registration" />
+      <Property Name="CreditLog" />
     </ShowAsAssociation>
   </Class>
   <Class Name="BankingSystem.AccLogTrans" Collapsed="true">
-    <Position X="0.5" Y="11.5" Width="1.5" />
+    <Position X="18" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAIAAAAAAAQAACAAAAAABAAAAAAAAAAQ=</HashCode>
       <FileName>Logs.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.AccLogModif" Collapsed="true">
-    <Position X="2.25" Y="11.5" Width="1.5" />
+    <Position X="19.75" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAAAAAIAAAAAAAAAAAAAAAAABAAAABAAAAAA=</HashCode>
       <FileName>Logs.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.Registration" Collapsed="true">
-    <Position X="1.25" Y="12.5" Width="1.5" />
+    <Position X="18.75" Y="14.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAgAAAAAAAAAAAAAAAAACAAFAAAAAAAAAAA=</HashCode>
       <FileName>Logs.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.AboutClient.Client" Collapsed="true">
-    <Position X="9.25" Y="11.75" Width="1.5" />
+    <Position X="26.75" Y="13.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAACQAQAACAAEQAAAEAARAQEBAAAAAAAAgACAAABAAA=</HashCode>
+      <HashCode>MAACQAQAACAAEQABAMAARQQEBBAAIAAAAgACCAIBAAA=</HashCode>
       <FileName>AboutClient\Client.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.AboutClient.ClientPresenter" Collapsed="true">
-    <Position X="10.25" Y="10.5" Width="1.5" />
+    <Position X="27.75" Y="12.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABgAgAAAAAAAAIAAAACAAAQAAAAAAAAAAAAAABAAQ=</HashCode>
       <FileName>AboutClient\ClientPresenter.cs</FileName>
@@ -62,9 +63,9 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="BankingSystem.AboutClient.DataClientPresenter" Collapsed="true">
-    <Position X="5.75" Y="8.25" Width="1.5" />
+    <Position X="23.25" Y="10.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAgAAgAAAEUQAAEAAAAQAACABQEABAAIQhBAAAAAI=</HashCode>
+      <HashCode>AQAAgAAgAAAEUQAIEAAAAQAACABQUABAAIQhBAAAEAI=</HashCode>
       <FileName>AboutClient\DataClientPresenter.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -76,14 +77,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="BankingSystem.AllAccount.Account" Collapsed="true">
-    <Position X="1.75" Y="7" Width="1.5" />
+    <Position X="19.25" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAIAAAAAAAAAAAAAAAAACACAAAAAAAAABAAAAgQ=</HashCode>
       <FileName>AllAccount\Account.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.AllAccount.AccountPresenter" Collapsed="true">
-    <Position X="3.75" Y="7.5" Width="1.5" />
+    <Position X="21.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAgAAAAAAAAAAAAEAAAAAAAIAAAAAEAAAAAEAAAEA=</HashCode>
       <FileName>AllAccount\AccountPresenter.cs</FileName>
@@ -94,23 +95,23 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="BankingSystem.BankManagement.Admin" Collapsed="true">
-    <Position X="9.75" Y="5.25" Width="1.5" />
+    <Position X="27.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BankManagemenet\Admin.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.BankManagement.Manager" Collapsed="true">
-    <Position X="9.75" Y="3.75" Width="1.5" />
+    <Position X="27.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAACAAAAAAAAAEAAQAAAAAAABEAAAADAECAARAAAQ=</HashCode>
+      <HashCode>ACgAACAAAAAAAAAEAAQAAAAACgBEAAAADAECAARAEAQ=</HashCode>
       <FileName>BankManagemenet\Manager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.BankManagement.Operator" Collapsed="true">
-    <Position X="9.75" Y="2.5" Width="1.5" />
+    <Position X="27.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQoCwAQAAAAAEAAAAAAAAAAAAAAEAAAAAAEAAAACAAA=</HashCode>
+      <HashCode>AQoCwAQAACAAMAAAAAAEAAAAAAAEACAAAAEABAACAEA=</HashCode>
       <FileName>BankManagemenet\Operator.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -119,14 +120,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BankingSystem.UserAut.User" Collapsed="true">
-    <Position X="11.5" Y="11.75" Width="1.5" />
+    <Position X="29" Y="13.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQACAAAAAAAAAAAAAEAAAAAAAACIAAACAAAQgAAAAgA=</HashCode>
       <FileName>UserAut\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.UserAut.UserPresenter" Collapsed="true">
-    <Position X="6.75" Y="13.75" Width="1.5" />
+    <Position X="23.5" Y="15.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAABgEAAAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAQAAA=</HashCode>
       <FileName>UserAut\UserPresenter.cs</FileName>
@@ -138,7 +139,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="BankingSystem.Authorization.FormAuthorization" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="10.25" Y="9.25" Width="1.5" />
+    <Position X="27.75" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EQAEAAQAgCAQEBAEAA6AAAAGhggIAAFAGkAAIAAAgDA=</HashCode>
       <FileName>FormAuthorization.cs</FileName>
@@ -149,9 +150,9 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BankingSystem.FormClient.FormClient" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="7.25" Width="1.5" />
+    <Position X="23.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AChAIAAAEiBAQJADQACQCQACECIICAAAoEgAQIAAAAI=</HashCode>
+      <HashCode>IChAIAAAEiBAQJQDYBCQCQICECIYCCAAoEgAQIAAAAI=</HashCode>
       <FileName>FormClient.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -160,7 +161,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BankingSystem.Login.Form1" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="3.5" Y="13.75" Width="1.5" />
+    <Position X="20.25" Y="15.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAgIAABBACAAEAAAAAKAAAQSgQAAAAEAIQABAACAAAA=</HashCode>
       <FileName>FormLogin.cs</FileName>
@@ -171,14 +172,14 @@
     <Lollipop Position="0.245" />
   </Class>
   <Class Name="BankingSystem.Login.Program" Collapsed="true">
-    <Position X="3.75" Y="2.5" Width="1.5" />
+    <Position X="21.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.FormManagement.FormManagement" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7.5" Y="3.75" Width="1.5" />
+    <Position X="25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAgAAAEBASAAEBAAAACAAgQKoQAACAEJIQABQACAAAA=</HashCode>
       <FileName>FormManagement.cs</FileName>
@@ -189,14 +190,14 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BankingSystem.Loading.Load&lt;K, T&gt;" Collapsed="true">
-    <Position X="6.75" Y="10.5" Width="1.5" />
+    <Position X="24.25" Y="12.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAIAAAAEAAAAAAAAAAAACgAAAAAAEAA=</HashCode>
       <FileName>Loading.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BankingSystem.AboutClient.CopyOfClient" Collapsed="true">
-    <Position X="1.75" Y="8.75" Width="1.5" />
+    <Position X="19.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAACQAQAACAAEQAAAEAARAQEBAAAAAAAAgACAAABAEA=</HashCode>
       <FileName>AboutClient\Client.cs</FileName>
@@ -205,35 +206,114 @@
       <Property Name="Account" />
     </ShowAsAssociation>
   </Class>
+  <Class Name="BankingSystem.CreditLog" Collapsed="true">
+    <Position X="16.75" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAABAAAgAJAAAABIAAAAQ=</HashCode>
+      <FileName>Logs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.AboutClient.CompanyPresenter" Collapsed="true">
+    <Position X="28.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAgAAAAAAAAAAACAAAAAIQAAAAJAAGAAAgBAAgAQA=</HashCode>
+      <FileName>AboutClient\CompanyPresenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Company" />
+      <Property Name="Load" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankingSystem.AllAccount.Company" Collapsed="true">
+    <Position X="30.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQABAAAAAAAQAAAAAAAAAAACAABAFAAAAAAAAAoQ=</HashCode>
+      <FileName>AboutClient\Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.AllAccount.Credit" Collapsed="true">
+    <Position X="24.75" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAAAAAAAAEAAAAAAAEAACAABAAAAABCAAAAAA=</HashCode>
+      <FileName>AllAccount\Credit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankingSystem.AllAccount.CreditPresenter" Collapsed="true">
+    <Position X="24.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAABAAAJAAAAAAAAABAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>AllAccount\CreditPresenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Credit" />
+      <Property Name="Load" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankingSystem.FormCompany" Collapsed="true">
+    <Position X="22.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAAIFAAAQCDAAACAAAAAAAKMAAAAAAAQEA=</HashCode>
+      <FileName>FormCompany.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CreditPresenter" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BankingSystem.FormCompanyReg" Collapsed="true">
+    <Position X="26.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAADAACAAQBAABAGAAEBCgAgAACAAAACIEAQAAGQ=</HashCode>
+      <FileName>FormCompanyReg.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CompanyPresenter" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="BankingSystem.AboutClient.IClient" Collapsed="true">
-    <Position X="10.25" Y="8.25" Width="1.5" />
+    <Position X="27.75" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAAAAQAQABAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>AboutClient\IClient.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BankingSystem.AboutClient.IDataClient" Collapsed="true">
-    <Position X="5.75" Y="6.25" Width="1.5" />
+    <Position X="23.25" Y="8.25" Width="1.5" />
     <Compartments>
       <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIAAAAAAAQAQCAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAQAYCAAAAAAEAAAAAAAAAAQ=</HashCode>
       <FileName>AboutClient\IDataClient.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BankingSystem.BankManagement.IAdmin" Collapsed="true">
-    <Position X="7.5" Y="2.5" Width="1.5" />
+    <Position X="25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQoCAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAEAAAAAAAA=</HashCode>
       <FileName>BankManagemenet\IAdmin.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BankingSystem.UserAut.IUser" Collapsed="true">
-    <Position X="10.25" Y="7" Width="1.5" />
+    <Position X="27.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAgAIAAAAEAAAIAAAAAA=</HashCode>
       <FileName>UserAut\IUser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BankingSystem.AboutClient.ICompany" Collapsed="true">
+    <Position X="26.75" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAQAAAAAAAAAAAAAABAAAAAAAAAAAIQ=</HashCode>
+      <FileName>AboutClient\ICompany.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BankingSystem.AboutClient.ISalary" Collapsed="true">
+    <Position X="22.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAEAAABAAAAAQ=</HashCode>
+      <FileName>AboutClient\ISalary.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

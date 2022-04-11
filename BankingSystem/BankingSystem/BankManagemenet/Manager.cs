@@ -108,7 +108,7 @@ namespace BankingSystem.BankManagement
                 }
                 else if (choose == "Заявки на зарплатный проект")
                 {
-                    DenyCompany(listBoxInfo, "PayProjectRegistr");
+                    DenyPayProject(listBoxInfo);
                 }
 
             }
@@ -191,7 +191,7 @@ namespace BankingSystem.BankManagement
             {
                 foreach (int num in listBoxInfo.SelectedIndices)
                 {
-                    string id = listBoxInfo.Items[num].ToString().Substring(9, 41);
+                    string id = listBoxInfo.Items[num].ToString().Substring(11, 41);
                     if (!creditPresenter.CreditsDict[id].MinusOrPlus)
                     {
                         Load<string, Client> cl = new(Bank.Name, "ClientsData");
@@ -199,6 +199,8 @@ namespace BankingSystem.BankManagement
                         cl.Information[id.Substring(0, 36)].AccountsDict[id].AddMoney(creditPresenter.CreditsDict[id].CreditSum, true);
                         cl.LoadToFile();
                     }
+                    //Logs logs = new(Bank.Name);
+                    logs.AddCreditLog(true, creditPresenter.CreditsDict[id]);
                     creditPresenter.Add(Bank.Name, id);
                 }
             }
@@ -213,22 +215,10 @@ namespace BankingSystem.BankManagement
             {
                 foreach (int num in listBoxInfo.SelectedIndices)
                 {
-                    creditPresenter.RemoveCredit(Bank.Name, listBoxInfo.Items[num].ToString().Substring(9, 41));
+                    logs.AddCreditLog(false, creditPresenter.CreditsDict[listBoxInfo.Items[num].ToString().Substring(11, 41)]);
+                    creditPresenter.RemoveCredit(Bank.Name, listBoxInfo.Items[num].ToString().Substring(11, 41));
+                    //Logs logs = new(Bank.Name);
                     //logs.AddLogModif(listBoxInfo.Items[num].ToString().Substring(9, 41), "не одобрен");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Выберите элемент");
-            }
-        }
-        protected void ApproveComp(ListBox listBox)
-        {
-            if (listBox.SelectedIndices.Count != 0)
-            {
-                foreach (int num in listBox.SelectedIndices)
-                {
-                    companyPresenter.AddCompany(listBox.Items[num].ToString().Substring(0, 40));
                 }
             }
             else

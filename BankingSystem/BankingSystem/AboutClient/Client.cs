@@ -176,13 +176,13 @@ namespace BankingSystem.AboutClient
             cr.CreateSum();
             this.CreditsDict.Add(cr.IdAcc, cr);
         }
-        public Credit? CreateCredit(IDataClient data, Bank Bank, bool MinusOrPlus)
+        public Credit? CreateCredit(IDataClient data, float Bank, bool MinusOrPlus)
         {
             if(!CreditsDict.ContainsKey(data.HomeId))
             {
                 try
                 {
-                    Credit temp = new(MinusOrPlus, Bank.BankCredits[data.Month], data.Month, data.Sum, data.HomeId);
+                    Credit temp = new(MinusOrPlus, Bank, data.Month, data.Sum, data.HomeId);
                     return temp;
                 }
                 catch { return null; }

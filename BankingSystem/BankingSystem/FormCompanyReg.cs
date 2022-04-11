@@ -67,6 +67,14 @@ namespace BankingSystem
             }
         }
 
+        internal CompanyPresenter CompanyPresenter
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private void buttonAuthorization_Click(object sender, EventArgs e)
         {
             companyPresenter.SendToReg(this);

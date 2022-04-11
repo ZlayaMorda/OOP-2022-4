@@ -33,7 +33,7 @@ namespace BankingSystem.BankManagement
                 {
                     ShowAcc(listBoxInfo);
                 }
-                else
+                else if(choose == "Логи движений по счетам" || choose == "Логи регистрации" || choose == "Логи кредитов, вкладов, зарплат, рассрочек")
                 {
                     logs.FillLog(listBoxInfo, choose);
                 }
