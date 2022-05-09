@@ -57,6 +57,11 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Line",
+            "Rectangle",
+            "Ellipse",
+            "BrokenLine"});
             this.comboBox1.Location = new System.Drawing.Point(12, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(201, 36);
@@ -64,11 +69,12 @@
             // 
             // buttonLineColor
             // 
+            this.buttonLineColor.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.buttonLineColor.Location = new System.Drawing.Point(284, 12);
             this.buttonLineColor.Name = "buttonLineColor";
             this.buttonLineColor.Size = new System.Drawing.Size(50, 49);
             this.buttonLineColor.TabIndex = 2;
-            this.buttonLineColor.UseVisualStyleBackColor = true;
+            this.buttonLineColor.UseVisualStyleBackColor = false;
             this.buttonLineColor.Click += new System.EventHandler(this.buttonLineColor_Click);
             // 
             // label1
@@ -101,9 +107,12 @@
             // trackBarWidth
             // 
             this.trackBarWidth.Location = new System.Drawing.Point(480, 12);
+            this.trackBarWidth.Maximum = 12;
+            this.trackBarWidth.Minimum = 1;
             this.trackBarWidth.Name = "trackBarWidth";
             this.trackBarWidth.Size = new System.Drawing.Size(135, 56);
             this.trackBarWidth.TabIndex = 6;
+            this.trackBarWidth.Value = 1;
             // 
             // Form1
             // 

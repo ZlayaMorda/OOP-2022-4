@@ -9,7 +9,6 @@ namespace Paint
 {
     internal interface IFigure
     { 
-        public string Name { get;}
         public void Draw(Graphics g);
     }
 
@@ -22,10 +21,18 @@ namespace Paint
         public Color PenColor { get; set; }
         public float PenWidth { get; set; }
         public Color BrushColor { get; set; }
-        public string Name { get; }
+        public Line() 
+        {
+            this.x1 = 0;
+            this.y1 = 0;
+            this.x2 = 0;
+            this.y2 = 0;
+            this.PenColor = Color.AntiqueWhite;
+            this.PenWidth = 0;
+            this.BrushColor = Color.AntiqueWhite;
+        }
         public Line(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
         {
-            this.Name = "Line";
             this.x1 = x1;
             this.y1 = y1;
             this.x2 = x2;
@@ -44,10 +51,8 @@ namespace Paint
     internal class BrokenLine : IFigure
     {
         public List<Line> Lines { get; set; }
-        public string Name { get; }
         public BrokenLine(List<Line> lines)
         {
-            this.Name = "BrokenLine";
             this.Lines = lines;
         }
         public void Draw(Graphics graphics)
@@ -68,10 +73,8 @@ namespace Paint
         public Color PenColor { get; set; }
         public float PenWidth { get; set; }
         public Color BrushColor { get; set; }
-        public string Name { get; }
         public Rectangle(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
         {
-            this.Name = "Rectangle";
             this.x1 = x1;
             this.y1 = y1;
             this.x2 = x2;
@@ -103,10 +106,8 @@ namespace Paint
         public Color PenColor { get; set; }
         public float PenWidth { get; set; }
         public Color BrushColor { get; set; }
-        public string Name { get; }
         public Ellipse(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
         {
-            this.Name = "Ellipse";
             this.x1 = x1;
             this.y1 = y1;
             this.x2 = x2;

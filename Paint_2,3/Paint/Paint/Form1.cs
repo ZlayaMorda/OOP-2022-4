@@ -3,11 +3,54 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IPaint
     {
+        internal Dictionary<string, IFigure> FiguresDict = new();
+
         public Form1()
         {
+            Line line = new();
+            // BrokenLine brokenLine = new();
+
+            FiguresDict.Add("Line", line);
+            //FiguresDict.Add("Line", brokenLine);
+            //FiguresDict.Add("Line", rectangle);
+            //FiguresDict.Add("Line", ellipse);
             InitializeComponent();
+        }
+
+        string IPaint.Name
+        { 
+            get
+            {
+                if(comboBox1.SelectedItem != null)
+                {
+                    return comboBox1.SelectedItem.ToString();
+                }
+                else { return "Line"; }
+                    
+            }
+        }
+        Color IPaint.LineColor
+        {
+            get
+            {
+                return buttonLineColor.BackColor = colorDialog1.Color;
+            }
+        }
+        Color IPaint.BrushColor
+        {
+            get
+            {
+                return buttonBrushColor.BackColor = colorDialog1.Color;
+            }
+        }
+        float IPaint.Width
+        {
+            get
+            {
+                return trackBarWidth.Value;
+            }
         }
 
         private void buttonLineColor_Click(object sender, EventArgs e)
@@ -17,8 +60,6 @@ namespace Paint
                 return;
             }
             buttonLineColor.BackColor = colorDialog1.Color;
-            //model.pen = new Pen(button1.BackColor);
-            //model.pen.Width = trackBar1.Value;
         }
 
         private void buttonBrushColor_Click(object sender, EventArgs e)
@@ -31,6 +72,7 @@ namespace Paint
         }
 
         private bool IsMouseUp = false;
+
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             IsMouseUp = true;
