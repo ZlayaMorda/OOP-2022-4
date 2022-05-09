@@ -26,7 +26,7 @@ namespace Paint.mvp
         }
         internal void Click(int X, int Y)
         {
-            Model.Click(X, Y, Storage.figures);
+            Model.Click(X, Y, Storage);
         }
         internal void Move(int X, int Y)
         {
@@ -45,7 +45,15 @@ namespace Paint.mvp
         }
         internal void DoubleClick()
         {
-            Model.DoubleClick(Storage.figures);
+            Model.DoubleClick(Storage);
+        }
+        internal void Before()
+        {
+            Storage.ReturnBefor();
+        }
+        internal void After()
+        {
+            Storage.ReturnAfter();
         }
     }
 }

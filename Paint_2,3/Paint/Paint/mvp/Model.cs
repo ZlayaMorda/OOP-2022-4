@@ -143,7 +143,7 @@ namespace Paint.mvp
 
         }
 
-        public void Click(int eX, int eY, List<IFigure> list)
+        public void Click(int eX, int eY, Storage list)
         {
             n++;
             if (n != 2)
@@ -167,7 +167,7 @@ namespace Paint.mvp
                 else
                 {
                     IsClicked = false;
-                    list.Add(figure.CreateFigure(x1, y1, x2, y2, pen.Color, this.width, brush.Color));
+                    list.AddToFigures(figure.CreateFigure(x1, y1, x2, y2, pen.Color, this.width, brush.Color));
                     n = 0;
                     x1 = 0;
                     y1 = 0;
@@ -177,7 +177,7 @@ namespace Paint.mvp
             }
         }
 
-        public void DoubleClick(List<IFigure> list)
+        public void DoubleClick(Storage list)
         {
             if (Name == "BrokenLine")
             {
@@ -185,7 +185,7 @@ namespace Paint.mvp
                 n = 0;
                 BrokenLine temp_figure = new(lines);
                 lines = new List<Line>();
-                list.Add(temp_figure);
+                list.AddToFigures(temp_figure);
                 x1 = 0;
                 y1 = 0;
                 x2 = 0;

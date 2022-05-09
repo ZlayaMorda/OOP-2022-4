@@ -36,6 +36,8 @@
             this.buttonBrushColor = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.trackBarWidth = new System.Windows.Forms.TrackBar();
+            this.Before = new System.Windows.Forms.Button();
+            this.After = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWidth)).BeginInit();
             this.SuspendLayout();
@@ -115,11 +117,39 @@
             this.trackBarWidth.TabIndex = 6;
             this.trackBarWidth.Value = 1;
             // 
+            // Before
+            // 
+            this.Before.BackgroundImage = global::Paint.Properties.Resources.blue_arrow_left73_600x600;
+            this.Before.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Before.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.Before.FlatAppearance.BorderSize = 0;
+            this.Before.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Before.Location = new System.Drawing.Point(621, 12);
+            this.Before.Name = "Before";
+            this.Before.Size = new System.Drawing.Size(50, 49);
+            this.Before.TabIndex = 7;
+            this.Before.UseVisualStyleBackColor = true;
+            this.Before.Click += new System.EventHandler(this.Before_Click);
+            // 
+            // After
+            // 
+            this.After.BackgroundImage = global::Paint.Properties.Resources.blue_arrow_right73_600x600;
+            this.After.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.After.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.After.Location = new System.Drawing.Point(677, 12);
+            this.After.Name = "After";
+            this.After.Size = new System.Drawing.Size(50, 49);
+            this.After.TabIndex = 8;
+            this.After.UseVisualStyleBackColor = true;
+            this.After.Click += new System.EventHandler(this.After_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 614);
+            this.Controls.Add(this.After);
+            this.Controls.Add(this.Before);
             this.Controls.Add(this.trackBarWidth);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonBrushColor);
@@ -146,5 +176,7 @@
         private Button buttonBrushColor;
         private ColorDialog colorDialog1;
         private TrackBar trackBarWidth;
+        private Button Before;
+        private Button After;
     }
 }

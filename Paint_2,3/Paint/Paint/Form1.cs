@@ -102,5 +102,17 @@ namespace Paint
         {
             presenter.DoubleClick();
         }
+
+        private void Before_Click(object sender, EventArgs e)
+        {
+            presenter.Before();
+            pictureBox1.Invalidate();
+        }
+
+        private void After_Click(object sender, EventArgs e)
+        {
+            presenter.After();
+            pictureBox1.Invalidate();
+        }
     }
 }
