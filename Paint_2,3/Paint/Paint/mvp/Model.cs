@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Paint
 {
     static class Dict
@@ -14,7 +9,7 @@ namespace Paint
             { "BrokenLine", new BrokenLine()},
             { "Rectangle", new Rectangle(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite) },
             { "Ellipse", new Ellipse(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite)}
-
+            //{ "Trapeze", new Trapeze(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite) }
         };
     }
 

@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-
-
+﻿
 namespace Paint
 {
-    internal interface IFigure
+    public interface IFigure
     {
         public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor, string Name = "Name");
         public IFigure CreateFigure(List<Line> lst);
         public void Draw(Graphics g);
     }
 
-    internal class Line : IFigure
+    public class Line : IFigure
     {
         public int x1 { get; set; }
         public int y1 { get; set; }
