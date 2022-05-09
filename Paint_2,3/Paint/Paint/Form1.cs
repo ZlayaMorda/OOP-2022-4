@@ -13,10 +13,6 @@ namespace Paint
 
         public Form1()
         {
-            // BrokenLine brokenLine = new();
-            //FiguresDict.Add("Line", brokenLine);
-            //FiguresDict.Add("Line", rectangle);
-            //FiguresDict.Add("Line", ellipse);
             InitializeComponent();
             presenter = new(this);
         }
@@ -100,6 +96,11 @@ namespace Paint
                 presenter.Click(e.X, e.Y);
                 pictureBox1.Invalidate();
             }
+        }
+
+        private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            presenter.DoubleClick();
         }
     }
 }

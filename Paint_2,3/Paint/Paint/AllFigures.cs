@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
+
 namespace Paint
 {
     internal interface IFigure
     {
-        public void CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor);
+        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor);
+        public IFigure CreateFigure(List<Line> lst);
         public void Draw(Graphics g);
     }
 
@@ -22,17 +24,8 @@ namespace Paint
         public Color PenColor { get; set; }
         public float PenWidth { get; set; }
         public Color BrushColor { get; set; }
-        public Line() 
-        {
-            this.x1 = 0;
-            this.y1 = 0;
-            this.x2 = 0;
-            this.y2 = 0;
-            this.PenColor = Color.AntiqueWhite;
-            this.PenWidth = 0;
-            this.BrushColor = Color.AntiqueWhite;
-        }
-        public void CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
+        public string Name { get; set; }
+        public Line(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor) 
         {
             this.x1 = x1;
             this.y1 = y1;
@@ -41,6 +34,22 @@ namespace Paint
             this.PenColor = PenColor;
             this.PenWidth = PenWidth;
             this.BrushColor = BrushColor;
+            this.Name = "Line";
+        }
+        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
+        {
+            this.x1 = x1;
+            this.y1 = y1;
+            this.x2 = x2;
+            this.y2 = y2;
+            this.PenColor = PenColor;
+            this.PenWidth = PenWidth;
+            this.BrushColor = BrushColor;
+            return new Line(x1, y1, x2, y2, PenColor, PenWidth, BrushColor);
+        }
+        public IFigure CreateFigure(List<Line> lst)
+        {
+            return lst[0];
         }
         public void Draw(Graphics graphics)
         {
@@ -49,21 +58,34 @@ namespace Paint
 
     }
 
-    //internal class BrokenLine : IFigure
-    //{
-    //    public List<Line> Lines { get; set; }
-    //    public BrokenLine(List<Line> lines)
-    //    {
-    //        this.Lines = lines;
-    //    }
-    //    public void Draw(Graphics graphics)
-    //    {
-    //        foreach (Line line in Lines)
-    //        {
-    //            line.Draw(graphics);
-    //        }
-    //    }
-    //}
+    internal class BrokenLine : IFigure
+    {
+        public List<Line>? Lines { get; set; }
+        public BrokenLine()
+        {
+
+        }
+        public BrokenLine(List<Line> lines)
+        {
+            this.Lines = lines;
+        }
+        public IFigure CreateFigure(List<Line> lst)
+        {
+            return new BrokenLine(lst);
+        }
+        public void Draw(Graphics graphics)
+        {
+            foreach (Line line in Lines)
+            {
+                line.Draw(graphics);
+            }
+        }
+        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
 
     //internal class Rectangle : IFigure
     //{

@@ -10,7 +10,9 @@ namespace Paint.mvp
     {
         static internal Dictionary<string, IFigure> FiguresDict = new()
         {
-            { "Line", new Line() }
+            { "Line", new Line(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite) },
+            { "BrokenLine", new BrokenLine()}
+
         };
     }
 
@@ -24,7 +26,9 @@ namespace Paint.mvp
         private int temp_y1;
         private int n;
         private float width;
+        public string Name;
         IFigure figure;
+        private List<Line> lines;
         public Pen pen { get; set; }
         public SolidBrush brush { get; set; }
         public bool IsClicked { get; set; }
@@ -34,6 +38,7 @@ namespace Paint.mvp
         public Model(IPaint paint)
         {
             IsClicked = false;
+            Name = paint.Name;
             x1 = 0;
             x2 = 0;
             y1 = 0;
@@ -42,12 +47,18 @@ namespace Paint.mvp
             temp_y1 = 0;
             n = 0;
             width = paint.Width;
-            this.figure = Dict.FiguresDict[paint.Name];
+            lines = new List<Line>();
+            if (paint.Name == "BrokenLine")
+            {
+                this.figure = Dict.FiguresDict["Line"];
+            }
+            else { this.figure = Dict.FiguresDict[paint.Name]; }
             pen = new Pen(paint.LineColor);
             brush = new SolidBrush(paint.BrushColor);
         }
         public void FillModel(IPaint paint)
         {
+            Name = paint.Name;
             IsClicked = false;
             x1 = 0;
             x2 = 0;
@@ -57,7 +68,12 @@ namespace Paint.mvp
             temp_y1 = 0;
             n = 0;
             width = paint.Width;
-            this.figure = Dict.FiguresDict[paint.Name];
+            lines = new List<Line>();
+            if (paint.Name == "BrokenLine")
+            {
+                this.figure = Dict.FiguresDict["Line"];
+            }
+            else { this.figure = Dict.FiguresDict[paint.Name]; }
             pen = new Pen(paint.LineColor);
             brush = new SolidBrush(paint.BrushColor);
         }
@@ -69,13 +85,31 @@ namespace Paint.mvp
             y2 = eY;
         }
 
-        public void Paint(Graphics graphics)
+        public void Paint(Graphics graphics, List<IFigure> list)
         {
-            figure.CreateFigure(x1, y1, x2, y2, pen.Color, this.width, brush.Color);
-            figure.Draw(graphics);
+            foreach(IFigure figure in list)
+            {
+                figure.Draw(graphics);
+            }
+
+            if (Name == "BrokenLine")
+            {
+                foreach (Line f in lines)
+                {
+                    f.Draw(graphics);
+                }
+                figure.CreateFigure(x1, y1, x2, y2, pen.Color, this.width, brush.Color);
+                figure.Draw(graphics);
+            }
+            else
+            {
+                figure.CreateFigure(x1, y1, x2, y2, pen.Color, this.width, brush.Color);
+                figure.Draw(graphics);
+            }
+
         }
 
-        public void Click(int eX, int eY)
+        public void Click(int eX, int eY, List<IFigure> list)
         {
             n++;
             if (n != 2)
@@ -88,13 +122,43 @@ namespace Paint.mvp
             }
             else
             {
-                IsClicked = false;
-                //x1 = 0;
-                //y1 = 0;
-                //x2 = 0;
-                //y2 = 0;
-                n = 0;
+                if (Name == "BrokenLine")
+                {
+                    lines.Add((Line)figure.CreateFigure(x1, y1, x2, y2, pen.Color, this.width, brush.Color));
+                    n = 1;
+                    IsClicked = true;
+                    x1 = eX;
+                    y1 = eY;
+                }
+                else
+                {
+                    IsClicked = false;
+                    list.Add(figure.CreateFigure(x1, y1, x2, y2, pen.Color, this.width, brush.Color));
+                    n = 0;
+                    x1 = 0;
+                    y1 = 0;
+                    x2 = 0;
+                    y2 = 0;
+                }
             }
         }
+
+        public void DoubleClick(List<IFigure> list)
+        {
+            if (Name == "BrokenLine")
+            {
+                IsClicked = false;
+                n = 0;
+                BrokenLine temp_figure = new(lines);
+                lines = new List<Line>();
+                list.Add(temp_figure);
+                x1 = 0;
+                y1 = 0;
+                x2 = 0;
+                y2 = 0;
+            }
+        }
+
+
     }
 }
