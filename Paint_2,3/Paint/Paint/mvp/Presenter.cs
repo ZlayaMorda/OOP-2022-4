@@ -24,13 +24,20 @@ namespace Paint.mvp
             ViewPresenter = paint;
             Model.FillModel(paint);
         }
-        internal void MoveForLine(int X, int Y)
-        {
-            Model.MoveForLine(X, Y);
-        }
         internal void Click(int X, int Y)
         {
             Model.Click(X, Y, Storage.figures);
+        }
+        internal void Move(int X, int Y)
+        {
+            if(ViewPresenter.Name == "Line" || ViewPresenter.Name == "BrokenLine")
+            {
+                Model.MoveForLine(X, Y);
+            }
+            else
+            {
+                Model.MoveOtherShit(X, Y);
+            }
         }
         internal void Paint(Graphics graphics)
         {

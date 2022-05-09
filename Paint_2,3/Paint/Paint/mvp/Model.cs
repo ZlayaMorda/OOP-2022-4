@@ -11,7 +11,8 @@ namespace Paint.mvp
         static internal Dictionary<string, IFigure> FiguresDict = new()
         {
             { "Line", new Line(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite) },
-            { "BrokenLine", new BrokenLine()}
+            { "BrokenLine", new BrokenLine()},
+            { "Rectangle", new Rectangle(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite) }
 
         };
     }
@@ -83,6 +84,38 @@ namespace Paint.mvp
         {
             x2 = eX;
             y2 = eY;
+        }
+
+        public void MoveOtherShit(int eX, int eY)
+        {
+            if (eX - temp_x1 > 0 && eY - temp_y1 > 0)
+            {
+                x1 = temp_x1;
+                y1 = temp_y1;
+                x2 = eX - temp_x1;
+                y2 = eY - temp_y1;
+            }
+            if (eX - temp_x1 < 0 && eY - temp_y1 > 0)
+            {
+                x1 = eX;
+                y1 = temp_y1;
+                x2 = temp_x1 - eX;
+                y2 = eY - temp_y1;
+            }
+            if (eX - temp_x1 > 0 && eY - temp_y1 < 0)
+            {
+                x1 = temp_x1;
+                y1 = eY;
+                x2 = eX - temp_x1;
+                y2 = temp_y1 - eY;
+            }
+            if (eX - temp_x1 < 0 && eY - temp_y1 < 0)
+            {
+                x1 = eX;
+                y1 = eY;
+                x2 = temp_x1 - eX;
+                y2 = temp_y1 - eY;
+            }
         }
 
         public void Paint(Graphics graphics, List<IFigure> list)

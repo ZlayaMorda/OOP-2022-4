@@ -73,7 +73,7 @@ namespace Paint
         {
             if(presenter.Model.IsClicked)
             {
-                presenter.MoveForLine(e.X, e.Y);
+                presenter.Move(e.X, e.Y);
                 pictureBox1.Invalidate();
             }
         }
