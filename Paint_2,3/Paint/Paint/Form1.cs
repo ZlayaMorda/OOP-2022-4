@@ -1,5 +1,8 @@
+using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
+using System.Data;
 using Paint.mvp;
 
 namespace Paint
@@ -10,12 +13,12 @@ namespace Paint
 
         public Form1()
         {
-            presenter = new(this);
             // BrokenLine brokenLine = new();
             //FiguresDict.Add("Line", brokenLine);
             //FiguresDict.Add("Line", rectangle);
             //FiguresDict.Add("Line", ellipse);
             InitializeComponent();
+            presenter = new(this);
         }
 
         string IPaint.Name
@@ -34,14 +37,14 @@ namespace Paint
         {
             get
             {
-                return buttonLineColor.BackColor = colorDialog1.Color;
+                return buttonLineColor.BackColor;
             }
         }
         Color IPaint.BrushColor
         {
             get
             {
-                return buttonBrushColor.BackColor = colorDialog1.Color;
+                return buttonBrushColor.BackColor;
             }
         }
         float IPaint.Width
@@ -72,12 +75,31 @@ namespace Paint
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-
+            if(presenter.Model.IsClicked)
+            {
+                presenter.MoveForLine(e.X, e.Y);
+                pictureBox1.Invalidate();
+            }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            presenter.Click(e.X, e.Y);
+            presenter.Paint(e.Graphics);
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (presenter.Model.IsClicked)
+            {
+                presenter.Click(e.X, e.Y);
+                pictureBox1.Invalidate();
+            }
+            else
+            {
+                presenter.ReloadView(this);
+                presenter.Click(e.X, e.Y);
+                pictureBox1.Invalidate();
+            }
         }
     }
 }

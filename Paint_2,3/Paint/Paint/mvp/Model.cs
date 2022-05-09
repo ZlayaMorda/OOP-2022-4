@@ -22,14 +22,15 @@ namespace Paint.mvp
         private int y2;
         private int temp_x1;
         private int temp_y1;
+        private int n;
+        private float width;
         IFigure figure;
         public Pen pen { get; set; }
-        public Graphics g { get; set; }
         public SolidBrush brush { get; set; }
         public bool IsClicked { get; set; }
 
 
-
+        
         public Model(IPaint paint)
         {
             IsClicked = false;
@@ -39,10 +40,28 @@ namespace Paint.mvp
             y2 = 0;
             temp_x1 = 0;
             temp_y1 = 0;
+            n = 0;
+            width = paint.Width;
             this.figure = Dict.FiguresDict[paint.Name];
             pen = new Pen(paint.LineColor);
             brush = new SolidBrush(paint.BrushColor);
         }
+        public void FillModel(IPaint paint)
+        {
+            IsClicked = false;
+            x1 = 0;
+            x2 = 0;
+            y1 = 0;
+            y2 = 0;
+            temp_x1 = 0;
+            temp_y1 = 0;
+            n = 0;
+            width = paint.Width;
+            this.figure = Dict.FiguresDict[paint.Name];
+            pen = new Pen(paint.LineColor);
+            brush = new SolidBrush(paint.BrushColor);
+        }
+
 
         public void MoveForLine(int eX, int eY)
         {
@@ -52,13 +71,14 @@ namespace Paint.mvp
 
         public void Paint(Graphics graphics)
         {
-            figure.CreateFigure(x1, y1, x2, y2, pen.Color, pen.Width, brush.Color);
+            figure.CreateFigure(x1, y1, x2, y2, pen.Color, this.width, brush.Color);
             figure.Draw(graphics);
         }
 
         public void Click(int eX, int eY)
         {
-            if (!IsClicked)
+            n++;
+            if (n != 2)
             {
                 IsClicked = true;
                 x1 = eX;
@@ -69,10 +89,11 @@ namespace Paint.mvp
             else
             {
                 IsClicked = false;
-                x1 = 0;
-                y1 = 0;
-                x2 = 0;
-                y2 = 0;
+                //x1 = 0;
+                //y1 = 0;
+                //x2 = 0;
+                //y2 = 0;
+                n = 0;
             }
         }
     }

@@ -9,7 +9,7 @@ namespace Paint.mvp
     internal class Presenter
     {
         IPaint ViewPresenter { get; set; }
-        Model Model { get; set; }
+        internal Model Model { get; set; }
 
         internal Presenter(IPaint paint)
         {
@@ -19,7 +19,8 @@ namespace Paint.mvp
 
         internal void ReloadView(IPaint paint)
         {
-
+            ViewPresenter = paint;
+            Model.FillModel(paint);
         }
         internal void MoveForLine(int X, int Y)
         {
@@ -28,6 +29,10 @@ namespace Paint.mvp
         internal void Click(int X, int Y)
         {
             Model.Click(X, Y);
+        }
+        internal void Paint(Graphics graphics)
+        {
+            Model.Paint(graphics);
         }
     }
 }
