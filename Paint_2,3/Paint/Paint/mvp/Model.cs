@@ -12,7 +12,8 @@ namespace Paint.mvp
         {
             { "Line", new Line(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite) },
             { "BrokenLine", new BrokenLine()},
-            { "Rectangle", new Rectangle(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite) }
+            { "Rectangle", new Rectangle(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite) },
+            { "Ellipse", new Ellipse(0, 0, 0, 0, Color.Black, 1, Color.AntiqueWhite)}
 
         };
     }
