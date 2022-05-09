@@ -1,5 +1,5 @@
 ﻿
-namespace Paint.mvp
+namespace Paint
 {
     internal class Presenter
     {
@@ -54,6 +54,10 @@ namespace Paint.mvp
         {
             Serializer.Serialize(Storage.figures);
             Storage.Clear();
+        }
+        internal void Load()
+        {
+            Serializer.Deserialize(Storage);
         }
     }
 }

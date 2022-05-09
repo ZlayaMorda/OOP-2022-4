@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Paint.mvp
+namespace Paint
 {
     static class Dict
     {

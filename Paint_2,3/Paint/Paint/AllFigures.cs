@@ -10,7 +10,7 @@ namespace Paint
 {
     internal interface IFigure
     {
-        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor);
+        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor, string Name = "Name");
         public IFigure CreateFigure(List<Line> lst);
         public void Draw(Graphics g);
     }
@@ -36,7 +36,7 @@ namespace Paint
             this.BrushColor = BrushColor;
             this.Name = "Line";
         }
-        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
+        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor, string Name = "Line")
         {
             this.x1 = x1;
             this.y1 = y1;
@@ -80,7 +80,7 @@ namespace Paint
                 line.Draw(graphics);
             }
         }
-        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
+        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor, string Name = "BrokenLine")
         {
             throw new NotImplementedException();
         }
@@ -108,7 +108,7 @@ namespace Paint
             this.BrushColor = BrushColor;
             this.Name = "Rectangle";
         }
-        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
+        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor, string Name = "Rectangle")
         {
             this.x1 = x1;
             this.y1 = y1;
@@ -158,7 +158,7 @@ namespace Paint
             this.BrushColor = BrushColor;
             this.Name = "Ellipse";
         }
-        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor)
+        public IFigure CreateFigure(int x1, int y1, int x2, int y2, Color PenColor, float PenWidth, Color BrushColor, string Name = "Ellipse")
         {
             this.x1 = x1;
             this.y1 = y1;

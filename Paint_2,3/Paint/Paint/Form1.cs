@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Data;
-using Paint.mvp;
 
 namespace Paint
 {
@@ -123,7 +122,8 @@ namespace Paint
 
         private void Load_Click(object sender, EventArgs e)
         {
-
+            presenter.Load();
+            pictureBox1.Invalidate();
         }
     }
 }
