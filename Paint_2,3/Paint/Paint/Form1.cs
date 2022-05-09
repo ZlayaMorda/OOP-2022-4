@@ -1,18 +1,17 @@
 using System.Drawing;
 using System.Windows.Forms;
+using Paint.mvp;
 
 namespace Paint
 {
     public partial class Form1 : Form, IPaint
     {
-        internal Dictionary<string, IFigure> FiguresDict = new();
+        Presenter presenter;
 
         public Form1()
         {
-            Line line = new();
+            presenter = new(this);
             // BrokenLine brokenLine = new();
-
-            FiguresDict.Add("Line", line);
             //FiguresDict.Add("Line", brokenLine);
             //FiguresDict.Add("Line", rectangle);
             //FiguresDict.Add("Line", ellipse);
@@ -71,21 +70,14 @@ namespace Paint
             buttonBrushColor.BackColor = colorDialog1.Color;
         }
 
-        private bool IsMouseUp = false;
-
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            IsMouseUp = true;
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            IsMouseUp = false;
-        }
-
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            presenter.Click(e.X, e.Y);
         }
     }
 }
