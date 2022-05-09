@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Paint.mvp
 {
     internal class Presenter
@@ -54,6 +49,11 @@ namespace Paint.mvp
         internal void After()
         {
             Storage.ReturnAfter();
+        }
+        internal void Save()
+        {
+            Serializer.Serialize(Storage.figures);
+            Storage.Clear();
         }
     }
 }

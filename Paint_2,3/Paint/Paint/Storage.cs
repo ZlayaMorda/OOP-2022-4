@@ -36,5 +36,10 @@ namespace Paint
             catch(InvalidOperationException) { }
             
         }
+        public void Clear()
+        {
+            figures.Clear();
+            stack.Clear();
+        }
     }
 }

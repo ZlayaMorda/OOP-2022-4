@@ -114,5 +114,16 @@ namespace Paint
             presenter.After();
             pictureBox1.Invalidate();
         }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            presenter.Save();
+            pictureBox1.Invalidate();
+        }
+
+        private void Load_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

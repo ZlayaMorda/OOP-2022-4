@@ -38,6 +38,8 @@
             this.trackBarWidth = new System.Windows.Forms.TrackBar();
             this.Before = new System.Windows.Forms.Button();
             this.After = new System.Windows.Forms.Button();
+            this.Save = new System.Windows.Forms.Button();
+            this.Load = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWidth)).BeginInit();
             this.SuspendLayout();
@@ -109,7 +111,7 @@
             // 
             // trackBarWidth
             // 
-            this.trackBarWidth.Location = new System.Drawing.Point(480, 12);
+            this.trackBarWidth.Location = new System.Drawing.Point(466, 12);
             this.trackBarWidth.Maximum = 12;
             this.trackBarWidth.Minimum = 1;
             this.trackBarWidth.Name = "trackBarWidth";
@@ -124,7 +126,7 @@
             this.Before.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.Before.FlatAppearance.BorderSize = 0;
             this.Before.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Before.Location = new System.Drawing.Point(621, 12);
+            this.Before.Location = new System.Drawing.Point(607, 12);
             this.Before.Name = "Before";
             this.Before.Size = new System.Drawing.Size(50, 49);
             this.Before.TabIndex = 7;
@@ -136,18 +138,42 @@
             this.After.BackgroundImage = global::Paint.Properties.Resources.blue_arrow_right73_600x600;
             this.After.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.After.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.After.Location = new System.Drawing.Point(677, 12);
+            this.After.Location = new System.Drawing.Point(663, 12);
             this.After.Name = "After";
             this.After.Size = new System.Drawing.Size(50, 49);
             this.After.TabIndex = 8;
             this.After.UseVisualStyleBackColor = true;
             this.After.Click += new System.EventHandler(this.After_Click);
             // 
+            // Save
+            // 
+            this.Save.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Save.Location = new System.Drawing.Point(719, 12);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(80, 49);
+            this.Save.TabIndex = 9;
+            this.Save.Text = "Save";
+            this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
+            // 
+            // Load
+            // 
+            this.Load.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Load.Location = new System.Drawing.Point(805, 12);
+            this.Load.Name = "Load";
+            this.Load.Size = new System.Drawing.Size(80, 49);
+            this.Load.TabIndex = 10;
+            this.Load.Text = "Load";
+            this.Load.UseVisualStyleBackColor = true;
+            this.Load.Click += new System.EventHandler(this.Load_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 614);
+            this.Controls.Add(this.Load);
+            this.Controls.Add(this.Save);
             this.Controls.Add(this.After);
             this.Controls.Add(this.Before);
             this.Controls.Add(this.trackBarWidth);
@@ -178,5 +204,7 @@
         private TrackBar trackBarWidth;
         private Button Before;
         private Button After;
+        private Button Save;
+        private Button Load;
     }
 }
