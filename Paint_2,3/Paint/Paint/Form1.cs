@@ -1,7 +1,7 @@
 
 namespace Paint
 {
-    public partial class Form1 : Form, IPaint
+    public partial class Form1 : Form, IPaint, IHost
     {
         Presenter presenter;
 
@@ -21,6 +21,21 @@ namespace Paint
                 }
                 else { return "Line"; }
                     
+            }
+        }
+        string IPaint.PluginName
+        {
+            get
+            {
+                try
+                {
+                    return comboBoxPLugins.SelectedItem.ToString();
+                }
+                catch(NullReferenceException)
+                {
+                    return "";
+                }
+
             }
         }
         Color IPaint.LineColor
@@ -119,6 +134,26 @@ namespace Paint
         {
             presenter.Load();
             pictureBox1.Invalidate();
+        }
+
+        private void AddPlug_Click(object sender, EventArgs e)
+        {
+            presenter.ReloadView(this);
+            if(presenter.AddPLugin(this))
+            {
+                comboBoxPLugins.SelectedIndex = -1;
+                comboBoxPLugins.Items.Remove("Trapeze");
+            }
+        }
+
+        void IHost.AddPluginToForm(string pluginName)
+        {
+            comboBox1.Items.Add(pluginName);
+        }
+
+        void IHost.AddPLuginToDict(string Name, IFigure figure)
+        {
+            Dict.FiguresDict.Add(Name, figure);
         }
     }
 }

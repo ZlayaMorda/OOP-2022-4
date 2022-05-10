@@ -1,6 +1,6 @@
 ﻿using Paint;
 
-[assembly: Name("Add ModToggleSwitch")]
+//[assembly: Name("Trapeze")]
 
 namespace Plugins
 {

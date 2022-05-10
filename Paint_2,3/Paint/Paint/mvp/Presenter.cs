@@ -59,5 +59,19 @@ namespace Paint
         {
             Serializer.Deserialize(Storage);
         }
+        internal bool AddPLugin(IHost host)
+        {
+            if (ViewPresenter.PluginName != "")
+            {
+                PluginManager pm = new();
+                pm.ScanPlugins(Path.GetFullPath(@"..\..\..\..\") + @"Plugins\bin\Debug", ViewPresenter.PluginName);
+                if(pm.AddPlugin != null)
+                {
+                    pm.AddPlugin.RunHost(host);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

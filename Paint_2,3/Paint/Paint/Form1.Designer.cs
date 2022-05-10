@@ -40,6 +40,8 @@
             this.After = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
             this.Load = new System.Windows.Forms.Button();
+            this.comboBoxPLugins = new System.Windows.Forms.ComboBox();
+            this.AddPlug = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWidth)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +52,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(12, 82);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(918, 520);
+            this.pictureBox1.Size = new System.Drawing.Size(992, 520);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -167,11 +169,33 @@
             this.Load.UseVisualStyleBackColor = true;
             this.Load.Click += new System.EventHandler(this.Load_Click);
             // 
+            // comboBoxPLugins
+            // 
+            this.comboBoxPLugins.FormattingEnabled = true;
+            this.comboBoxPLugins.Items.AddRange(new object[] {
+            "Trapeze"});
+            this.comboBoxPLugins.Location = new System.Drawing.Point(891, 9);
+            this.comboBoxPLugins.Name = "comboBoxPLugins";
+            this.comboBoxPLugins.Size = new System.Drawing.Size(113, 28);
+            this.comboBoxPLugins.TabIndex = 11;
+            // 
+            // AddPlug
+            // 
+            this.AddPlug.Location = new System.Drawing.Point(891, 43);
+            this.AddPlug.Name = "AddPlug";
+            this.AddPlug.Size = new System.Drawing.Size(113, 27);
+            this.AddPlug.TabIndex = 12;
+            this.AddPlug.Text = "Add Plugin";
+            this.AddPlug.UseVisualStyleBackColor = true;
+            this.AddPlug.Click += new System.EventHandler(this.AddPlug_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 614);
+            this.ClientSize = new System.Drawing.Size(1016, 614);
+            this.Controls.Add(this.AddPlug);
+            this.Controls.Add(this.comboBoxPLugins);
             this.Controls.Add(this.Load);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.After);
@@ -206,5 +230,7 @@
         private Button After;
         private Button Save;
         private Button Load;
+        private ComboBox comboBoxPLugins;
+        private Button AddPlug;
     }
 }

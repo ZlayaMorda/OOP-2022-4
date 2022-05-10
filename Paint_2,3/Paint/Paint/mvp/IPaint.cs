@@ -12,6 +12,7 @@ namespace Paint
         Color LineColor { get; }
         Color BrushColor { get; }
         float Width { get; }
+        string PluginName { get; }
 
     }
 }
