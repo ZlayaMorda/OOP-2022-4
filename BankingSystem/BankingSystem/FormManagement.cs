@@ -97,6 +97,14 @@ namespace BankingSystem.FormManagement
             }
         }
 
+        internal IAdmin IAdmin
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             Administration.Add(this);

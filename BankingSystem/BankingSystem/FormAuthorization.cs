@@ -121,6 +121,14 @@ namespace BankingSystem.Authorization
 
         public string? Member => throw new NotImplementedException();
 
+        internal ClientPresenter ClientPresenter
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             ClientPresenter presenter = new(this);

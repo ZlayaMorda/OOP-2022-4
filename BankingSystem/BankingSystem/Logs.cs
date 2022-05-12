@@ -1,5 +1,6 @@
 ﻿using BankingSystem.Loading;
 using BankingSystem.AboutClient;
+using BankingSystem.AllAccount;
 
 namespace BankingSystem
 {
@@ -11,6 +12,42 @@ namespace BankingSystem
             load = new(BankName, "Logs");
             load.LoadFromFile();
         }
+        public void Reload()
+        {
+            load.LoadFromFile();
+        }
+        internal AccLogTrans AccLogTrans
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal AccLogModif AccLogModif
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Load<object, object> Load
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Registration Registration
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public void AddLogTrans(IDataClient data, string currency)
         {
             AccLogTrans log = new(data.HomeId, data.AlienId, data.Sum, currency);
@@ -34,17 +71,26 @@ namespace BankingSystem
             Registration log = new(Id, UserType, state);
             load.AddToFile(log.GetRegString(), CreateKey(load, "Reg0"));
         }
+        public void AddCreditLog(bool state, Credit cr)
+        {
+            CreditLog log = new(state, cr);
+            load.AddToFile(log.GetCreditString(), CreateKey(load, "Cre0"));
+        }
 
         public void FillLog(ListBox listBox, string choose)
         {
             load.LoadFromFile();
-            foreach(var key in load.Information.Keys)
+            foreach (var key in load.Information.Keys)
             {
-                if(key.IndexOf("Acc") != -1 && choose == "Логи движений по счетам")
+                if (key.IndexOf("Acc") != -1 && choose == "Логи движений по счетам")
                 {
                     listBox.Items.Add(load.Information[key]);
                 }
-                if (key.IndexOf("Reg") != -1 && choose == "Логи регистрации")
+                else if (key.IndexOf("Reg") != -1 && choose == "Логи регистрации")
+                {
+                    listBox.Items.Add(load.Information[key]);
+                }
+                else if (key.IndexOf("Cre") != -1 && choose == "Логи кредитов, вкладов, зарплат, рассрочек")
                 {
                     listBox.Items.Add(load.Information[key]);
                 }
@@ -62,10 +108,28 @@ namespace BankingSystem
             }
             return key;
         }
+        public void ChangeStr(string str)
+        {
+            foreach (var key in load.Information.Keys)
+            {
+                if (key.IndexOf("Acc") != -1 && load.Information[key] == str)
+                {
+                    load.Information[key] += "canceled";
+                    load.LoadToFile();
+                }
+            }
+        }
 
+        internal CreditLog CreditLog
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
     internal class AccLogTrans
-    { 
+    {
         private string HomeId { get; set; }
         private string? AlienId { get; set; }
         private string Sum { get; set; }
@@ -78,7 +142,7 @@ namespace BankingSystem
             this.AlienId = AlienId;
             this.Sum = Sum;
             this.Currency = Currency;
-            if(Date == null)
+            if (Date == null)
             {
                 this.Date = DateTime.Now;
             }
@@ -159,7 +223,7 @@ namespace BankingSystem
             }
             this.Id = Id;
             this.UserType = UserType;
-            if(reg)
+            if (reg)
             {
                 state = " Зарегестрирован в банке, ID";
             }
@@ -171,6 +235,59 @@ namespace BankingSystem
         internal string GetRegString()
         {
             return Date.ToString() + "Пользователь " + this.UserType + this.state + this.Id;
+        }
+    }
+
+    internal class CreditLog
+    {
+        private string AccId { get; set; }
+        private DateTime? Date { get; set; }
+        private bool MinusOrPlus { get; set; }
+        private float percent { get; set; }
+        private string Monthes { get; set; }
+        private string Sum { get; set; }
+        private string State { get; set; }
+        internal CreditLog(bool state, Credit credit, DateTime ?Date = null)
+        {
+            if (Date == null)
+            {
+                this.Date = DateTime.Now;
+            }
+            else
+            {
+                this.Date = Date;
+            }
+            this.AccId = credit.IdAcc;
+            this.MinusOrPlus = credit.MinusOrPlus;
+            this.percent = credit.Percent;
+            this.Monthes = credit.Data;
+            this.Sum = credit.CreditSum;
+            if (state) { this.State = " Одобрили "; }
+            else { this.State = " Не одобрили "; }
+        }
+        internal string GetCreditString()
+        {
+            if(this.MinusOrPlus == false && this.percent != 0)
+            {
+                return this.Date + this.State + "Кредит " + "Под процент: " + this.percent.ToString() + " На месяцы: " +
+                    this.Monthes + " Сумма: " + this.Sum + " Счет: " + this.AccId;
+            }
+            else if(this.MinusOrPlus == true && this.percent != 0)
+            {
+                return this.Date + this.State + "Вклад " + "Под процент: " + this.percent.ToString() + " На месяцы: " +
+                    this.Monthes + " Сумма: " + this.Sum + " Счет: " + this.AccId;
+            }
+            if (this.MinusOrPlus == false && this.percent == 0)
+            {
+                return this.Date + this.State + "Рассрочку " + "Под процент: " + this.percent.ToString() + " На месяцы: " +
+                    this.Monthes + " Сумма: " + this.Sum + " Счет: " + this.AccId;
+            }
+            else if (this.MinusOrPlus == true && this.percent == 0)
+            {
+                return this.Date + this.State + "Зарплату " + "Под процент: " + this.percent.ToString() + " На месяцы: " +
+                    this.Monthes + " Сумма: " + this.Sum + " Счет: " + this.AccId;
+            }
+            else { return ""; }
         }
     }
 }

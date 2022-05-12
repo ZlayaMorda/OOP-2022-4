@@ -23,6 +23,39 @@ namespace BankingSystem.AboutClient
                 ClientView = null;
             }
         }
+
+        internal Authorization.FormAuthorization FormAuthorization
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Client Client
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal User User
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Load<object, object> Load
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private static bool Check(string input, string reg)
         {
             if (string.IsNullOrEmpty(input)) { return false; }
@@ -66,7 +99,6 @@ namespace BankingSystem.AboutClient
                         UserToAdd.CreateId("Клиент");
                         Client ClientToAdd = new(ClientView.Bank, UserToAdd.Id, ClientView.Surname, ClientView.Name, ClientView.PName, ClientView.PhoneNumber,
                             ClientView.LoginText, ClientView.PasportNum);
-                        MessageBox.Show(ClientToAdd.Id);
 
                         ClientToAdd.Send("ClientsDataToRegistr");
                         UserToAdd.Send("UsersDataToRegistr", UserToAdd.Login);

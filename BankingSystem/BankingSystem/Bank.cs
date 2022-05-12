@@ -40,6 +40,22 @@ namespace BankingSystem
             ["USD-EUR"] = 1.14f,
         };
 
+        public Dictionary<string, float> BankCredits = new()
+        {
+            ["3"] = 0.02f,
+            ["6"] = 0.03f,
+            ["12"] = 0.04f,
+            ["24"] = 0.06f,
+        };
+
+        public Dictionary<string, float> BankDeposits = new()
+        {
+            ["3"] = 0.01f,
+            ["6"] = 0.02f,
+            ["12"] = 0.03f,
+            ["24"] = 0.05f,
+        };
+
         internal Bank(string Name)
         {
             this.Name = Name;

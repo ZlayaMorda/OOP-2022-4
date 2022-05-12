@@ -72,6 +72,7 @@
             this.textBoxPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxPassword.Location = new System.Drawing.Point(112, 63);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(261, 34);
             this.textBoxPassword.TabIndex = 3;
             // 
@@ -124,7 +125,7 @@
             // 
             this.labelMessage.AutoSize = true;
             this.labelMessage.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelMessage.Location = new System.Drawing.Point(31, 160);
+            this.labelMessage.Location = new System.Drawing.Point(12, 160);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(0, 31);
             this.labelMessage.TabIndex = 8;

@@ -159,6 +159,7 @@
             this.textBoxSurname.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxSurname.Location = new System.Drawing.Point(295, 4);
             this.textBoxSurname.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.textBoxSurname.MaxLength = 32;
             this.textBoxSurname.Name = "textBoxSurname";
             this.textBoxSurname.Size = new System.Drawing.Size(305, 34);
             this.textBoxSurname.TabIndex = 7;
@@ -168,6 +169,7 @@
             this.textBoxName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxName.Location = new System.Drawing.Point(295, 47);
             this.textBoxName.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.textBoxName.MaxLength = 32;
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(305, 34);
             this.textBoxName.TabIndex = 8;
@@ -177,6 +179,7 @@
             this.textBoxPName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxPName.Location = new System.Drawing.Point(295, 90);
             this.textBoxPName.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.textBoxPName.MaxLength = 32;
             this.textBoxPName.Name = "textBoxPName";
             this.textBoxPName.Size = new System.Drawing.Size(305, 34);
             this.textBoxPName.TabIndex = 9;
@@ -186,6 +189,7 @@
             this.textBoxPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxPhone.Location = new System.Drawing.Point(295, 134);
             this.textBoxPhone.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.textBoxPhone.MaxLength = 13;
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(305, 34);
             this.textBoxPhone.TabIndex = 10;
@@ -195,6 +199,7 @@
             this.textBoxEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxEmail.Location = new System.Drawing.Point(295, 176);
             this.textBoxEmail.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.textBoxEmail.MaxLength = 32;
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(305, 34);
             this.textBoxEmail.TabIndex = 11;
@@ -204,6 +209,7 @@
             this.textBoxParole.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxParole.Location = new System.Drawing.Point(295, 264);
             this.textBoxParole.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.textBoxParole.MaxLength = 20;
             this.textBoxParole.Name = "textBoxParole";
             this.textBoxParole.Size = new System.Drawing.Size(305, 34);
             this.textBoxParole.TabIndex = 13;
@@ -262,6 +268,7 @@
             this.textBoxPasport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxPasport.Location = new System.Drawing.Point(295, 220);
             this.textBoxPasport.Margin = new System.Windows.Forms.Padding(8, 5, 8, 5);
+            this.textBoxPasport.MaxLength = 9;
             this.textBoxPasport.Name = "textBoxPasport";
             this.textBoxPasport.Size = new System.Drawing.Size(305, 34);
             this.textBoxPasport.TabIndex = 12;

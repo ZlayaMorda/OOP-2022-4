@@ -7,6 +7,22 @@ namespace BankingSystem.AllAccount
     {
         readonly public Dictionary<string, Account> accounts = new();
 
+        internal Account Account
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Load<object, object> Load
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public static void Send(Account acc, string Bank)
         {
             Load<string, Account> load = new(Bank, "AccountsToRegistr");
@@ -57,5 +73,7 @@ namespace BankingSystem.AllAccount
         {
             return accounts[id].Id + "Валюта: " + accounts[id].Currency;
         }
+
+
     }
 }

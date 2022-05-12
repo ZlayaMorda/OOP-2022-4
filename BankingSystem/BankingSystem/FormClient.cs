@@ -52,6 +52,17 @@ namespace BankingSystem.FormClient
                 catch (NullReferenceException) { return ""; }
             }
         }
+        string? IDataClient.ToReg
+        {
+            get
+            {
+                try
+                {
+                    return comboBoxRequest.SelectedItem.ToString();
+                }
+                catch (NullReferenceException) { return null; }
+            }
+        }
         string? IDataClient.Currency
         {
             get
@@ -63,6 +74,24 @@ namespace BankingSystem.FormClient
                 catch (NullReferenceException) { return null; }
             }
         }
+        string? IDataClient.Month
+        {
+            get
+            {
+                try
+                {
+                    return comboBoxMonth.SelectedItem.ToString();
+                }
+                catch (NullReferenceException) { return null; }
+            }
+        }
+        internal AccountPresenter AccountPresenter
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public FormClient()
         {
@@ -72,23 +101,12 @@ namespace BankingSystem.FormClient
         {
             InitializeComponent();
             this.labelBank.Text = Bank;
-            Bank bank = new(Bank);
-            dataClientPresenter = new(bank, id);
+            dataClientPresenter = new(new Bank(Bank), id);
         }
 
         private void buttonRequestAcc_Click(object sender, EventArgs e)
         {
-            try
-            {
-                AccountPresenter accPres = new();
-                if (comboBoxRequest.SelectedItem.ToString() == "Открыть счет")
-                {
-
-                    AccountPresenter.Send(dataClientPresenter.GetAcc(this), dataClientPresenter.Bank.Name);
-                
-                }
-            }
-            catch (NullReferenceException) { }
+            dataClientPresenter.SendToApprove(this);
         }
         private void comboBoxNature_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -138,6 +156,18 @@ namespace BankingSystem.FormClient
         {
             dataClientPresenter.RemoveAcc(this);
             comboBoxNature_SelectedIndexChanged(comboBoxNature, EventArgs.Empty);
+        }
+
+        private void buttonRegComp_Click(object sender, EventArgs e)
+        {
+            FormCompanyReg formReg = new(dataClientPresenter.client, dataClientPresenter.Bank);
+            formReg.ShowDialog();
+        }
+
+        private void buttonCompany_Click(object sender, EventArgs e)
+        {
+            FormCompany formComp = new(dataClientPresenter.client);
+            formComp.ShowDialog();
         }
     }
 }

@@ -19,6 +19,30 @@ namespace BankingSystem.UserAut
             }
         }
 
+        internal Login.Form1 Form1
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal User User
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal Load<object, object> Load
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public string? FindUser()
         {
             if (UserView != null)
